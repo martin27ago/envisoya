@@ -1,18 +1,13 @@
 %h2 Details about #{@user.name}
-
+%div
 %ul#Details
-%li
-Name:
-= @user.name
-%li
-  Surname:
-= @user.surname
-%li
-Document:
-= @user.document
-Email:
-  %li
-= @user.mail
-
-
+%li Name: #{@user.name}
+%br
+%li Surname: #{@user.surname}
+%br
+%li Document: #{@user.document}
+%br
+%li Email: #{@user.mail}
+%br
 = link_to 'Edit info', edit_user_path(@user)
+%div

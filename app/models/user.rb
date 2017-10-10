@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+  validates :document, presence:  true,  length: {minimum: 1}, on: :edit
+  validates :name, presence: true,  length: {minimum: 1}, on: :edit
+  validates :surname, presence:true, length: {minimum: 1}, on: :edit
+  validates :mail, presence: true,  length: {minimum: 1}, on: :edit
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
       user.provider = auth.provider
