@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   resources :users
 
   root :to => redirect('/users')
+  get '/users/:id/show', to: 'users#show'
+  get '/users/:id/show', to: 'users#show'
 end

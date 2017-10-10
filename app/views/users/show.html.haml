@@ -1,14 +1,18 @@
 %h2 Details about #{@user.name}
 
-%ul#details
+%ul#Details
 %li
-Rating:
+Name:
 = @user.name
 %li
+  Surname:
+= @user.surname
+%li
+Document:
+= @user.document
+Email:
+  %li
+= @user.mail
 
-%h3 Description:
-
-%p#description= @user.mail
 
 = link_to 'Edit info', edit_user_path(@user)
-= link_to 'Back to movie list', users_path
