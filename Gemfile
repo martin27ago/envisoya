@@ -58,5 +58,3 @@ gem 'omniauth'
 gem 'haml'
 
 gem 'omniauth-facebook', '~> 4.0.0'
-
-gem 'ci_uy'

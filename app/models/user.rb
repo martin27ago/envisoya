@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
-  validates :document, presence:  true,  length: {minimum: 1}, on: :edit
-  validates :name, presence: true,  length: {minimum: 1}, on: :edit
-  validates :surname, presence:true, length: {minimum: 1}, on: :edit
-  validates :mail, presence: true,  length: {minimum: 1}, on: :edit
-
+  validates :document, :presence =>  true
+  validates :name, :presence => true
+  validates :surname, :presence => true
+  validates :mail, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}, :presence => true
+  enum typeUser: {admin:0, client:1, cadet:2}
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
       user.provider = auth.provider

@@ -11,6 +11,18 @@ class UsersController < ApplicationController
     redirect_to user_path(@user)
   end
 
+  def show
+    id = params[:id]
+    @user = User.find(id)
+    resolve_format @user
+  end
+
+  def users
+    # @clients = User.where(User.client)
+    @users = User.All
+    resolve_format @users
+  end
+
   def user_params
     params.require(:user).permit(:name, :surname, :mail, :document)
   end
@@ -21,11 +33,5 @@ class UsersController < ApplicationController
       format.xml { render :xml => obj }
       format.json { render :json => obj }
     end
-  end
-
-  def show
-    id = params[:id]
-    @user = User.find(id)
-    resolve_format @user
   end
 end
