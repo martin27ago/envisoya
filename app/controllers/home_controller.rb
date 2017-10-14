@@ -1,5 +1,4 @@
 class HomeController < ApplicationController
-  def show
-    flash[:notice] = "Bienvenido"
+  def login
   end
 end

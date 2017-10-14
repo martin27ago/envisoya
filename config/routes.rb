@@ -1,17 +1,23 @@
 Rails.application.routes.draw do
 
-  get 'auth/:provider/callback', to: 'sessions#create'
-  get 'auth/failure', to: redirect('/')
-  get 'signout', to: 'sessions#destroy', as: 'signout'
+  get 'auth/:provider/callback', to: 'sessions#createFacebook'
+  get 'auth/failure', to: 'home#login'
+  get 'signout', to: 'sessions#signout'
+  get '/', to: 'home#login'
 
-  resources :sessions, only: [:create, :destroy]
-  resource :home, only: [:show]
+  resources :sessions
 
-  root to: "home#show"
+
+  resource :home
+
+  root :to => redirect('home')
+  get '/home/login', to: 'home#login'
+  get '/home/login/signin', to: 'sessions#signin'
 
   resources :users
 
-  root :to => redirect('/users')
   get '/users/:id/show', to: 'users#show'
+  get '/users/new', to: 'users#new'
   get '/users/:id/users', to: 'users#users'
+  root :to => redirect('/users')
 end

@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   validates :name, :presence => true
   validates :surname, :presence => true
   validates :mail, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}, :presence => true
-  enum typeUser: {admin:0, client:1, cadet:2}
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
       user.provider = auth.provider
@@ -14,7 +14,16 @@ class User < ActiveRecord::Base
       user.image = auth.info.image
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.document = '123456789'
       user.save!
     end
+  end
+
+  def self.signin (mail, password)
+    aux = User.where(["mail = ? AND password = ?", mail, password]).first
+    if(aux.nil?)
+      return nil
+    end
+    User.find(aux.id)
   end
 end
