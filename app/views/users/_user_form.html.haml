@@ -7,8 +7,12 @@
 %br
 %br
 = label :user, :mail, 'Mail'
-= text_field :user, :mail, :required => true
+= email_field :user, :mail, :required => true
 %br
 %br
 = label :user, :document, 'Documento'
 = text_field :user, :document, :required => true
+%br
+%br
+= label :user, :password, 'Contrasena'
+= password_field :user, :password, :required => true

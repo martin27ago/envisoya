@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <style>
+    /* Email styles need to be inline */
+  </style>
+</head>
+<body>
+  <div align="center">
+    <%= form_tag(home_login_signin_url, :method => "get") do %>
+        Mail: <%= email_field :mail, "mail" %>
+        <br>
+        Contrasena:<%= password_field :password, "password" %>
+        <br>
+        <%= submit_tag("Entrar") %>
+    <% end %>
+    <br>
+    <%= link_to "Ingresar con Facebook", "/auth/facebook", id: "sign_in" %>
+    <br>
+    <%= link_to "Registrarse", "/users/new", id: "sign_up" %>
+  </div>
+</body>
+</html>
