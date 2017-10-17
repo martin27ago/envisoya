@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :surname, :mail, :document, :password)
+    params.require(:user).permit(:name, :surname, :email, :document, :password, :image)
   end
 
   def resolve_format(obj)

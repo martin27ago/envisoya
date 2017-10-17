@@ -63,3 +63,5 @@ gem 'omniauth-facebook', '~> 4.0.0'
 
 gem 'bootstrap-sass'
 
+gem 'paperclip', git: 'git://github.com/thoughtbot/paperclip.git'
+

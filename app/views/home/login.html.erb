@@ -19,17 +19,19 @@
       Email: <%= email_field :email, "email", class:'form-control'%>
       <br>
   </div>
-        <div class="form-group col-md-5 col-md-offset-2" >
+  <div class="form-group col-md-5 col-md-offset-2" >
       Contraseña:<%= password_field :password, "password", class:'form-control' %>
       <br>
   </div>
+  <div class="form-group col-md-5 col-md-offset-2" >
       <%= submit_tag("Entrar") %>
-        <div class="form-group col-md-5 col-md-offset-2">
+  </div>
+  <div class="form-group col-md-5 col-md-offset-2">
           <p class="text-danger"><%=flash[:notice]%></p>
-        </div>
+  </div>
   <% end %>
 </div>
-<div class="containter">
+<div class="form-group col-md-5 col-md-offset-2">
 <br>
 <%= link_to "Ingresar con Facebook", "/auth/facebook?type=user", id: "sign_in" %>
 <br>

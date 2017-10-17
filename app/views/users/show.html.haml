@@ -9,5 +9,8 @@
 %br
 %li Email: #{@user.email}
 %br
+%li Foto:
+<img src=#{@user.image.url(:medium)}>
+
 = link_to 'Editar Informacion', edit_user_path(@user)
 %div
