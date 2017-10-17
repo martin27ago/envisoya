@@ -2,23 +2,39 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" href="freelancer.css">
+</head>
   <style>
     /* Email styles need to be inline */
   </style>
 </head>
 <body>
-  <div align="center">
-    <%= form_tag(home_login_signin_url, :method => "get") do %>
-        Mail: <%= email_field :mail, "mail" %>
-        <br>
-        Contrasena:<%= password_field :password, "password" %>
-        <br>
-        <%= submit_tag("Entrar") %>
-    <% end %>
-    <br>
-    <%= link_to "Ingresar con Facebook", "/auth/facebook", id: "sign_in" %>
-    <br>
-    <%= link_to "Registrarse", "/users/new", id: "sign_up" %>
+
+<br>
+<br>
+
+<div class="container">
+  <div class="form-group col-md-5 col-md-offset-2" >
+  <%= form_tag('signin', :method => "get") do %>
+      Email: <%= email_field :email, "email", class:'form-control'%>
+      <br>
   </div>
+        <div class="form-group col-md-5 col-md-offset-2" >
+      Contraseña:<%= password_field :password, "password", class:'form-control' %>
+      <br>
+  </div>
+      <%= submit_tag("Entrar") %>
+        <div class="form-group col-md-5 col-md-offset-2">
+          <p class="text-danger"><%=flash[:notice]%></p>
+        </div>
+  <% end %>
+</div>
+<div class="containter">
+<br>
+<%= link_to "Ingresar con Facebook", "/auth/facebook?type=user", id: "sign_in" %>
+<br>
+<%= link_to "Registrarse", "/users/new", id: "sign_up" %>
+</div>
+
 </body>
 </html>

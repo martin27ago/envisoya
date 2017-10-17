@@ -106,39 +106,39 @@
       <Position>4</Position>
       <DataType>varchar|0</DataType>
     </column>
-    <column id="32" parent="10" name="mail">
+    <column id="32" parent="10" name="email">
       <Position>5</Position>
       <DataType>varchar|0</DataType>
     </column>
-    <column id="33" parent="10" name="document">
+    <column id="33" parent="10" name="password">
       <Position>6</Position>
       <DataType>varchar|0</DataType>
     </column>
-    <column id="34" parent="10" name="oauth_token">
+    <column id="34" parent="10" name="document">
       <Position>7</Position>
       <DataType>varchar|0</DataType>
     </column>
-    <column id="35" parent="10" name="oauth_expires_at">
+    <column id="35" parent="10" name="image">
       <Position>8</Position>
-      <DataType>datetime|0</DataType>
+      <DataType>varchar|0</DataType>
     </column>
-    <column id="36" parent="10" name="created_at">
+    <column id="36" parent="10" name="oauth_token">
       <Position>9</Position>
-      <DataType>datetime|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>varchar|0</DataType>
     </column>
-    <column id="37" parent="10" name="updated_at">
+    <column id="37" parent="10" name="oauth_expires_at">
       <Position>10</Position>
       <DataType>datetime|0</DataType>
+    </column>
+    <column id="38" parent="10" name="created_at">
+      <Position>11</Position>
+      <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="38" parent="10" name="image">
-      <Position>11</Position>
-      <DataType>varchar|0</DataType>
-    </column>
-    <column id="39" parent="10" name="password">
+    <column id="39" parent="10" name="updated_at">
       <Position>12</Position>
-      <DataType>varchar|0</DataType>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
     </column>
     <key id="40" parent="10">
       <ColNames>id</ColNames>

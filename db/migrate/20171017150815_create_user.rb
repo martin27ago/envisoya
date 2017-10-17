@@ -1,12 +1,14 @@
-class CreateUsers < ActiveRecord::Migration[5.1]
+class CreateUser < ActiveRecord::Migration[5.1]
   def change
     create_table :users do |t|
       t.string :provider
       t.string :uid
       t.string :name
       t.string :surname
-      t.string :mail
+      t.string :email
+      t.string :password
       t.string :document
+      t.string :image
       t.string :oauth_token
       t.datetime :oauth_expires_at
       t.timestamps
