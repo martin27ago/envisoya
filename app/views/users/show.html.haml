@@ -1,0 +1,16 @@
+%h2 Detalles de #{@user.name}
+%div
+%ul#Details
+%li Nombre: #{@user.name}
+%br
+%li Apellido: #{@user.surname}
+%br
+%li Documento: #{@user.document}
+%br
+%li Email: #{@user.email}
+%br
+%li Foto:
+<img src=#{@user.image.url(:medium)}>
+
+= link_to 'Editar Informacion', edit_user_path(@user)
+%div

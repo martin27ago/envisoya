@@ -1,0 +1,7 @@
+%h2 Editar Informacion
+
+= form_tag user_path(@user), :method => :put, :enctype => "multipart/form-data" do
+
+  = render :partial => 'user_form'
+  %br
+  = submit_tag 'Guardar Cambios'

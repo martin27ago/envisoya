@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" type="text/css" href="freelancer.css">
   <title>EnviosYa</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div>
+<div align="right">
   <% if current_user %>
       Signed in as <strong><%= current_user.name %></strong>!
-      <%= image_tag(current_user.image, :alt => "rss feed") %>
+      <% if current_user.image_file_name.nil? %>
+            <%= image_tag(current_user.imageFacebook, :alt => "rss feed") %>
+      <%else%>
+            <%= image_tag(current_user.image.url(:thumb), :alt => "rss feed") %>
+      <%end%>
+
       <%= link_to "Sign out", signout_path, id: "sign_out" %>
-  <% else %>
-      <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
   <% end %>
 </div>
-<%= yield %>
+<div align="left">
 
+</div>
+</body>
+<div class="container">
+<%= yield %>
+</div>
 </body>
 </html>

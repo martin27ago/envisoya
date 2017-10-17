@@ -1,0 +1,23 @@
+%h1 All Users
+
+%table#users
+  %thead
+    %tr
+      %th Nombre
+      %th Apellido
+      %th Email
+      %th Documento
+    %tbody
+      - @users.each do |user|
+        <%=user.if >
+        %tr
+          %td= user.name
+          %td= user.surname
+          %td= user.email
+          %td= user.document
+          %td= link_to "Detalles de #{user.name}", user_path(user)
+          %td= link_to "Editar", edit_user_path(user)
+          %td= link_to "Borrar", user_path(user), :method => :delete
+
+
+

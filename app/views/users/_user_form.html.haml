@@ -1,0 +1,22 @@
+= label :user, :name, 'Nombre'
+= text_field :user, :name, :required => true
+%br
+%br
+= label :user, :surname, 'Apellido'
+= text_field :user, :surname, :required => true
+%br
+%br
+= label :user, :email, 'Email'
+= email_field :user, :email, :required => true
+%br
+%br
+= label :user, :document, 'Documento'
+= text_field :user, :document, :required => true
+%br
+%br
+= label :user, :password, 'Contraseña'
+= password_field :user, :password, :required => true
+%br
+%br
+= label :user, :image, 'Foto'
+= file_field :user, :image, :required => true
