@@ -1,0 +1,20 @@
+%h1 Cadetes
+
+%table#cadets
+  %thead
+    %tr
+      %th Nombre
+      %th Apellido
+      %th Email
+      %th Documento
+      %th Activo
+    %tbody
+      - @deliveries.each do |delivery|
+        %tr
+          %td= delivery.name
+          %td= delivery.surname
+          %td= delivery.email
+          %td= delivery.document
+          %td= delivery.active
+          %td= link_to "Detalles de #{delivery.name}", delivery_path(delivery)
+          %td= link_to "Activar", {:controller => "deliveries", :action => "active", :id => delivery.id}

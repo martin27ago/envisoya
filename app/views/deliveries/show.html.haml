@@ -1,0 +1,16 @@
+%h2 Detalles de #{@delivery.name}
+%div
+%ul#Details
+%li Nombre: #{@delivery.name}
+%br
+%li Apellido: #{@delivery.surname}
+%br
+%li Documento: #{@delivery.document}
+%br
+%li Email: #{@delivery.email}
+%br
+%li Foto:
+<img src=#{@delivery.image.url(:medium)}>
+
+= link_to 'Editar Informacion', edit_delivery_path(@delivery)
+%div

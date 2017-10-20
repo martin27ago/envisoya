@@ -33,9 +33,13 @@
 </div>
 <div class="form-group col-md-5 col-md-offset-2">
 <br>
-<%= link_to "Ingresar con Facebook", "/auth/facebook?type=user", id: "sign_in" %>
+<%= link_to "Ingresar con Facebook como Usuario", "/auth/facebook?type=user", id: "sign_in" %>
 <br>
-<%= link_to "Registrarse", "/users/new", id: "sign_up" %>
+<%= link_to "Registrarse como Usuario", "/users/new", id: "sign_up" %>
+  <br>
+  <%= link_to "Ingresar con Facebook como Cadete", "/auth/facebook?type=delivery", id: "sign_in" %>
+  <br>
+  <%= link_to "Registrarse como Cadete", "/deliveries/new", id: "sign_up" %>
 </div>
 
 </body>

@@ -1,0 +1,7 @@
+%h2 Registrarse
+
+= form_tag deliveries_path, :method => :post, :enctype => "multipart/form-data" do
+
+  = render :partial => 'delivery_form'
+  %br
+  = submit_tag 'Registrse'

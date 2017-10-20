@@ -10,7 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171017173527) do
+ActiveRecord::Schema.define(version: 20171019212205) do
+
+  create_table "deliveries", force: :cascade do |t|
+    t.boolean "active", default: false
+    t.string "provider"
+    t.string "uid"
+    t.string "name"
+    t.string "surname"
+    t.string "email"
+    t.string "password"
+    t.string "document"
+    t.string "imageFacebook"
+    t.string "oauth_token"
+    t.datetime "oauth_expires_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.string "license_file_name"
+    t.string "license_content_type"
+    t.integer "license_file_size"
+    t.datetime "license_updated_at"
+    t.string "papers_file_name"
+    t.string "papers_content_type"
+    t.integer "papers_file_size"
+    t.datetime "papers_updated_at"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "provider"
@@ -29,6 +57,7 @@ ActiveRecord::Schema.define(version: 20171017173527) do
     t.string "image_content_type"
     t.integer "image_file_size"
     t.datetime "image_updated_at"
+    t.boolean "admin", default: false
   end
 
 end

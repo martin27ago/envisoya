@@ -14,8 +14,10 @@ Rails.application.routes.draw do
 
   resources :users
 
-  get '/users/:id/show', to: 'users#show'
-  get '/users/new', to: 'users#new'
-  get '/users/:id/users', to: 'users#users'
   root :to => redirect('/users')
+
+  resources :deliveries
+
+  get 'deliveries/active/:id', to: 'deliveries#active'
+  root :to => redirect('/deliveries')
 end

@@ -1,0 +1,7 @@
+%h2 Editar Informacion
+
+= form_tag delivery_path(@delivery), :method => :put, :enctype => "multipart/form-data" do
+
+  = render :partial => 'delivery_form'
+  %br
+  = submit_tag 'Guardar Cambios'

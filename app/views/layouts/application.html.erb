@@ -8,16 +8,29 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div class="form-group col-md-5 col-md-offset-2">
+  <p class="text-danger"><%=flash[:notice]%></p>
+</div>
 <div align="right">
   <% if current_user %>
-      Signed in as <strong><%= current_user.name %></strong>!
+      Hola, <strong><%= current_user.name %></strong>!
       <% if current_user.image_file_name.nil? %>
             <%= image_tag(current_user.imageFacebook, :alt => "rss feed") %>
       <%else%>
             <%= image_tag(current_user.image.url(:thumb), :alt => "rss feed") %>
       <%end%>
 
-      <%= link_to "Sign out", signout_path, id: "sign_out" %>
+      <%= link_to "Salir", signout_path, id: "sign_out" %>
+  <% else if current_delivery %>
+      Hola, <strong><%= current_delivery.name %></strong>!
+      <% if current_delivery.image_file_name.nil? %>
+          <%= image_tag(current_delivery.imageFacebook, :alt => "rss feed") %>
+      <%else%>
+          <%= image_tag(current_delivery.image.url(:thumb), :alt => "rss feed") %>
+      <%end%>
+
+      <%= link_to "Salir", signout_path, id: "sign_out" %>
+  <% end %>
   <% end %>
 </div>
 <div align="left">

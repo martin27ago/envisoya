@@ -1,5 +1,21 @@
 class UsersController < ApplicationController
 
+  #before_action :require_login, only: [:show]
+
+  def require_login
+    if @current_user.nil?
+      flash[:notice] = "Tienes que estar logeado"
+      redirect_to home_login_url
+    end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:notice] = "#{@user.name}' borrado."
+    redirect_to users_path
+  end
+
   def edit
    @user = User.find params[:id]
   end
@@ -22,14 +38,15 @@ class UsersController < ApplicationController
   end
 
   def create
+    @user.admin = false
     @user = User.create!(user_params)
     flash[:notice] = "#{@user.name} te registraste con exito."
-    redirect_to user_path(user.id)+'/edit'
+    redirect_to user_path(@user.id)+'/edit'
   end
 
-  def users
+  def index
     # @clients = User.where(User.client)
-    @users = User.All
+    @users = User.all
     resolve_format @users
   end
 
