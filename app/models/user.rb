@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  has_many :shippings
   validates :document, :presence =>  true
   validates :name, :presence => true
   validates :surname, :presence => true
@@ -30,14 +29,4 @@ class User < ActiveRecord::Base
     end
     User.find(aux.id)
   end
-<<<<<<< HEAD
 end
-=======
-
-  def self.ExistUserReceiver email, sender
-    if !User.exists?(["email = ?", email])
-      ApplicationMailer.registry_mail(email,sender).deliver_now
-    end
-  end
-end
->>>>>>> 2198e903fd3131a9a4d54da7955190d383c11192
