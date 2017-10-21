@@ -38,7 +38,6 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user.admin = false
     @user = User.create!(user_params)
     flash[:notice] = "#{@user.name} te registraste con exito."
     redirect_to user_path(@user.id)+'/edit'

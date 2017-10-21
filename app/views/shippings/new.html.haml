@@ -1,0 +1,92 @@
+%h2 Solicitar Envio
+%div{ :id => "map", :class => "container", :style => "position: absolute; height: 600px; width: 800px;" }
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+
+= form_tag shippings_path, :method => :post, :enctype => "multipart/form-data" do
+
+  = render :partial => 'shipping_form'
+  %br
+  = submit_tag 'Realizar'
+
+%script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBz3WyEB0DzEcad5JKkEdJUUz1ijChvank&callback=initMap"
+async defer)
+:javascript
+    var map;
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: -34.894942447397305, lng: -56.14013671875},
+        zoom: 13
+      });
+      google.maps.event.addListener(map, 'click', displayLocation);
+    }
+    var markers = []
+    function displayLocation(current){
+          if(markers.length == 2)
+          {
+            deleteOverlays();
+          }
+          else{
+              var marker = new google.maps.Marker({
+              position: current.latLng,
+              map: map
+              });
+              var geocoder=new google.maps.Geocoder;
+          geocoder.geocode({'location':current.latLng}, function (results,status){
+                if(status==='OK'){
+                    if(results[1]){
+                        if(markers.length==0) {
+                        $('#shipping_addressFrom').val(results[1].formatted_address)
+                        }
+                        else{
+                            $('#shipping_addressTo').val(results[1].formatted_address)
+                        }
+                        markers.push(marker);
+                        $('#shipping_latitudeFrom').val(markers[0].position.lat)
+                        $('#shipping_longitudeFrom').val(markers[0].position.lng)
+                        if(markers.length == 2)
+                        {
+                          $('#shipping_latitudeTo').val(markers[1].position.lat)
+                          $('#shipping_longitudeTo').val(markers[1].position.lng)
+                        }
+                    }
+                }
+              });
+          }
+    }
+    function deleteOverlays() {
+        while(markers.length) { markers.pop().setMap(null); }
+        $('#shipping_latitudeTo').val(null)
+        $('#shipping_longitudeTo').val(null)
+        $('#shipping_latitudeFrom').val(null)
+        $('#shipping_longitudeFrom').val(null)
+    }

@@ -1,4 +1,5 @@
 class Delivery < ActiveRecord::Base
+  has_many :shippings
   validates :document, :presence =>  true
   validates :name, :presence => true
   validates :surname, :presence => true
@@ -32,5 +33,15 @@ class Delivery < ActiveRecord::Base
       return nil
     end
     Delivery.find(aux.id)
+  end
+
+  def self.selectDelivery (userFrom, addressFrom, addressTo)
+    aux = Delivery.first
+    if(aux.nil?)
+      return nil
+    end
+    delivery = Delivery.find(aux.id)
+    ApplicationMailer.new_shipping_mail(delivery.email, userFrom, addressFrom, addressTo).deliver_now
+    return delivery
   end
 end

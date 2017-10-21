@@ -39,7 +39,6 @@ class DeliveriesController < ApplicationController
   end
 
   def create
-    @delivery.active = false
     @delivery = Delivery.create!(delivery_params)
     flash[:notice] = "#{@delivery.name} te registraste con exito."
     redirect_to delivery_path(@delivery.id)+'/edit'

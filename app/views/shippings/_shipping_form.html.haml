@@ -1,0 +1,41 @@
+-cache @user_cache do
+  = label :shipping, :emailTo, 'Mail receptor'
+  = email_field :shipping, :emailTo, :required => true
+  = label :shipping, :latitudeFrom, 'latitudeFrom', :style => 'display:none'
+  = text_field :shipping, :latitudeFrom, :required => true, :style => 'display:none'
+  = label :shipping, :longitudeFrom, 'longitudeFrom', :style => 'display:none'
+  = text_field :shipping, :longitudeFrom, :required => true, :style => 'display:none'
+  = label :shipping, :latitudeTo, 'latitudeTo', :style => 'display:none'
+  = text_field :shipping, :latitudeTo, :required => true, :style => 'display:none'
+  = label :shipping, :longitudeTo, 'longitudeTo', :style => 'display:none'
+  = text_field :shipping, :longitudeTo, :required => true, :style => 'display:none'
+  %br
+  = label :shipping, :addressFrom, 'Desde'
+  = text_field :shipping, :addressFrom, :required => true, style: { readonly: true }
+  %br
+  = label :shipping, :addressTo, 'Hasta'
+  = text_field :shipping, :addressTo, :required => true, style: { readonly: true }
+  %br
+  = label :shipping, :price, 'Precio'
+  = number_field :shipping, :price, :required => true
+  %br
+  = label :shipping, :postalCodeFrom, 'Codigo postal desde'
+  = number_field :shipping, :postalCodeFrom, :required => true
+  %br
+  = label :shipping, :postalCodeTo, 'Codigo postal hasta'
+  = number_field :shipping, :postalCodeTo, :required => true
+
+
+%script{type: "text/javascript"}
+  :plain
+    var userCache = #{raw @user_cache}
+    $('#shipping_emailTo').autocomplete({
+    source: function( request, response ) {
+          var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
+
+          response( $.grep( userCache, function( item ){
+              return matcher.test( item );
+          }) );
+        }
+      }
+    );

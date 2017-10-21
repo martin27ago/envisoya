@@ -4,8 +4,15 @@
   <title>EnviosYa</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js' %>
+  <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"%>
+  <%= stylesheet_link_tag "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"%>
   <link rel="stylesheet" type="text/css" href="freelancer.css">
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="initial-scale=1.0">
+  <meta charset="utf-8">
+  <style>
+  </style>
 </head>
 <body>
 <div class="form-group col-md-5 col-md-offset-2">
@@ -33,11 +40,8 @@
   <% end %>
   <% end %>
 </div>
-<div align="left">
-
-<% end %>
-</body>
-<div class="container col-md-5 col-md-offset-3">
+<div>
 <%= yield %>
 </div>
+</body>
 </html>
