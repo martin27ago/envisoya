@@ -1,20 +1,22 @@
-%h1 Cadetes
+%h1 Deliveries
+%br
 
-%table#cadets
-  %thead
-    %tr
-      %th Nombre
-      %th Apellido
-      %th Email
-      %th Documento
-      %th Activo
-    %tbody
-      - @deliveries.each do |delivery|
-        %tr
-          %td= delivery.name
-          %td= delivery.surname
-          %td= delivery.email
-          %td= delivery.document
-          %td= delivery.active
-          %td= link_to "Detalles de #{delivery.name}", delivery_path(delivery)
-          %td= link_to "Activar", {:controller => "deliveries", :action => "active", :id => delivery.id}
+%div(class="container" )
+  %table.table-striped #cadets
+    %thead
+      %tr
+        %th <strong> Nombre </strong>
+        %th <strong> Apellido </strong>
+        %th <strong> Email </strong>
+        %th <strong> Documento </strong>
+        %th <strong> Activo </strong>
+      %tbody
+        - @deliveries.each do |delivery|
+          %tr
+            %td= delivery.name
+            %td= delivery.surname
+            %td= delivery.email
+            %td= delivery.document
+            %td= delivery.active
+            %td= link_to "Detalles de #{delivery.name}", delivery_path(delivery), class: "btn-primary"
+            %td= link_to "Activar", {:controller => "deliveries", :action => "active", :id => delivery.id}, class: "btn-primary"

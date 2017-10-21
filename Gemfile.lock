@@ -127,7 +127,6 @@ GEM
     omniauth-oauth2 (1.4.0)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
-    pg (0.20.0)
     puma (3.10.0)
     rack (2.0.3)
     rack-test (0.7.0)
@@ -224,7 +223,6 @@ DEPENDENCIES
   omniauth
   omniauth-facebook (~> 4.0.0)
   paperclip!
-  pg (= 0.20.0)
   puma (~> 3.7)
   rails (~> 5.1.4)
   ruby-debug-ide (= 0.6.1.beta9)

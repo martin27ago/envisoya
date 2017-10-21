@@ -1,16 +1,27 @@
 %h2 Detalles de #{@delivery.name}
 %div
 %ul#Details
-%li Nombre: #{@delivery.name}
-%br
-%li Apellido: #{@delivery.surname}
-%br
-%li Documento: #{@delivery.document}
-%br
-%li Email: #{@delivery.email}
-%br
-%li Foto:
-<img src=#{@delivery.image.url(:medium)}>
+  %br
+  - if @delivery.image_file_name.nil?
+    %img(src= "#{@delivery.imageFacebook}")
+  - else
+    %img(src= "#{@delivery.image.url}" height="300px"  width="250px" )
+    %br
 
-= link_to 'Editar Informacion', edit_delivery_path(@delivery)
+%table.table.table-bordered
+  %tr
+    %td <strong> Nombre: </strong>
+    %td #{@delivery.name}
+  %tr
+    %td <strong> Apellido: </strong>
+    %td #{@delivery.surname}
+  %tr
+    %td<strong> Documento: </strong>:
+    %td #{@delvery.document}
+  %tr
+    %td<strong>Email: </strong>
+    %td #{@delivery.email}
+
+
+= link_to 'Editar Informacion', edit_delivery_path(@delivery), class: "btn-primary"
 %div

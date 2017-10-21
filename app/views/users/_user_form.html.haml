@@ -1,22 +1,42 @@
-= label :user, :name, 'Nombre'
-= text_field :user, :name, :required => true
-%br
-%br
-= label :user, :surname, 'Apellido'
-= text_field :user, :surname, :required => true
-%br
-%br
-= label :user, :email, 'Email'
-= email_field :user, :email, :required => true
-%br
-%br
-= label :user, :document, 'Documento'
-= text_field :user, :document, :required => true
-%br
-%br
-= label :user, :password, 'Contraseña'
-= password_field :user, :password, :required => true
-%br
-%br
-= label :user, :image, 'Foto'
-= file_field :user, :image, :required => true
+.form-horizontal
+  .form-group
+    .control-label
+    .col-sm-2
+      = label :user, :name, 'Nombre'
+    .col-sm-10
+      = text_field :user, :name, :required => true
+
+  .form-group
+    .control-label
+    .col-sm-2
+      = label :user, :surname, 'Apellido'
+    .col-sm-10
+      = text_field :user, :surname, :required => true
+
+  .form-group
+    .control-label
+    .col-sm-2
+      = label :user, :email, 'Email'
+    .col-sm-10
+      = email_field :user, :email, :required => true
+
+  .form-group
+    .control-label
+    .col-sm-2
+      = label :user, :document, 'Documento'
+    .col-sm-10
+      = text_field :user, :document, :required => true
+
+  .form-group
+    .control-label
+    .col-sm-2
+      = label :user, :password, 'Contraseña'
+    .col-sm-10
+      = password_field :user, :password, :required => true
+
+  .form-group
+    .control-label
+    .col-sm-2
+      = label :user, :image, 'Foto'
+    .col-sm-10
+      = file_field :user, :image
