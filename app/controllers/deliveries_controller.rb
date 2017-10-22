@@ -12,8 +12,13 @@ class DeliveriesController < ApplicationController
     end
   end
 
+<<<<<<< HEAD
   def require_login_as_admin
     if current_admin.nil?
+=======
+  def same_delivery id
+    if current_delivery.id != id
+>>>>>>> 8278e7e09cebeb7e778c6ef4949b09a006742638
       flash[:notice] = "Tienes que estar logeado"
       redirect_to home_login_url
     end

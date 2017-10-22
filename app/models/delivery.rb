@@ -20,8 +20,6 @@ class Delivery < ActiveRecord::Base
       delivery.imageFacebook = auth.info.image
       delivery.oauth_token = auth.credentials.token
       delivery.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      delivery.document = '123456789'
-      delivery.password = '123'
       delivery.active = false
       delivery.save!
     end
