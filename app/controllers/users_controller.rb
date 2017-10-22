@@ -40,7 +40,8 @@ class UsersController < ApplicationController
   def create
     @user = User.create!(user_params)
     flash[:notice] = "#{@user.name} te registraste con exito."
-    redirect_to user_path(@user.id)+'/edit'
+    session[:user_id] = @user.id
+    redirect_to shippings_path
   end
 
   def index

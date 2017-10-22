@@ -22,14 +22,14 @@ class SessionsController < ApplicationController
         redirect_to home_login_url
       else
         session[:delivery_id] = delivery.id
-        redirect_to delivery_path(delivery.id)+'/edit'
+        redirect_to shippings_path
       end
     else
       session[:user_id] = user.id
       if(user.admin == true)
         redirect_to deliveries_url
       else
-        redirect_to user_path(user.id)+'/edit'
+        redirect_to shippings_path
       end
     end
   end
