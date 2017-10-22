@@ -1,28 +1,38 @@
 class DeliveriesController < ApplicationController
 
-  before_action :require_login, only: [:show]
+  before_action :require_login, only: [:show, :edit, :new]
+  before_action :require_login or :require_login_as_admin; only[:index]
   #before_action only: [:edit] do |c| c.require_login and c.same_delivery(params[:edit]) end
 
+  #Security methods
   def require_login
-    if @current_delivery.nil?
+    if current_delivery.nil?
+      flash[:notice] = "Tienes que estar logeado"
+      redirect_to home_login_url
+    end
+  end
+
+  def require_login_as_admin
+    if current_admin.nil?
       flash[:notice] = "Tienes que estar logeado"
       redirect_to home_login_url
     end
   end
 
   def same_delivery id
-    if @current_delivery.id != id
+    if current_delivery.id != id
       flash[:notice] = "Tienes que estar logeado"
       redirect_to home_login_url
     end
   end
 
-  def edit
-    @delivery = Delivery.find params[:id]
-  end
-
+#Actions
   def new
     @delivery = Delivery.new
+  end
+
+  def edit
+    @delivery = Delivery.find params[:id]
   end
 
   def update
