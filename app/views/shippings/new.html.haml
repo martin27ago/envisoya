@@ -1,15 +1,5 @@
 %h2 Solicitar Envio
-%div{ :id => "map", :class => "container", :style => "position: absolute; height: 600px; width: 800px;" }
-%br
-%br
-%br
-%br
-%br
-%br
-%br
-%br
-%br
-%br
+%div{ :id => "map", :class => "container", :style => "position: absolute; height: 400px; width: 600px;" }
 %br
 %br
 %br
@@ -35,8 +25,13 @@
 = form_tag shippings_path, :method => :post, :enctype => "multipart/form-data" do
 
   = render :partial => 'shipping_form'
-  %br
-  = submit_tag 'Realizar'
+%br
+%br
+%br
+%br
+%br
+%br
+  = submit_tag 'Realizar', class: "btn-primary center-block"
 
 %script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBz3WyEB0DzEcad5JKkEdJUUz1ijChvank&callback=initMap"
 async defer)

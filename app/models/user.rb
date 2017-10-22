@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   has_many :shippings
-  validates :document, :presence =>  true
   validates :name, :presence => true
+  validates :document, :presence => true
+  validates :password, :presence => true
   validates :surname, :presence => true
   validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}, :presence => true
   has_attached_file :image, styles:{ medium: '200x200>', thumb: '48x48>'}
@@ -15,6 +16,8 @@ class User < ActiveRecord::Base
       user.surname = auth.info.last_name
       user.email = auth.info.email
       user.imageFacebook = auth.info.image
+      user.document ='123456789'
+      user.password = '123'
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save!

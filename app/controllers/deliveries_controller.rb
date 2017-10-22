@@ -1,7 +1,7 @@
 class DeliveriesController < ApplicationController
 
-  before_action :require_login, only: [:show, :edit, :new]
-  before_action :require_login or :require_login_as_admin; only[:index]
+  before_action :require_login, only: [:show, :edit]
+  #before_action :require_login or :require_login_as_admin; only[:index]
   #before_action only: [:edit] do |c| c.require_login and c.same_delivery(params[:edit]) end
 
   #Security methods
@@ -12,13 +12,9 @@ class DeliveriesController < ApplicationController
     end
   end
 
-<<<<<<< HEAD
-  def require_login_as_admin
-    if current_admin.nil?
-=======
+
   def same_delivery id
     if current_delivery.id != id
->>>>>>> 8278e7e09cebeb7e778c6ef4949b09a006742638
       flash[:notice] = "Tienes que estar logeado"
       redirect_to home_login_url
     end
