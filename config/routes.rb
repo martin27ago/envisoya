@@ -21,8 +21,8 @@ Rails.application.routes.draw do
   get 'deliveries/active/:id', to: 'deliveries#active'
   root :to => redirect('/deliveries')
 
-  resources :shippings do
+  resources :shippings
 
   root :to => redirect('/shippings')
-  end
+
 end

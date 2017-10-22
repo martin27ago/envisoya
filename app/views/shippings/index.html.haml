@@ -1,0 +1,19 @@
+%h1 Deliveries
+%br
+
+%div(class="container" )
+%table#shippings
+  %thead
+    %tr
+      %th <strong> Desde </strong>
+      %th <strong> Hasta </strong>
+      %th <strong> Solicitado </strong>
+      %th <strong> Estado </strong>
+  %tbody
+    - @shippings.each do |shipping|
+      %tr
+        %td= shipping.addressFrom
+        %td= shipping.addressTo
+        %td= shipping.created_at
+        %td= shipping.status
+        %td= link_to "Detalles", shipping_path(shipping), class: "btn-primary"

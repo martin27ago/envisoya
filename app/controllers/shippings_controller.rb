@@ -1,5 +1,23 @@
 class ShippingsController < ApplicationController
 
+  def show
+    id = params[:id]
+    @shipping = Shipping.find(id)
+    resolve_format @shipping
+  end
+
+  def index
+    if(current_user.nil?)
+      @shippings = Shipping.where("delivery_id = ?", current_delivery.id)
+    else
+      @shippings = Shipping.where("user_id = ?", current_user.id)
+    end
+  end
+  
+  def edit
+    @shipping = Shipping.find params[:id]
+  end
+
   def new
     @shipping = Shipping.new
     @user_cache = User.pluck(:email)
@@ -20,5 +38,13 @@ class ShippingsController < ApplicationController
 
   def shipping_params
     params.require(:shipping).permit(:emailTo, :latitudeFrom, :latitudeTo, :longitudeFrom, :longitudeTo, :addressFrom, :addressTo, :price, :postalCodeFrom, :postalCodeTo)
+  end
+
+  def resolve_format(obj)
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => obj }
+      format.json { render :json => obj }
+    end
   end
 end

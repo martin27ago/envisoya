@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171019212205) do
+ActiveRecord::Schema.define(version: 20171022143905) do
 
   create_table "deliveries", force: :cascade do |t|
     t.boolean "active", default: false
@@ -38,6 +38,33 @@ ActiveRecord::Schema.define(version: 20171019212205) do
     t.string "papers_content_type"
     t.integer "papers_file_size"
     t.datetime "papers_updated_at"
+    t.string "longitude", default: "-56.14013671875"
+    t.string "latitude", default: "-34.894942447397305"
+  end
+
+  create_table "shippings", force: :cascade do |t|
+    t.string "latitudeFrom"
+    t.string "longitudeFrom"
+    t.string "latitudeTo"
+    t.string "longitudeTo"
+    t.string "emailTo"
+    t.decimal "price", precision: 10, scale: 2
+    t.integer "status", default: 0
+    t.string "postalCodeFrom"
+    t.string "postalCodeTo"
+    t.integer "delivery_id"
+    t.integer "user_id"
+    t.string "addressFrom"
+    t.string "addressTo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "signature_file_name"
+    t.string "signature_content_type"
+    t.integer "signature_file_size"
+    t.datetime "signature_updated_at"
+    t.integer "paymentMedia"
+    t.index ["delivery_id"], name: "index_shippings_on_delivery_id"
+    t.index ["user_id"], name: "index_shippings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,0 +1,7 @@
+%h2 Editar Informacion
+%br
+= form_tag shipping_path(@shipping), :method => :put, :enctype => "multipart/form-data" do
+
+  = render :partial => 'shipping_form'
+  %br
+  = submit_tag 'Guardar Cambios', class: "btn-primary"
