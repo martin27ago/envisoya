@@ -1,23 +1,23 @@
-%h1 Deliveries
+%h1 Cadetes
 %br
 
-%div(class="container" )
-  %table.table-striped #cadets
-    %thead
+%div(class="container")
+%table.table-striped.table-bordered
+  %thead
+    %tr
+      %th.col-md-4 <strong> Nombre </strong>
+      %th.col-md-4 <strong> Apellido </strong>
+      %th.col-md-4 <strong> Email </strong>
+      %th.col-md-3 <strong> Documento </strong>
+      %th.col-md-3 <strong> Activo </strong>
+  %tbody
+    - @deliveries.each do |delivery|
       %tr
-        %th <strong> Nombre </strong>
-        %th <strong> Apellido </strong>
-        %th <strong> Email </strong>
-        %th <strong> Documento </strong>
-        %th <strong> Activo </strong>
-      %tbody
-        - @deliveries.each do |delivery|
-          %tr
-            %td= delivery.name
-            %td= delivery.surname
-            %td= delivery.email
-            %td= delivery.document
-            %td= delivery.active
-            %td= link_to "Detalles de #{delivery.name}", delivery_path(delivery), class: "btn-primary"
-            - if !delivery.active
-              %td= link_to "Activar", {:controller => "deliveries", :action => "active", :id => delivery.id}, class: "btn-primary"
+        %td.col-md-4= delivery.name
+        %td.col-md-4= delivery.surname
+        %td.col-md-4= delivery.email
+        %td.col-md-4= delivery.document
+        %td.col-md-3= delivery.active
+        %td.col-md-3= link_to "Detalles", delivery_path(delivery), class: "btn-primary"
+        - if !delivery.active
+          %td.col-md-4= link_to "Activar", {:controller => "deliveries", :action => "active", :id => delivery.id}, class: "btn-primary"

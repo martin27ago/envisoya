@@ -2,18 +2,18 @@
 %br
 
 %div(class="container" )
-%table#shippings
+%table.table-striped.table-bordered#shippings
   %thead
     %tr
-      %th <strong> Desde </strong>
-      %th <strong> Hasta </strong>
-      %th <strong> Solicitado </strong>
-      %th <strong> Estado </strong>
+      %th.col-md-4 <strong> Desde </strong>
+      %th.col-md-4 <strong> Hasta </strong>
+      %th.col-md-4 <strong> Solicitado </strong>
+      %th.col-md-4 <strong> Estado </strong>
   %tbody
     - @shippings.each do |shipping|
       %tr
-        %td= shipping.addressFrom
-        %td= shipping.addressTo
-        %td= shipping.created_at
-        %td= shipping.status
-        %td= link_to "Detalles", shipping_path(shipping), class: "btn-primary"
+        %td.col-md-4= shipping.addressFrom
+        %td.col-md-4= shipping.addressTo
+        %td.col-md-4= shipping.created_at
+        %td.col-md-4= shipping.status
+        %td.col-md-4= link_to "Detalles", shipping_path(shipping), class: "btn-primary"

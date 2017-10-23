@@ -916,6 +916,9 @@
     .btn:active,
     .btn:focus {
       outline: none; }
+    .table-bordered{
+      border-color:#18BC9C;
+    }
     </style>
 </head>
 <body>
@@ -931,7 +934,7 @@
         </div>
         <ul class="nav navbar-nav mainNav">
           <li class="nav-item"><%= link_to "Mis envios", shippings_path %></li>
-          <li class="nav-item"><a href="#">Crear envio</a></li>
+          <li class="nav-item"><%= link_to "Crear Envio", shippings_path+"/new" %></li>
           <li class="nav-item">
             <a href="#">
                   Hola, <strong><%= current_user.name %></strong>!
@@ -963,14 +966,14 @@
         </ul>
         <ul class="nav navbar-nav mainNav">
           <li class="nav-item">
-            <a href="#">
+            <%= link_to "", deliveries_path + current_delivery.id+'/edit' %>
               Hola, <strong><%= current_delivery.name %></strong>!
               <% if current_delivery.image_file_name.nil? %>
                   <%= image_tag(current_delivery.imageFacebook, :alt => "rss feed") %>
               <%else%>
                   <%= image_tag(current_delivery.image.url(:thumb), :alt => "rss feed") %>
               <%end%>
-            </a>
+
           </li>
         </ul>
         <ul class="nav navbar-nav mainNav">

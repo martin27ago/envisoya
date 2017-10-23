@@ -6,16 +6,14 @@
       = label :shipping, :emailTo, 'Mail receptor:'
     .col-sm-6
       = email_field :shipping, :emailTo, :required => true
-  = label :shipping, :latitudeFrom, 'latitudeFrom', :style => 'display:none'
-  = text_field :shipping, :latitudeFrom, :required => true, :style => 'display:none'
-  = label :shipping, :longitudeFrom, 'longitudeFrom', :style => 'display:none'
-  = text_field :shipping, :longitudeFrom, :required => true, :style => 'display:none'
-  = label :shipping, :latitudeTo, 'latitudeTo', :style => 'display:none'
-  = text_field :shipping, :latitudeTo, :required => true, :style => 'display:none'
-  = label :shipping, :longitudeTo, 'longitudeTo', :style => 'display:none'
-  = text_field :shipping, :longitudeTo, :required => true, :style => 'display:none'
-
-  .form-horizontal
+      = label :shipping, :latitudeFrom, 'latitudeFrom', :style => 'display:none'
+      = text_field :shipping, :latitudeFrom, :required => true, :style => 'display:none'
+      = label :shipping, :longitudeFrom, 'longitudeFrom', :style => 'display:none'
+      = text_field :shipping, :longitudeFrom, :required => true, :style => 'display:none'
+      = label :shipping, :latitudeTo, 'latitudeTo', :style => 'display:none'
+      = text_field :shipping, :latitudeTo, :required => true, :style => 'display:none'
+      = label :shipping, :longitudeTo, 'longitudeTo', :style => 'display:none'
+      = text_field :shipping, :longitudeTo, :required => true, :style => 'display:none'
   .form-group
     .control-label
     .col-sm-6
@@ -46,7 +44,6 @@
       = label :shipping, :postalCodeTo, 'Codigo postal hasta:'
     .col-sm-6
       = number_field :shipping, :postalCodeTo, :required => true
-
 
 %script{type: "text/javascript"}
   :plain
