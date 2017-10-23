@@ -40,3 +40,10 @@
       = label :user, :image, 'Foto'
     .col-sm-10
       = file_field :user, :image
+
+  .form-group
+    .control-label
+    .col-sm-2
+      = label :user, :userFrom, 'From', :style => 'display:none'
+    .col-sm-10
+      = number_field :user, :userFrom, value: params[:from], :style => 'display:none'

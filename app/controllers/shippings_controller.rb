@@ -13,7 +13,7 @@ class ShippingsController < ApplicationController
       @shippings = Shipping.where("user_id = ?", current_user.id)
     end
   end
-  
+
   def edit
     @shipping = Shipping.find params[:id]
   end
@@ -25,15 +25,17 @@ class ShippingsController < ApplicationController
   end
 
   def create
-    @userFrom = current_user
-    User.ExistUserReceiver shipping_params[:emailTo], @userFrom.name+' '+@userFrom.surname
-    @delivery = Delivery.selectDelivery @userFrom.name+' '+@userFrom.surname, shipping_params[:addressFrom], shipping_params[:addressTo]
-    shipping_params.merge(:user => @userFrom, :delivery => @delivery)
+    userFrom = current_user
+    User.ExistUserReceiver shipping_params[:emailTo], userFrom
+    delivery = Delivery.selectDelivery userFrom.name+' '+userFrom.surname, shipping_params[:addressFrom], shipping_params[:addressTo]
+    shipping_params.merge(:user => userFrom, :delivery => delivery)
     @shipping = Shipping.new(shipping_params)
-    @shipping.user = @userFrom
-    @shipping.delivery = @delivery
+    @shipping.user = userFrom
+    @shipping.delivery = delivery
     @shipping.save!
+    userFrom.applyDiscount
     flash[:notice] = "Envio creado."
+    redirect_to shippings_path
   end
 
   def shipping_params
