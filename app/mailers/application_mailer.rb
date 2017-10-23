@@ -4,6 +4,7 @@ class ApplicationMailer < ActionMailer::Base
 
   def registry_mail (to, from)
     @from = from
+    @fromId = from.id.to_s
     @url  = 'http://www.gmail.com'
     mail(to: to, subject: 'Te damos la bienvenida a nuestra app')
   end

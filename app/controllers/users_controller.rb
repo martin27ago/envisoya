@@ -38,8 +38,12 @@ class UsersController < ApplicationController
   end
 
   def create
+    userFrom = params[:user][:userFrom]
     @user = User.create!(user_params)
     flash[:notice] = "#{@user.name} te registraste con exito."
+    if(!userFrom.nil?)
+      Discount.ManageDiscount @user, userFrom
+    end
     session[:user_id] = @user.id
     redirect_to shippings_path
   end

@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_many :shippings
+  has_many :discounts, foreign_key: "user_id", class_name: "Discount"
+  has_many :discountsTransmitted, foreign_key: "userFrom_id", class_name: "Discount"
   validates :name, :presence => true
   validates :document, :presence => true
   validates :password, :presence => true
@@ -34,7 +36,20 @@ class User < ActiveRecord::Base
 
   def self.ExistUserReceiver email, sender
     if !User.exists?(["email = ?", email])
-      ApplicationMailer.registry_mail(email,sender).deliver_now
+      ApplicationMailer.registry_mail(email,sender).deliver_later
     end
+  end
+
+  def applyDiscount
+    discount = Discount.where(["active = ? and used = ? and user_id = ?", true, false, self.id]).first
+    if(!discount.nil?)
+      discountFrom = Discount.where(["userFrom = ? and user_id = ? and active = ?", self.id, discount.userFrom, false]).first
+      discountFrom.active = true
+      discountFrom.save!
+      discount.used = true
+      discount.save!
+      return discount.porcent
+    end
+    return 0
   end
 end
