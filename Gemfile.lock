@@ -60,6 +60,7 @@ GEM
     byebug (9.1.0)
     childprocess (0.8.0)
       ffi (~> 1.0, >= 1.0.11)
+    ci_uy (0.1.1)
     climate_control (0.2.0)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
@@ -127,7 +128,6 @@ GEM
     omniauth-oauth2 (1.4.0)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
-    pg (0.20.0)
     puma (3.10.0)
     rack (2.0.3)
     rack-test (0.7.0)
@@ -218,6 +218,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass
   byebug
+  ci_uy
   coffee-rails (~> 4.2)
   debase (= 0.2.2.beta10)
   haml
@@ -226,7 +227,6 @@ DEPENDENCIES
   omniauth
   omniauth-facebook (~> 4.0.0)
   paperclip!
-  pg (= 0.20.0)
   puma (~> 3.7)
   rails (~> 5.1.4)
   rails-jquery-autocomplete

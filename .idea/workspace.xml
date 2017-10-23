@@ -2,14 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f04b0fae-3ef7-45c6-88f3-046d3c14d4dc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/dd70f2a9-0b07-4b86-81f7-becbf6ebbabb/_metadata_/metadata" afterPath="$PROJECT_DIR$/.idea/dataSources/dd70f2a9-0b07-4b86-81f7-becbf6ebbabb/_metadata_/metadata" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/dd70f2a9-0b07-4b86-81f7-becbf6ebbabb/_metadata_/metadata.values.at" afterPath="$PROJECT_DIR$/.idea/dataSources/dd70f2a9-0b07-4b86-81f7-becbf6ebbabb/_metadata_/metadata.values.at" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/obligatorio.iml" afterPath="$PROJECT_DIR$/.idea/obligatorio.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/deliveries/index.html.haml" afterPath="$PROJECT_DIR$/app/views/deliveries/index.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/application_mailer/new_shipping_mail.html.erb" afterPath="$PROJECT_DIR$/app/views/application_mailer/new_shipping_mail.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/application_mailer/registry_mail.html.erb" afterPath="$PROJECT_DIR$/app/views/application_mailer/registry_mail.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/shippings/_shipping_form.html.haml" afterPath="$PROJECT_DIR$/app/views/shippings/_shipping_form.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/shippings/index.html.haml" afterPath="$PROJECT_DIR$/app/views/shippings/index.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/shippings/new.html.haml" afterPath="$PROJECT_DIR$/app/views/shippings/new.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/users/edit.html.haml" afterPath="$PROJECT_DIR$/app/views/users/edit.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -25,7 +28,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/obligatorio@Development__obligatorio.coverage" NAME="Development: obligatorio Coverage Results" MODIFIED="1508683268591" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="obligatorio" />
-    <SUITE FILE_PATH="coverage/EnviosYa2@Development__obligatorio.coverage" NAME="Development: obligatorio Coverage Results" MODIFIED="1508711243962" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="obligatorio" />
+    <SUITE FILE_PATH="coverage/EnviosYa2@Development__obligatorio.coverage" NAME="Development: obligatorio Coverage Results" MODIFIED="1508786345168" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="obligatorio" />
     <SUITE FILE_PATH="coverage/EnviosYa@Development__obligatorio.coverage" NAME="Development: obligatorio Coverage Results" MODIFIED="1508615135359" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="obligatorio" />
   </component>
   <component name="DatabaseView">
@@ -51,41 +54,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="show.html.haml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/users/show.html.haml">
+      <file leaf-file-name="Gemfile" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Gemfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="27" lean-forward="true" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+            <state relative-caret-position="567">
+              <caret line="72" column="11" lean-forward="false" selection-start-line="72" selection-start-column="11" selection-end-line="72" selection-end-column="11" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="edit.html.haml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/shippings/edit.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="49" lean-forward="false" selection-start-line="6" selection-start-column="49" selection-end-line="6" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html.haml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/deliveries/index.html.haml">
+        <entry file="file://$PROJECT_DIR$/app/views/users/edit.html.haml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
-              <caret line="7" column="44" lean-forward="true" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
+              <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.haml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/shippings/index.html.haml">
+      <file leaf-file-name="registry_mail.html.erb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/application_mailer/registry_mail.html.erb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
-              <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+              <caret line="10" column="8" lean-forward="true" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="new_shipping_mail.html.erb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/application_mailer/new_shipping_mail.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="45" lean-forward="false" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -94,7 +97,7 @@
       <file leaf-file-name="_delivery_form.html.haml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/deliveries/_delivery_form.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
+            <state relative-caret-position="407">
               <caret line="47" column="4" lean-forward="false" selection-start-line="47" selection-start-column="4" selection-end-line="47" selection-end-column="4" />
               <folding />
             </state>
@@ -104,18 +107,28 @@
       <file leaf-file-name="application.html.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="938" column="12" lean-forward="true" selection-start-line="938" selection-start-column="12" selection-end-line="938" selection-end-column="24" />
+            <state relative-caret-position="264">
+              <caret line="923" column="6" lean-forward="false" selection-start-line="923" selection-start-column="6" selection-end-line="923" selection-end-column="6" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.html.erb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/home/login.html.erb">
+      <file leaf-file-name="sessions_controller.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/sessions_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="80" lean-forward="false" selection-start-line="29" selection-start-column="67" selection-end-line="29" selection-end-column="80" />
+            <state relative-caret-position="210">
+              <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application_controller.rb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="13" column="6" lean-forward="true" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -124,42 +137,33 @@
       <file leaf-file-name="new.html.haml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/shippings/new.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-159">
-              <caret line="27" column="3" lean-forward="true" selection-start-line="27" selection-start-column="3" selection-end-line="27" selection-end-column="3" />
+            <state relative-caret-position="362">
+              <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
               <folding>
-                <marker date="1508710954000" expanded="true" signature="595:829" ph="{...}" />
-                <marker date="1508710954000" expanded="true" signature="661:753" ph="{...}" />
-                <marker date="1508710954000" expanded="true" signature="888:2183" ph="{...}" />
-                <marker date="1508710954000" expanded="true" signature="934:977" ph="{...}" />
-                <marker date="1508710954000" expanded="true" signature="992:2177" ph="{...}" />
-                <marker date="1508710954000" expanded="true" signature="1044:1124" ph="{&quot;position&quot;: current.latLng...}" />
-                <marker date="1508710954000" expanded="true" signature="1261:2163" ph="{...}" />
-                <marker date="1508710954000" expanded="true" signature="1296:2147" ph="{...}" />
-                <marker date="1508710954000" expanded="true" signature="1332:2129" ph="{...}" />
-                <marker date="1508710954000" expanded="true" signature="1380:1492" ph="{...}" />
-                <marker date="1508710954000" expanded="true" signature="1521:1635" ph="{...}" />
-                <marker date="1508710954000" expanded="true" signature="1917:2107" ph="{...}" />
-                <marker date="1508710954000" expanded="true" signature="2214:2465" ph="{...}" />
+                <marker date="1508782684000" expanded="true" signature="607:841" ph="{...}" />
+                <marker date="1508782684000" expanded="true" signature="673:765" ph="{...}" />
+                <marker date="1508782684000" expanded="true" signature="900:2195" ph="{...}" />
+                <marker date="1508782684000" expanded="true" signature="946:989" ph="{...}" />
+                <marker date="1508782684000" expanded="true" signature="1004:2189" ph="{...}" />
+                <marker date="1508782684000" expanded="true" signature="1056:1136" ph="{&quot;position&quot;: current.latLng...}" />
+                <marker date="1508782684000" expanded="true" signature="1273:2175" ph="{...}" />
+                <marker date="1508782684000" expanded="true" signature="1308:2159" ph="{...}" />
+                <marker date="1508782684000" expanded="true" signature="1344:2141" ph="{...}" />
+                <marker date="1508782684000" expanded="true" signature="1392:1504" ph="{...}" />
+                <marker date="1508782684000" expanded="true" signature="1533:1647" ph="{...}" />
+                <marker date="1508782684000" expanded="true" signature="1929:2119" ph="{...}" />
+                <marker date="1508782684000" expanded="true" signature="2226:2477" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_shipping_form.html.haml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="_shipping_form.html.haml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/shippings/_shipping_form.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="13" lean-forward="true" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            <state relative-caret-position="420">
+              <caret line="28" column="13" lean-forward="true" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="users" pinned="false" current-in-tab="false">
-        <entry file="das://table:/82868e86/dd70f2a9-0b07-4b86-81f7-becbf6ebbabb/main.users">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
@@ -187,6 +191,7 @@
       <find>li.a</find>
       <find>Hola</find>
       <find>.table</find>
+      <find>ci</find>
       <find>Crear</find>
     </findStrings>
   </component>
@@ -196,14 +201,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/views/cadets/cadets.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/cadets/delivery.html.haml" />
         <option value="$PROJECT_DIR$/app/views/cadets/edit.html.haml" />
         <option value="$PROJECT_DIR$/app/views/cadets/new.html.haml" />
         <option value="$PROJECT_DIR$/app/views/cadets/show.html.haml" />
         <option value="$PROJECT_DIR$/app/views/cadets/_delivery_form.html.haml" />
         <option value="$PROJECT_DIR$/db/migrate/20171017194118_create_cadet.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/deliveries/delivery.html.haml" />
         <option value="$PROJECT_DIR$/db/migrate/20171018204109_addpapersdelivery.rb" />
         <option value="$PROJECT_DIR$/config/initializers/database.yml" />
@@ -219,12 +221,10 @@
         <option value="$PROJECT_DIR$/app/views/users/index.html.haml" />
         <option value="$PROJECT_DIR$/db/migrate/20171018123314_create_delivery.rb" />
         <option value="$PROJECT_DIR$/app/controllers/users_controller.rb" />
-        <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/home.scss" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/sessions.scss" />
         <option value="$PROJECT_DIR$/app/views/users/new.html.haml" />
         <option value="$PROJECT_DIR$/app/views/home/login.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/users/edit.html.haml" />
         <option value="$PROJECT_DIR$/app/views/users/_user_form.html.haml" />
         <option value="$PROJECT_DIR$/app/views/deliveries/_delivery_form.html.haml" />
         <option value="$PROJECT_DIR$/app/views/deliveries/edit.html.haml" />
@@ -244,9 +244,14 @@
         <option value="$PROJECT_DIR$/app/models/user.rb" />
         <option value="$PROJECT_DIR$/app/views/shippings/index.html.haml" />
         <option value="$PROJECT_DIR$/app/views/deliveries/index.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/shippings/_shipping_form.html.haml" />
         <option value="$PROJECT_DIR$/app/views/shippings/new.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/shippings/_shipping_form.html.haml" />
+        <option value="$PROJECT_DIR$/Gemfile" />
+        <option value="$PROJECT_DIR$/app/views/application_mailer/new_shipping_mail.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/application_mailer/registry_mail.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/users/edit.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
+        <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
       </list>
     </option>
   </component>
@@ -315,13 +320,6 @@
               <item name="EnviosYa2" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="EnviosYa2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EnviosYa2" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="deliveries" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="EnviosYa2" type="b2602c69:ProjectViewProjectNode" />
@@ -525,12 +523,12 @@
       <workItem from="1508529842421" duration="14910000" />
       <workItem from="1508622835668" duration="4583000" />
       <workItem from="1508701739200" duration="13000" />
-      <workItem from="1508701772694" duration="5370000" />
+      <workItem from="1508701772694" duration="10399000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="111227000" />
+    <option name="totallyTimeSpent" value="116256000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -540,10 +538,10 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30533335" sideWeight="0.503125" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1875" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35333332" sideWeight="0.48948786" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.444" sideWeight="0.48948786" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36266667" sideWeight="0.490625" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23066667" sideWeight="0.490625" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45108137" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -568,21 +566,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/db/migrate/20171019004359_addadmin.rb" />
-    <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/home/login.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="31" column="11" lean-forward="true" selection-start-line="31" selection-start-column="11" selection-end-line="31" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css.sass">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -592,14 +575,6 @@
     </entry>
     <entry file="file://$USER_HOME$/.rvm/gems/ruby-2.4.2/gems/activerecord-5.1.4/lib/active_record/persistence.rb" />
     <entry file="file://$USER_HOME$/.rvm/gems/ruby-2.4.2/gems/actionpack-5.1.4/lib/action_controller/metal/rescue.rb" />
-    <entry file="file://$PROJECT_DIR$/Gemfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="56" column="9" lean-forward="false" selection-start-line="56" selection-start-column="7" selection-end-line="56" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/sessions.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -618,13 +593,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="13470">
           <caret line="898" column="18" lean-forward="false" selection-start-line="898" selection-start-column="18" selection-end-line="898" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/users/_user_form.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -654,13 +622,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="4" column="7" lean-forward="false" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/sessions_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="20" lean-forward="true" selection-start-line="2" selection-start-column="4" selection-end-line="3" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -765,14 +726,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/users/edit.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/application_record.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -846,23 +799,7 @@
     <entry file="file://$PROJECT_DIR$/app/views/users/show.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
-          <caret line="9" column="27" lean-forward="true" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/deliveries/_delivery_form.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="47" column="4" lean-forward="false" selection-start-line="47" selection-start-column="4" selection-end-line="47" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/deliveries/index.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="44" lean-forward="true" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
+          <caret line="9" column="27" lean-forward="false" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -875,6 +812,60 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/deliveries/index.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="26" lean-forward="false" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/users/_user_form.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-96">
+          <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/shippings/new.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+          <folding>
+            <marker date="1508782684000" expanded="true" signature="607:841" ph="{...}" />
+            <marker date="1508782684000" expanded="true" signature="673:765" ph="{...}" />
+            <marker date="1508782684000" expanded="true" signature="900:2195" ph="{...}" />
+            <marker date="1508782684000" expanded="true" signature="946:989" ph="{...}" />
+            <marker date="1508782684000" expanded="true" signature="1004:2189" ph="{...}" />
+            <marker date="1508782684000" expanded="true" signature="1056:1136" ph="{&quot;position&quot;: current.latLng...}" />
+            <marker date="1508782684000" expanded="true" signature="1273:2175" ph="{...}" />
+            <marker date="1508782684000" expanded="true" signature="1308:2159" ph="{...}" />
+            <marker date="1508782684000" expanded="true" signature="1344:2141" ph="{...}" />
+            <marker date="1508782684000" expanded="true" signature="1392:1504" ph="{...}" />
+            <marker date="1508782684000" expanded="true" signature="1533:1647" ph="{...}" />
+            <marker date="1508782684000" expanded="true" signature="1929:2119" ph="{...}" />
+            <marker date="1508782684000" expanded="true" signature="2226:2477" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/shippings/_shipping_form.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="13" lean-forward="true" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gemfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="72" column="11" lean-forward="false" selection-start-line="72" selection-start-column="11" selection-end-line="72" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/shippings/index.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -883,40 +874,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/views/application_mailer/new_shipping_mail.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="938" column="12" lean-forward="true" selection-start-line="938" selection-start-column="12" selection-end-line="938" selection-end-column="24" />
+        <state relative-caret-position="120">
+          <caret line="8" column="45" lean-forward="false" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/shippings/new.html.haml">
+    <entry file="file://$PROJECT_DIR$/app/views/deliveries/_delivery_form.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-159">
-          <caret line="27" column="3" lean-forward="true" selection-start-line="27" selection-start-column="3" selection-end-line="27" selection-end-column="3" />
-          <folding>
-            <marker date="1508710954000" expanded="true" signature="595:829" ph="{...}" />
-            <marker date="1508710954000" expanded="true" signature="661:753" ph="{...}" />
-            <marker date="1508710954000" expanded="true" signature="888:2183" ph="{...}" />
-            <marker date="1508710954000" expanded="true" signature="934:977" ph="{...}" />
-            <marker date="1508710954000" expanded="true" signature="992:2177" ph="{...}" />
-            <marker date="1508710954000" expanded="true" signature="1044:1124" ph="{&quot;position&quot;: current.latLng...}" />
-            <marker date="1508710954000" expanded="true" signature="1261:2163" ph="{...}" />
-            <marker date="1508710954000" expanded="true" signature="1296:2147" ph="{...}" />
-            <marker date="1508710954000" expanded="true" signature="1332:2129" ph="{...}" />
-            <marker date="1508710954000" expanded="true" signature="1380:1492" ph="{...}" />
-            <marker date="1508710954000" expanded="true" signature="1521:1635" ph="{...}" />
-            <marker date="1508710954000" expanded="true" signature="1917:2107" ph="{...}" />
-            <marker date="1508710954000" expanded="true" signature="2214:2465" ph="{...}" />
-          </folding>
+        <state relative-caret-position="407">
+          <caret line="47" column="4" lean-forward="false" selection-start-line="47" selection-start-column="4" selection-end-line="47" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/shippings/_shipping_form.html.haml">
+    <entry file="file://$PROJECT_DIR$/app/views/application_mailer/registry_mail.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="13" lean-forward="true" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        <state relative-caret-position="150">
+          <caret line="10" column="8" lean-forward="true" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/users/edit.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="923" column="6" lean-forward="false" selection-start-line="923" selection-start-column="6" selection-end-line="923" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/sessions_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="6" lean-forward="true" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
           <folding />
         </state>
       </provider>

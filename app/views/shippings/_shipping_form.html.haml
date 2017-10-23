@@ -19,19 +19,19 @@
     .col-sm-6
       = label :shipping, :addressFrom, 'Desde:'
     .col-sm-6
-      = text_field :shipping, :addressFrom, :required => true, style: { readonly: true }
+      = text_field :shipping, :addressFrom, :required => true, :readonly => true
   .form-group
     .control-label
     .col-sm-6
       = label :shipping, :addressTo, 'Hasta:'
     .col-sm-6
-      = text_field :shipping, :addressTo, :required => true, style: { readonly: true }
+      = text_field :shipping, :addressTo, :required => true, :readonly => true
   .form-group
     .control-label
     .col-sm-6
       = label :shipping, :price, 'Precio:'
     .col-sm-6
-      = number_field :shipping, :price, :required => true
+      = number_field :shipping, :price, :required => true, input_html: { readonly: true }
   .form-group
     .control-label
     .col-sm-6

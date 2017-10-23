@@ -4,4 +4,8 @@
 
   = render :partial => 'user_form'
   %br
-  = submit_tag 'Guardar Cambios', class: "btn-primary"
+  = submit_tag 'Guardar Cambios', class: "btn-primary", id: 'submit'
+  %script
+  $(function() {
+  $('button').click(function(e)
+  { e.preventDefault(); $('user_form').submit(); } })

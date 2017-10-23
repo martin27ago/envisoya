@@ -3,17 +3,41 @@
     <meta content="text/html: charset = UTF-8" http-equiv="content-type">
   </head>
   <body>
-  <h1>EnviosYa</h1>
-    Tiene un nuevo envio para realizar a nombre de <%= @nameFrom %>:
+  <div class="container">
+  <h1 class="alert-info">EnviosYa</h1>
+    <p>
+      Tiene un nuevo envio para realizar a nombre de <%= @nameFrom %>:
+    </p>
     <br>
-    Desde: <%= @addressFrom %>
+    <talbe class="table-striped">
+    <tr>
+      <td>
+        Desde:
+      </td>
+      <td>
+        <strong><%= @addressFrom %></strong>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Hasta:
+      </td>
+      <td>
+        <strong><%= @addressTo %></strong>
+      </td>
+    </tr>
     <br>
-    Hasta: <%= @addressTo %>
+    </talbe>
+
+    <p>
+      Puede ver mas información del envío desde la app.
+    </p>
     <br>
-    Puede ver mas informacion del envio desde la app.
-    <br>
-    <br>
-    Saludos,
-    Equipo de EnviosYa!
+    <p>
+      Saludos,
+      <br>
+      Equipo de EnviosYa!
+    </p>
+  </div>
   </body>
 </html>

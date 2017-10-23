@@ -922,28 +922,28 @@
     </style>
 </head>
 <body>
-<div class="form-group col-md-5 col-md-offset-2">
-  <p class="text-danger"><%=flash[:notice]%></p>
-</div>
-
 <%if !current_user.nil? %>
     <nav class="navbar mainNav">
       <div class="container-fluid mainNav">
         <div class="navbar-header mainNav">
           <a class="navbar-brand mainNav" href="#">Envios Ya!</a>
+          <a class="navbar-brand mainNav" href="#"> Usuario </a>
         </div>
         <ul class="nav navbar-nav mainNav">
           <li class="nav-item"><%= link_to "Mis envios", shippings_path %></li>
           <li class="nav-item"><%= link_to "Crear Envio", shippings_path+"/new" %></li>
           <li class="nav-item">
-            <a href="#">
-                  Hola, <strong><%= current_user.name %></strong>!
-                  <% if current_user.image_file_name.nil? %>
-                      <%= image_tag(current_user.imageFacebook, :alt => "rss feed") %>
-                  <%else%>
-                      <%= image_tag(current_user.image.url(:thumb), :alt => "rss feed") %>
-                  <%end%>
-            </a>
+            <%=link_to("Hola, " + current_user.name,
+           :controller => 'users',
+           :action => 'edit',
+           :id => current_user.id)%>
+          </li>
+          <li class="nav-item">
+            <% if current_user.image_file_name.nil? %>
+                <%= image_tag(current_user.imageFacebook, :alt => "rss feed") %>
+            <%else%>
+                <%= image_tag(current_user.image.url(:thumb), :alt => "rss feed") %>
+            <%end%>
           </li>
           <li class="nav-item">
             <%= link_to "Salir", signout_path, id: "sign_out" %>
@@ -958,6 +958,7 @@
       <div class="container-fluid mainNav">
         <div class="navbar-header mainNav">
           <a class="navbar-brand mainNav" href="#">Envios Ya!</a>
+          <a class="navbar-brand mainNav" href="#"> Cadete </a>
         </div>
         <ul class="nav navbar-nav mainNav" style="align:left">
           <li class="nav-item">
@@ -966,8 +967,13 @@
         </ul>
         <ul class="nav navbar-nav mainNav">
           <li class="nav-item">
-            <%= link_to "", deliveries_path + current_delivery.id+'/edit' %>
-              Hola, <strong><%= current_delivery.name %></strong>!
+          <li class="nav-item">
+            <%=link_to("Hola, " + current_delivery.name,
+                       :controller => 'users',
+                       :action => 'edit',
+                       :id => current_delivery.id)%>
+          </li>
+          <li class="nav-item">
               <% if current_delivery.image_file_name.nil? %>
                   <%= image_tag(current_delivery.imageFacebook, :alt => "rss feed") %>
               <%else%>

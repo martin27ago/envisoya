@@ -10,4 +10,10 @@ class ApplicationController < ActionController::Base
   def current_delivery
     @current_delivery ||= Delivery.find(session[:delivery_id]) if session[:delivery_id]
   end
+
+=begin
+  def current_admin
+    @current_admin ||= User.find(session[:user_id] && name[:"admin"]) if session[:user_id]
+  end
+=end
 end

@@ -4,10 +4,14 @@
   </head>
   <body>
     <h1>EnviosYa</h1>
-    Bienvenido a nuestra aplicacion de cadeteria, <%= @from.name %> <%= @from.surname %> te a hecho un envio.<br>
+    <p>
+    Bienvenido a nuestra aplicación de cadetería, <%= @from.name %> <%= @from.surname %> te a hecho un envío.<br>
     Quieres <%= link_to 'registrarte', new_user_url.concat("?from=").concat(@fromId) %> para poder empezar nuestra app?
     <br>
+    <br>
   Saludos,
+      <br>
     Equipo de EnviosYa!
+   </p>
   </body>
 </html>

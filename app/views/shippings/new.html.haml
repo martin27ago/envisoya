@@ -25,12 +25,12 @@
 = form_tag shippings_path, :method => :post, :enctype => "multipart/form-data" do
 
   = render :partial => 'shipping_form'
-%br
-%br
-%br
-%br
-%br
-%br
+  %br
+  %br
+  %br
+  %br
+  %br
+  %br
   = submit_tag 'Realizar', class: "btn-primary center-block"
 
 %script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBz3WyEB0DzEcad5JKkEdJUUz1ijChvank&callback=initMap"
