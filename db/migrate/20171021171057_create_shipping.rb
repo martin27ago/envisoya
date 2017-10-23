@@ -15,6 +15,7 @@ class CreateShipping < ActiveRecord::Migration[5.1]
       t.string :addressFrom
       t.string :addressTo
       t.timestamps
+      t.decimal :weight
     end
   end
 end

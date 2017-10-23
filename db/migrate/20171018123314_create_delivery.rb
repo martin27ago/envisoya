@@ -6,7 +6,7 @@ class CreateDelivery < ActiveRecord::Migration[5.1]
       t.string :uid
       t.string :name
       t.string :surname
-      t.string :email
+      t.string :email, unique: true
       t.string :password
       t.string :document
       t.string :imageFacebook

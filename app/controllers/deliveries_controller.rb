@@ -1,8 +1,8 @@
 class DeliveriesController < ApplicationController
 
   before_action :require_login, only: [:show, :edit]
-  #before_action :require_login or :require_login_as_admin; only[:index]
-  #before_action only: [:edit] do |c| c.require_login and c.same_delivery(params[:edit]) end
+  before_action :admin_login, only: [:index]
+  before_action :is_log, only: [:new]
 
   #Security methods
   def require_login
@@ -12,10 +12,16 @@ class DeliveriesController < ApplicationController
     end
   end
 
+  def admin_login
+    if !current_user.nil? and !current_user.admin
+      flash[:notice] = "Solo puede ingresar el admin"
+      redirect_to home_login_url
+    end
+  end
 
-  def same_delivery id
-    if current_delivery.id != id
-      flash[:notice] = "Tienes que estar logeado"
+  def is_log
+    if !current_user.nil? or !current_delivery.nil?
+      flash[:notice] = "No puedes registrarte como cadete si estas logeado"
       redirect_to home_login_url
     end
   end
@@ -50,10 +56,29 @@ class DeliveriesController < ApplicationController
   end
 
   def create
-    @delivery = Delivery.create!(delivery_params)
-    flash[:notice] = "#{@delivery.name} te registraste con exito."
-    session[:delivery_id] = @delivery.id
-    redirect_to shippings_path
+    document = delivery_params[:document]
+    image = delivery_params[:image]
+    if(!CiUY.validate(document) or image.nil?)
+      if(!CiUY.validate(document))
+        flash[:notice] = "Documento no verificable"
+      else
+        flash[:notice] = "Falta la foto"
+      end
+      render '/deliveries/new'
+    else
+      begin
+        @delivery = Delivery.create!(delivery_params)
+      rescue ActiveRecord::RecordInvalid => invalid
+        if (@delivery.nil?)
+          flash[:notice] = invalid.message
+          render '/deliveries/new'
+        else
+          flash[:notice] = "#{@delivery.name} te registraste con exito."
+          session[:delivery_id] = @delivery.id
+          redirect_to shippings_path
+        end
+      end
+    end
   end
 
   def index

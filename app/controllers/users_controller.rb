@@ -1,10 +1,18 @@
 class UsersController < ApplicationController
 
-  #before_action :require_login, only: [:show]
+  before_action :require_login, only: [:show, :edit]
+  before_action :is_log, only: [:new]
 
   def require_login
-    if @current_user.nil?
+    if current_user.nil?
       flash[:notice] = "Tienes que estar logeado"
+      redirect_to home_login_url
+    end
+  end
+
+  def is_log
+    if !current_user.nil? or !current_delivery.nil?
+      flash[:notice] = "No podes registrar nuevo usuario si estas logeado"
       redirect_to home_login_url
     end
   end
@@ -12,7 +20,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    flash[:notice] = "#{@user.name}' borrado."
+    flash[:notice] = "#{@user.name} borrado."
     redirect_to users_path
   end
 
@@ -39,13 +47,32 @@ class UsersController < ApplicationController
 
   def create
     userFrom = params[:user][:userFrom]
-    @user = User.create!(user_params)
-    flash[:notice] = "#{@user.name} te registraste con exito."
-    if(!userFrom.nil?)
-      Discount.ManageDiscount @user, userFrom
+    cedula = user_params[:document]
+    image = delivery_params[:image]
+    if(!CiUY.validate(cedula)or image.nil?)
+      if(!CiUY.validate(document))
+        flash[:notice] = "Documento no verificable"
+      else
+        flash[:notice] = "Falta la foto"
+      end
+      render '/users/new'
+    else
+      begin
+      @user = User.create!(user_params)
+      rescue ActiveRecord::RecordInvalid => invalid
+        if (@user.nil?)
+          flash[:notice] = invalid.message
+          render '/users/new'
+        else
+          flash[:notice] = "#{@user.name} te registraste con exito."
+          if(userFrom!='')
+            Discount.ManageDiscount @user, userFrom
+          end
+          session[:user_id] = @user.id
+          redirect_to shippings_path
+        end
+      end
     end
-    session[:user_id] = @user.id
-    redirect_to shippings_path
   end
 
   def index

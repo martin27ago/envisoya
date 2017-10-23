@@ -1,5 +1,30 @@
 class ShippingsController < ApplicationController
 
+  before_action :require_login_user, only: [:new]
+  before_action :require_login_delivery, only: [:edit]
+  before_action :require_login_delivery_user, only: [:show]
+
+  def require_login_user
+    if current_user.nil?
+      flash[:notice] = "Tienes que estar logeado"
+      redirect_to home_login_url
+    end
+  end
+
+  def require_login_delivery
+    if current_delivery.nil?
+      flash[:notice] = "Tienes que estar logeado"
+      redirect_to home_login_url
+    end
+  end
+
+  def require_login_delivery_user
+    if current_user.nil? and @current_delivery.nil?
+      flash[:notice] = "Tienes que estar logeado"
+      redirect_to home_login_url
+    end
+  end
+
   def show
     id = params[:id]
     @shipping = Shipping.find(id)
