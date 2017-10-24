@@ -62,7 +62,7 @@ class UsersController < ApplicationController
   def create
     userFrom = params[:user][:userFrom]
     document = user_params[:document]
-    image = delivery_params[:image]
+    image = user_params[:image]
     if(!CiUY.validate(document)or image.nil?)
       if(!CiUY.validate(document))
         flash[:notice] = "Documento no verificable"

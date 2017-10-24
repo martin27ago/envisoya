@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def login
+    #Zone.UpdateZones
     if !current_user.nil?
       redirect_to shippings_path
     else
