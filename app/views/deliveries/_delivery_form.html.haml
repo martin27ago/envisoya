@@ -32,18 +32,18 @@
   .form-group
     .control-label
     .col-sm-2
-      = label :delivery, :license, 'Licencia'
+      = label :delivery, :license, 'Licencia (.jpg, .pdf)'
     .col-sm-10
       = file_field :delivery, :license, :required => true
   .form-group
     .control-label
     .col-sm-2
-      = label :delivery, :papers, 'Papeles del vehiculo'
+      = label :delivery, :papers, 'Papeles del vehiculo (.pdf)'
     .col-sm-10
       = file_field :delivery, :papers, :required => true
   .form-group
     .control-label
     .col-sm-2
-      = label :delivery, :image, 'Foto'
+      = label :delivery, :image, 'Foto (.jpg)'
     .col-sm-10
       = file_field :delivery, :image

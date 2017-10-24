@@ -12,7 +12,7 @@ class Delivery < ActiveRecord::Base
   validates_attachment_content_type :license, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif", "application/pdf"]
   validates_attachment :papers, content_type: { content_type: ["application/pdf"] }
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_initialize do |delivery|
+    where(email: auth.info.email).first_or_initialize do |delivery|
       delivery.provider = auth.provider
       delivery.uid = auth.uid
       delivery.name = auth.info.first_name
