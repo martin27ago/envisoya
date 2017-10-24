@@ -52,7 +52,7 @@ class DeliveriesController < ApplicationController
       @delivery = Delivery.find params[:id]
       @delivery.update_attributes!(delivery_params)
       rescue ActiveRecord::RecordInvalid => invalid
-        if (@delivery.nil?)
+        if (!invalid.nil?)
           flash[:notice] = invalid.message
           redirect_to edit_delivery_path(current_delivery)
         else

@@ -18,7 +18,7 @@ class Delivery < ActiveRecord::Base
       delivery.name = auth.info.first_name
       delivery.surname = auth.info.last_name
       delivery.email = auth.info.email
-      delivery.document = '000000000'
+      delivery.document = '123456789'
       delivery.password = '123'
       delivery.imageFacebook = auth.info.image
       delivery.oauth_token = auth.credentials.token
