@@ -1,23 +1,23 @@
 %h1 Cadetes
 %br
 
-%div(class="container" )
-  %table.table-striped#cadets
-    %thead
+%table.table-striped#deliveries
+  %thead
+    %tr
+      %th.col-md-5 Nombre
+      %th.col-md-5 Apellido
+      %th.col-md-5 Email
+      %th.col-md-5 Documento
+      %th.col-md-5 Activo
+      %th.col-md-5 Detalles
+  %tbody
+    - @deliveries.each do |delivery|
       %tr
-        %th.col-md-4 Nombre
-        %th.col-md-4 Apellido
-        %th.col-md-4 Email
-        %th.col-md-4 Documento
-        %th.col-md-4 Activo
-        %th.col-md-4 Detalles
-    %tbody
-      %tr
-        %td.col-md-4= delivery.name
-        %td.col-md-4= delivery.surname
-        %td.col-md-4= delivery.email
-        %td.col-md-4= delivery.document
-        %td.col-md-3= delivery.active
-        %td.col-md-3= link_to "Detalles", delivery_path(delivery), class: "btn-primary"
+        %td.col-md-5= delivery.name
+        %td.col-md-5= delivery.surname
+        %td.col-md-5= delivery.email
+        %td.col-md-5= delivery.document
+        %td.col-md-5= delivery.active
+        %td.col-md-5= link_to "Detalles", delivery_path(delivery), class: "btn-primary"
         - if !delivery.active
-          %td.col-md-4= link_to "Activar", {:controller => "deliveries", :action => "active", :id => delivery.id}, class: "btn-primary"
+          %td.col-md-3= link_to "Activar", {:controller => "deliveries", :action => "active", :id => delivery.id}, class: "btn-primary"
