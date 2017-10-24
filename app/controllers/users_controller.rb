@@ -33,10 +33,24 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find params[:id]
-    @user.update_attributes!(user_params)
-    flash[:notice] = "#{@user.name} se actualizo correctamente."
-    redirect_to user_path(@user)
+    document = user_params[:document]
+    if(!CiUY.validate(document))
+      flash[:notice] = "Documento no verificable"
+      redirect_to edit_user_path(current_user)
+    else
+      begin
+      @user = User.find params[:id]
+      @user.update_attributes!(user_params)
+      rescue ActiveRecord::RecordInvalid => invalid
+        if (@user.nil?)
+          flash[:notice] = invalid.message
+          redirect_to edit_user_path(current_user)
+        else
+          flash[:notice] = "#{@user.name} se actualizo correctamente."
+          redirect_to user_path(@user)
+        end
+      end
+    end
   end
 
   def show
@@ -47,9 +61,9 @@ class UsersController < ApplicationController
 
   def create
     userFrom = params[:user][:userFrom]
-    cedula = user_params[:document]
+    document = user_params[:document]
     image = delivery_params[:image]
-    if(!CiUY.validate(cedula)or image.nil?)
+    if(!CiUY.validate(document)or image.nil?)
       if(!CiUY.validate(document))
         flash[:notice] = "Documento no verificable"
       else
