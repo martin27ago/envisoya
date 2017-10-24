@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
       user.surname = auth.info.last_name
       user.email = auth.info.email
       user.imageFacebook = auth.info.image
-      user.document ='123456789'
+      user.document ='000000000'
       user.password = '123'
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
