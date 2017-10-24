@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
     if(user.nil?)
       delivery = Delivery.signin(params[:email][:email], params[:password][:password])
       if(delivery.nil?)
-        flash[:notice]= "Invalido usuario y/o contrasena"
+        flash[:error]= "Invalido usuario y/o contrasena"
         redirect_to home_login_url
       else
         session[:delivery_id] = delivery.id
