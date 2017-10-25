@@ -31,11 +31,40 @@
   %br
   %br
   %br
+  %br
+  %br
+  %br
   = submit_tag 'Realizar', class: "btn-primary center-block"
+%br
+= button_tag 'Calcular Precio',onclick: "calculateCost()", class: "btn-primary center-block"
+
 
 %script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBz3WyEB0DzEcad5JKkEdJUUz1ijChvank&callback=initMap"
 async defer)
 :javascript
+    function calculateCost(){
+    weight1 = document.getElementById('shipping_weight').value;
+    latitudeTo = document.getElementById('shipping_latitudeTo').value;
+    longitudeTo = document.getElementById('shipping_longitudeTo').value;
+    latitudeFrom = document.getElementById('shipping_latitudeFrom').value;
+    longitudeFrom = document.getElementById('shipping_longitudeFrom').value;
+      $.ajax({
+      type: "GET",
+      url: "/shippings/1/calculate_cost",
+      dataType: "json",
+      data: {
+        weight: weight1 ,
+        latTo : latitudeTo ,
+        longTo: longitudeTo,
+        latFrom: latitudeFrom,
+        longFrom: longitudeFrom
+      },
+      success:function(result){
+        cost = result
+        $('#shipping_price').val(cost);
+      }
+      });
+    }
     var map;
     function initMap() {
       map = new google.maps.Map(document.getElementById('map'), {
@@ -85,3 +114,4 @@ async defer)
         $('#shipping_latitudeFrom').val(null)
         $('#shipping_longitudeFrom').val(null)
     }
+
