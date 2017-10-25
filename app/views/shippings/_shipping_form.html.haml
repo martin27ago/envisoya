@@ -29,9 +29,9 @@
   .form-group
     .control-label
     .col-sm-6
-      = label :shipping, :price, 'Precio:'
+      = label :shipping, :weight, 'Peso:', input_html: { readonly: true }
     .col-sm-6
-      = number_field :shipping, :price, :required => true, input_html: { readonly: true }
+      = number_field :shipping, :weight, :required => true, input_html: { readonly: true }
   .form-group
     .control-label
     .col-sm-6
@@ -44,6 +44,12 @@
       = label :shipping, :postalCodeTo, 'Codigo postal hasta:'
     .col-sm-6
       = number_field :shipping, :postalCodeTo, :required => true
+  .form-group
+    .control-label
+    .col-sm-6
+      = label :shipping, :price, 'Precio:'
+    .col-sm-6
+      = number_field :shipping, :price, :readonly=> true, :required => true
 
 %script{type: "text/javascript"}
   :plain

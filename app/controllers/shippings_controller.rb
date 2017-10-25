@@ -63,6 +63,16 @@ class ShippingsController < ApplicationController
     redirect_to shippings_path
   end
 
+  def calculate_cost
+    weight = params[:weight]
+    latFrom = params[:latFrom]
+    longFrom = params[:longFrom]
+    latTo = params[:latTo]
+    longTo = params[:longTo]
+    @price = '300'
+    render json: @price
+  end
+
   def shipping_params
     params.require(:shipping).permit(:emailTo, :latitudeFrom, :latitudeTo, :longitudeFrom, :longitudeTo, :addressFrom, :addressTo, :price, :postalCodeFrom, :postalCodeTo)
   end
