@@ -34,6 +34,7 @@
   %br
   %br
   %br
+  %br
   = submit_tag 'Realizar', class: "btn-primary center-block"
 %br
 = button_tag 'Calcular Precio',onclick: "calculateCost()", class: "btn-primary center-block"
@@ -48,7 +49,11 @@ async defer)
     longitudeTo = document.getElementById('shipping_longitudeTo').value;
     latitudeFrom = document.getElementById('shipping_latitudeFrom').value;
     longitudeFrom = document.getElementById('shipping_longitudeFrom').value;
-      $.ajax({
+    if(weight1 == "" || latitudeFrom == "" || latitudeTo == ""){
+      alert("Es necesario ingresar las direcciones y el precio para calcular el costo.");
+    }
+    else{
+    $.ajax({
       type: "GET",
       url: "/shippings/1/calculate_cost",
       dataType: "json",
@@ -60,10 +65,16 @@ async defer)
         longFrom: longitudeFrom
       },
       success:function(result){
-        cost = result
-        $('#shipping_price').val(cost);
+        price = result['price'];
+        discount = result['discount'];
+        estimatedPrice = result['estimatedPrice'];
+
+        $('#shipping_price').val(price);
+        $('#shipping_discount').val(discount);
+        $('#shipping_estimatedPrice').prop("checked", estimatedPrice );
       }
       });
+    }
     }
     var map;
     function initMap() {

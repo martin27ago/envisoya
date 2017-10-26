@@ -50,6 +50,18 @@
       = label :shipping, :price, 'Precio:'
     .col-sm-6
       = number_field :shipping, :price, :readonly=> true, :required => true
+  .form-group
+    .control-label
+    .col-sm-6
+      = label :shipping, :discount, 'Descuento:'
+    .col-sm-6
+      = number_field :shipping, :discount, :readonly=> true, :required => true
+  .form-group
+    .control-label
+    .col-sm-6
+      = label :shipping, :estimatedPrice, 'Precio Estimado:'
+    .col-sm-6
+      = check_box :shipping, :estimatedPrice, :readonly=> true, :required => true
 
 %script{type: "text/javascript"}
   :plain

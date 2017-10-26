@@ -3,5 +3,14 @@
 = form_tag shipping_path(@shipping), :method => :put, :enctype => "multipart/form-data" do
 
   = render :partial => 'shipping_form'
+
+  .form-group
+  .control-label
+    .col-sm-2
+      = label :shipping, :signature, 'Firma (.jpg)'
+    .col-sm-10
+      = file_field :shipping, :signature
+  %br
+  %br
   %br
   = submit_tag 'Guardar Cambios', class: "btn-primary"

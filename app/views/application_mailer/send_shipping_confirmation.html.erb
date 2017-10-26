@@ -1,0 +1,43 @@
+<html>
+<head>
+  <meta content="text/html: charset = UTF-8" http-equiv="content-type">
+</head>
+<body>
+<div class="container">
+  <h1 class="alert-info">EnviosYa</h1>
+  <p>
+    <%= @user.name %>, tu envío está confirmado, con un costo de $ <%= @shipping.cost%>.
+  </p>
+  <br>
+  <talbe class="table-striped">
+    <tr>
+      <td>
+        Desde:
+      </td>
+      <td>
+        <strong><%= @shipping.addressFrom %></strong>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Hasta:
+      </td>
+      <td>
+        <strong><%= @shipping.addressTo %></strong>
+      </td>
+    </tr>
+    <br>
+  </talbe>
+
+  <p>
+    Puede ver mas información del envío desde la app.
+  </p>
+  <br>
+  <p>
+    Saludos,
+    <br>
+    Equipo de EnviosYa!
+  </p>
+</div>
+</body>
+</html>

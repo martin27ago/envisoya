@@ -46,19 +46,21 @@ class ShippingsController < ApplicationController
   def new
     @shipping = Shipping.new
     @user_cache = User.pluck(:email)
-    #parte de descuento
   end
 
   def create
     userFrom = current_user
+    # envia mail al usuario si no esta registrado
     User.ExistUserReceiver shipping_params[:emailTo], userFrom
+    #seleciona delivery y notificacion
     delivery = Delivery.selectDelivery userFrom.name+' '+userFrom.surname, shipping_params[:addressFrom], shipping_params[:addressTo]
     shipping_params.merge(:user => userFrom, :delivery => delivery)
     @shipping = Shipping.new(shipping_params)
     @shipping.user = userFrom
     @shipping.delivery = delivery
+    userFrom.applyDiscount
     @shipping.save!
-    discount = userFrom.applyDiscount
+    User.SendConfirmationMail @shipping, userFrom
     flash[:notice] = "Envio creado."
     redirect_to shippings_path
   end
@@ -69,12 +71,27 @@ class ShippingsController < ApplicationController
     longFrom = params[:longFrom]
     latTo = params[:latTo]
     longTo = params[:longTo]
-    @price = Shipping.CalculateCost longFrom, latFrom, longTo, latTo, weight
-    render json: @price
+    @result = Shipping.CalculateCost longFrom, latFrom, longTo, latTo, weight, current_user.id
+    render json: @result
+  end
+
+  def update
+    @shipping = Shipping.find params[:id]
+    @shipping.status = 1
+    @shipping.update_attributes!(shipping_params)
+    rescue ActiveRecord::RecordInvalid => invalid
+    if (!invalid.nil?)
+      flash[:notice] = invalid.message
+      redirect_to edit_delivery_path(current_delivery)
+    else
+      User.DeliveredShipping @shipping
+      flash[:notice] = "El envío fue finalizado. "
+      redirect_to delivery_path(@shipping)
+    end
   end
 
   def shipping_params
-    params.require(:shipping).permit(:emailTo, :latitudeFrom, :latitudeTo, :longitudeFrom, :longitudeTo, :addressFrom, :addressTo, :price, :postalCodeFrom, :postalCodeTo)
+    params.require(:shipping).permit(:emailTo, :latitudeFrom, :latitudeTo, :longitudeFrom, :longitudeTo, :addressFrom, :addressTo, :price, :postalCodeFrom, :postalCodeTo, :weight, :estimatedPrice, :discount)
   end
 
   def resolve_format(obj)

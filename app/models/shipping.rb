@@ -4,10 +4,10 @@ require 'net/http'
 class Shipping < ActiveRecord::Base
   belongs_to :user, class_name: "User"
   belongs_to :delivery, class_name: "Delivery"
-  enum status: [ :Pendiente, :Enviando, :Entregado, :Cancelado ]
+  enum status: [ :Pendiente, :Entregado, :Cancelado ]
   enum paymentMedia: [ :Contado, :Tarjeta ]
   has_attached_file :signature, styles: {thumbnail: "120x120>"}
-  validates_attachment_content_type :signature, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif", "application/pdf"]
+  validates_attachment_content_type :signature, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
   def self.PingDeliveryRate
     url = URI("https://delivery-rates.mybluemix.net/")
@@ -23,37 +23,40 @@ class Shipping < ActiveRecord::Base
 
   end
 
-  def self.CalculateCost longitudeFrom, latitudeFrom, longitudeTo, latitudeTo, weight
+  def self.CalculateCost longitudeFrom, latitudeFrom, longitudeTo, latitudeTo, weight, user_id
+    estimatedPrice = false
     sql = 'SELECT * FROM zones WHERE st_contains(ST_GeomFromText(zones.polygon), ST_GeomFromText(?))'
 
     point = 'POINT('+latitudeFrom+''+longitudeFrom+')'
-    zoneFrom = Zone.find_by_sql([sql, point]).first.id
+    zoneFrom = Zone.find_by_sql([sql, point]).first.identify.to_i
 
     pointTo = 'POINT('+latitudeTo+''+longitudeTo+')'
-    zoneTo = Zone.find_by_sql([sql, pointTo]).first.id
+    zoneTo = Zone.find_by_sql([sql, pointTo]).first.identify.to_i
 
     auxCostWeight = Cost.where(["id = 1"]).first
     costWeight = 0
     costZone = 0
     timeDiff = ((Time.now-auxCostWeight.updated_at)* 24 * 60).to_i
     if(timeDiff > 10)
+      estimatedPrice = true
       costWeight = (auxCostWeight.cost1 + auxCostWeight.cost2 + auxCostWeight.cost3) / 3
       else
       if(auxCostWeight.lastUpdate==1)
         costWeight = auxCostWeight.cost1
       else if(auxCostWeight.lastUpdate == 2)
-             costWeight = auxCostWeight.cost2
-             else
-               costWeight = auxCostWeight.cost3
+        costWeight = auxCostWeight.cost2
+     else
+      costWeight = auxCostWeight.cost3
              end
       end
     end
     if (zoneFrom==zoneTo)
       costZone = 0
     else
-      auxCostZone = Costzone.where(["zoneFrom = ? and zoneTo = ?", zoneFrom, zoneTo]).first
+      auxCostZone = Costzone.where(["\"zoneFrom\" = ? and \"zoneTo\" = ?", zoneFrom, zoneTo]).first
       timeDiff = ((Time.now-auxCostZone.updated_at)* 24 * 60).to_i
       if(timeDiff > 10)
+        estimatedPrice=true
         costZone = (auxCostZone.cost1 + auxCostZone.cost2 + auxCostZone.cost3) / 3
       else
         if(auxCostZone.lastUpdate==1)
@@ -66,8 +69,69 @@ class Shipping < ActiveRecord::Base
         end
       end
     end
-    (weight.to_i * costWeight) + costZone
+
+    discount = Discount.where(["active = ? and used = ? and user_id = ?", true, false, user_id]).first
+    percentageDiscount =0
+    if(!discount.nil?)
+      percentageDiscount = discount.porcent
+    end
+    price =(weight.to_i * costWeight) + costZone
+    result = { 'discount' => percentageDiscount, 'price' => price, 'estimatedPrice' => estimatedPrice }
+
   end
 
+  def self.ConfirmPrice
+    costWeight = Cost.where(["id = 1"]).first
+    costZones = Costzone.where(["id = 1"]).first
+    timeDiffZones = ((Time.now-costZone.updated_at)* 24 * 60).to_i
+    timeDiffWeight = ((Time.now-costWeight.updated_at)* 24 * 60).to_i
+
+    if timeDiffWeight<10 && timeDiffZones<10
+      shippings = Shipping.where(["\"estimatedPrice\" = ? and \"status\" = ?", true, 0])
+      shippings.each do |shipping|
+        cost = shipping.UpdateCost shipping
+        shipping.cost = cost
+        shipping.estimatedPrice=false
+        shipping.save!
+        user = shipping.user
+        User.SendConfirmationMail shipping, user
+      end
+    end
+  end
+
+  def UpdateCost shipping
+    point = 'POINT('+shipping.latitudeFrom+''+shipping.longitudeFrom+')'
+    zoneFrom = Zone.find_by_sql([sql, point]).first.identify.to_i
+
+    pointTo = 'POINT('+shipping.latitudeTo+''+shipping.longitudeTo+')'
+    zoneTo = Zone.find_by_sql([sql, pointTo]).first.identify.to_i
+
+    costZones = Costzone.where(["\"zoneFrom\" = ? and \"zoneTo\" = ?", zoneFrom, zoneTo]).first
+    costZone = (costZones.cost1 + costZones.cost2 + costZones.cost3) / 3
+
+    costWeights= Cost.where(["id = 1"]).first
+    costWeight = (costWeights.cost1 + costWeights.cost2 + costWeights.cost3) / 3
+
+    (shipping.weight * costWeight) + costZone
+  end
+
+  def self.DeliveredShipping
+    costWeight = Cost.where(["id = 1"]).first
+    costZones = Costzone.where(["id = 1"]).first
+    timeDiffZones = ((Time.now-costZone.updated_at)* 24 * 60).to_i
+    timeDiffWeight = ((Time.now-costWeight.updated_at)* 24 * 60).to_i
+
+    if timeDiffWeight<10 && timeDiffZones<10
+      shippings = Shipping.where(["\"estimatedPrice\" = ? and \"status\" = ?", true, 1])
+      shippings.each do |shipping|
+        cost = shipping.UpdateCost shipping
+        shipping.cost = cost
+        shipping.estimatedPrice=false
+        shipping.save!
+        user = shipping.user
+        User.SendConfirmationMail shipping, user
+      end
+    end
+  end
 
 end

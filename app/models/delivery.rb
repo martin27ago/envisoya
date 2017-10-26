@@ -5,12 +5,12 @@ class Delivery < ActiveRecord::Base
   validates :document, :presence => true
   validates :password, :presence => true
   validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}, :presence => true, :uniqueness => true
-  has_attached_file :image, styles:{ medium: '200x200>', thumb: '48x48>'}
-  has_attached_file :license, styles:{ medium: '200x200>', thumb: '48x48>'}
-  has_attached_file :papers, styles: {thumbnail: "60x60#"}
+  has_attached_file :image
+  has_attached_file :license
+  has_attached_file :papers
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
   validates_attachment_content_type :license, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif", "application/pdf"]
-  validates_attachment :papers, content_type: { content_type: ["application/pdf"] }
+  #validates_attachment :papers, :content_type => ["application/pdf", "image/jpg"]
   def self.from_omniauth(auth)
     where(email: auth.info.email).first_or_initialize do |delivery|
       delivery.provider = auth.provider
