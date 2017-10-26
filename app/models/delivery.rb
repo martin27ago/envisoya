@@ -37,7 +37,7 @@ class Delivery < ActiveRecord::Base
   end
 
   def self.selectDelivery (userFrom, addressFrom, addressTo)
-    aux = Delivery.first
+    aux = Delivery.where(['active = ?', true]).first
     if(aux.nil?)
       return nil
     end

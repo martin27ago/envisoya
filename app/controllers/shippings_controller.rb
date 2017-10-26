@@ -58,7 +58,7 @@ class ShippingsController < ApplicationController
     @shipping.user = userFrom
     @shipping.delivery = delivery
     @shipping.save!
-    userFrom.applyDiscount
+    discount = userFrom.applyDiscount
     flash[:notice] = "Envio creado."
     redirect_to shippings_path
   end
@@ -69,7 +69,7 @@ class ShippingsController < ApplicationController
     longFrom = params[:longFrom]
     latTo = params[:latTo]
     longTo = params[:longTo]
-    @price = '300'
+    @price = Shipping.CalculateCost longFrom, latFrom, longTo, latTo, weight
     render json: @price
   end
 

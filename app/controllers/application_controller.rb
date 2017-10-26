@@ -10,4 +10,9 @@ class ApplicationController < ActionController::Base
   def current_delivery
     @current_delivery ||= Delivery.find(session[:delivery_id]) if session[:delivery_id]
   end
+
+  def deliveriesJson
+    @deliveries = Delivery.all
+    render :json => @deliveries
+  end
 end

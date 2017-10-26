@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  require 'sidekiq/web'
+  require 'sidekiq/cron/web'
+  mount Sidekiq::Web => '/sidekiq'
+
   root :to => redirect('home/login')
 
   get 'auth/:provider/callback', to: 'sessions#create'
@@ -19,6 +23,9 @@ Rails.application.routes.draw do
   resources :deliveries
 
   get 'deliveries/active/:id', to: 'deliveries#active'
+
+
+
   root :to => redirect('/deliveries')
 
   resources :shippings do
@@ -28,5 +35,9 @@ Rails.application.routes.draw do
   resources :shippings
 
   root :to => redirect('/shippings')
+
+  get 'application/loadDataBase', to: 'application#loadDataBase'
+
+  get 'application/deliveriesJson', to: 'application#deliveriesJson'
 
 end

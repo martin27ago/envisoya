@@ -5,6 +5,7 @@ class CreateCost < ActiveRecord::Migration[5.1]
       t.decimal :cost1
       t.decimal :cost2
       t.decimal :cost3
+      t.integer :lastUpdate
     end
   end
 end

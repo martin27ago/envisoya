@@ -2,7 +2,8 @@ require 'uri'
 require 'net/http'
 
 class Zone < ActiveRecord::Base
-  def self.UpdateZones
+
+  def self.CreateZonesAndCostZones
     url = URI("https://delivery-rates.mybluemix.net/areas")
 
     http = Net::HTTP.new(url.host, url.port)
@@ -21,13 +22,16 @@ class Zone < ActiveRecord::Base
       zone.name = item['name']
       zone.polygon = item['polygon']
       zone.save!
-      #item['costToAreas'].each do |cost|
-       # costZones = Costzone.new
-        #costZones.zoneFrom = zone.identify
-        #costZones.zoneTo = cost[0].to_i
-        #costZones.cost = cost[1]
-        #costZones.save!
-      #end
+      item['costToAreas'].each do |cost|
+          costZonesNew = Costzone.new
+          costZonesNew.zoneFrom = zone.identify
+          costZonesNew.zoneTo = cost[0].to_i
+          costZonesNew.cost1 = cost[1]
+          costZonesNew.cost2 = 0
+          costZonesNew.cost3 = 0
+          costZonesNew.lastUpdate = 1
+          costZonesNew.save!
+      end
     end
   end
 end
