@@ -1,7 +1,7 @@
 class DeliveriesController < ApplicationController
 
   before_action :require_login, only: [:show, :edit]
-  before_action :admin_login, only: [:index]
+  before_action :admin_login, only: [:index, :destroy, :active]
   before_action :is_log, only: [:new]
 
   #Security methods

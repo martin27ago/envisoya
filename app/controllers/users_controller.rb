@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   before_action :require_login, only: [:show, :edit]
   before_action :is_log, only: [:new]
+  before_action :admin_login, only: [:index, :destroy]
 
   def require_login
     if current_user.nil?
@@ -13,6 +14,13 @@ class UsersController < ApplicationController
   def is_log
     if !current_user.nil? or !current_delivery.nil?
       flash[:notice] = "No podes registrar nuevo usuario si estas logeado"
+      redirect_to home_login_url
+    end
+  end
+
+  def admin_login
+    if !current_user.nil? and !current_user.admin
+      flash[:notice] = "Solo puede ingresar el admin"
       redirect_to home_login_url
     end
   end

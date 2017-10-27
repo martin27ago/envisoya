@@ -14,21 +14,33 @@ class SessionsController < ApplicationController
   end
 
   def signin
-    user = User.signin(params[:email][:email], params[:password][:password])
-    if(user.nil?)
+    type = params[:type][:type]
+    if(type)
+      user = User.signin(params[:email][:email], params[:password][:password])
+      if(user.nil?)
+        flash[:error]= "Invalido usuario y/o contrasena"
+        redirect_to home_login_url
+      else
+        session[:user_id] = user.id
+        if(user.admin == true)
+          redirect_to deliveries_url
+        else
+          redirect_to shippings_path
+        end
+        session[:user_id] = user.id
+        if(user.admin == true)
+          redirect_to deliveries_url
+        else
+          redirect_to shippings_path
+        end
+      end
+    else
       delivery = Delivery.signin(params[:email][:email], params[:password][:password])
       if(delivery.nil?)
         flash[:error]= "Invalido usuario y/o contrasena"
         redirect_to home_login_url
       else
         session[:delivery_id] = delivery.id
-        redirect_to shippings_path
-      end
-    else
-      session[:user_id] = user.id
-      if(user.admin == true)
-        redirect_to deliveries_url
-      else
         redirect_to shippings_path
       end
     end
