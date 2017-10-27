@@ -78,17 +78,13 @@ class DeliveriesController < ApplicationController
       end
       render '/deliveries/new'
     else
-      begin
-        @delivery = Delivery.create!(delivery_params)
-      rescue ActiveRecord::RecordInvalid => invalid
-        if (@delivery.nil?)
-          flash[:notice] = invalid.message
-          render '/deliveries/new'
-        else
-          flash[:notice] = "#{@delivery.name} te registraste con exito."
-          session[:delivery_id] = @delivery.id
-          redirect_to shippings_path
-        end
+      if(@delivery = Delivery.create!(delivery_params))
+        flash[:notice] = "#{@delivery.name} te registraste con exito."
+        session[:delivery_id] = @delivery.id
+        redirect_to shippings_path
+      else
+        flash[:notice] = "Informacion invalida"
+        render '/deliveries/new'
       end
     end
   end

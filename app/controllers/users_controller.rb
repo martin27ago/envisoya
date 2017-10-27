@@ -78,26 +78,21 @@ class UsersController < ApplicationController
       end
       render '/users/new'
     else
-      begin
-      @user = User.create!(user_params)
-      rescue ActiveRecord::RecordInvalid => invalid
-        if (@user.nil?)
-          flash[:notice] = invalid.message
-          render '/users/new'
-        else
-          flash[:notice] = "#{@user.name} te registraste con exito."
-          if(userFrom!='')
-            Discount.ManageDiscount @user, userFrom
-          end
-          session[:user_id] = @user.id
-          redirect_to shippings_path
+      if(@user = User.create!(user_params))
+        flash[:notice] = "#{@user.name} te registraste con exito."
+        if(userFrom!='')
+          Discount.ManageDiscount @user, userFrom
         end
+        session[:user_id] = @user.id
+        redirect_to shippings_path
+      else
+        flash[:notice] = "Informacion invalida"
+        render '/users/new'
       end
     end
   end
 
   def index
-    # @clients = User.where(User.client)
     @users = User.all
     resolve_format @users
   end

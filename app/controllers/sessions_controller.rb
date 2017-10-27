@@ -14,19 +14,13 @@ class SessionsController < ApplicationController
   end
 
   def signin
-    type = params[:type][:type]
-    if(type)
+    type = params[:autolyse][:autolyse]
+    if(type=="true")
       user = User.signin(params[:email][:email], params[:password][:password])
       if(user.nil?)
         flash[:error]= "Invalido usuario y/o contrasena"
         redirect_to home_login_url
       else
-        session[:user_id] = user.id
-        if(user.admin == true)
-          redirect_to deliveries_url
-        else
-          redirect_to shippings_path
-        end
         session[:user_id] = user.id
         if(user.admin == true)
           redirect_to deliveries_url

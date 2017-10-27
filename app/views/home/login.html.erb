@@ -19,9 +19,9 @@
       <br>
       <br>
       Usuario
-      <%= radio_button :type,:autolyse, true, class:'form-control' %>
+      <%= radio_button :autolyse,:autolyse, true, :checked => true, class:'form-control' %>
       Delivery
-      <%= radio_button :type, :autolyse, false, :checked => true, class:'form-control' %>
+      <%= radio_button :autolyse, :autolyse, false, class:'form-control' %>
       <br>
       <%= submit_tag("Entrar", class: 'btn-primary')%>
   <% end %>
