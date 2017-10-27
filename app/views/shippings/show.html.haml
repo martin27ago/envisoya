@@ -10,9 +10,6 @@
     %td <strong>Dirrecion hasta</strong>:
     %td #{@shipping.addressTo}
   %tr
-    %td <strong>Precio</strong>:
-    %td #{@shipping.price}
-  %tr
     %td <strong>Emisor<strong/>:
     %td #{@shipping.user.name} #{@shipping.user.surname}
   %tr
@@ -27,8 +24,18 @@
   %tr
     %td <strong>Cadete<strong/>:
     %td #{@shipping.delivery.name} #{@shipping.delivery.surname}
+  %tr
+    %td <strong>Peso</strong>:
+    %td #{@shipping.weight}
+  %tr
+    %td <strong>Descuento</strong>:
+    %td #{@shipping.discount}
+  %tr
+    %td <strong>Precio</strong>:
+    %td #{@shipping.price}
 
-=link_to "Entregar Pedido", edit_shipping_path(@shipping) , class: "btn-primary "
+-if(!current_delivery.nil?)
+  =link_to "Entregar Pedido", edit_shipping_path(@shipping) , class: "btn-primary "
 
 %div
 

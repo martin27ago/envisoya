@@ -41,14 +41,12 @@ class UsersController < ApplicationController
     else
       begin
       @user = User.find params[:id]
-      @user.update_attributes!(user_params)
-      rescue ActiveRecord::RecordInvalid => invalid
-        if (!invalid.nil?)
-          flash[:notice] = invalid.message
-          redirect_to edit_user_path(current_user)
-        else
+        if @user.update_attributes!(user_params)
           flash[:notice] = "#{@user.name} se actualizo correctamente."
           redirect_to user_path(@user)
+        else
+          flash[:notice] = invalid.message
+          redirect_to edit_user_path(current_user)
         end
       end
     end

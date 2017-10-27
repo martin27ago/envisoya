@@ -969,17 +969,16 @@
           <li class="nav-item">
           <li class="nav-item">
             <%=link_to("Hola, " + current_delivery.name,
-                       :controller => 'users',
+                       :controller => 'deliveries',
                        :action => 'edit',
                        :id => current_delivery.id)%>
           </li>
           <li class="nav-item">
-              <% if current_delivery.image_file_name.nil? %>
-                  <%= image_tag(current_delivery.imageFacebook, :alt => "rss feed") %>
-              <%else%>
-                  <%= image_tag(current_delivery.image.url(:thumb), :alt => "rss feed") %>
-              <%end%>
-
+            <% if current_delivery.image_file_name.nil? %>
+                <%= image_tag(current_delivery.imageFacebook, :alt => "rss feed") %>
+            <%else%>
+                <%= image_tag(current_delivery.image.url(:thumb), :alt => "rss feed") %>
+            <%end%>
           </li>
         </ul>
         <ul class="nav navbar-nav mainNav">

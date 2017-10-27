@@ -2,7 +2,7 @@ class ShippingsController < ApplicationController
 
   before_action :require_login_user, only: [:new]
   before_action :require_login_delivery, only: [:edit]
-  before_action :require_login_delivery_user, only: [:show]
+  #before_action :require_login_delivery_user, only: [:show]
 
   def require_login_user
     if current_user.nil?
@@ -78,15 +78,13 @@ class ShippingsController < ApplicationController
   def update
     @shipping = Shipping.find params[:id]
     @shipping.status = 1
-    @shipping.update_attributes!(shipping_params)
-    rescue ActiveRecord::RecordInvalid => invalid
-    if (!invalid.nil?)
-      flash[:notice] = invalid.message
-      redirect_to edit_delivery_path(current_delivery)
-    else
+    if @shipping.update_attributes!(shipping_params)
       User.DeliveredShipping @shipping
       flash[:notice] = "El envío fue finalizado. "
-      redirect_to delivery_path(@shipping)
+      redirect_to shippings_path
+    else
+      flash[:notice] = "No se pudo realizar el envío, algun parámetro inválido."
+      redirect_to edit_delivery_path(current_delivery)
     end
   end
 

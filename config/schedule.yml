@@ -4,6 +4,6 @@ update_cost:
     queue: default
 
 send_mail:
-    cron: "*/10 * * * *"
+    cron: "*/5 * * * *"
     class: "SendMailJob"
     queue: default

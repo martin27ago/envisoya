@@ -50,15 +50,13 @@ class DeliveriesController < ApplicationController
     else
       begin
       @delivery = Delivery.find params[:id]
-      @delivery.update_attributes!(delivery_params)
-      rescue ActiveRecord::RecordInvalid => invalid
-        if (!invalid.nil?)
-          flash[:notice] = invalid.message
-          redirect_to edit_delivery_path(current_delivery)
-        else
-          flash[:notice] = "#{@delivery.name} se actualizo correctamente."
-          redirect_to delivery_path(@delivery)
-        end
+      if @delivery.update_attributes!(delivery_params)
+        flash[:notice] = "#{@delivery.name} se actualizo correctamente."
+        redirect_to delivery_path(@delivery)
+      else
+        flash[:notice] = "Informacion inválida"
+        redirect_to edit_delivery_path(current_delivery)
+      end
       end
     end
   end

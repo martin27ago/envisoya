@@ -248,7 +248,9 @@ CREATE TABLE shippings (
     signature_file_name character varying,
     signature_content_type character varying,
     signature_file_size integer,
-    signature_updated_at timestamp without time zone
+    signature_updated_at timestamp without time zone,
+    "estimatedPrice" boolean DEFAULT false,
+    discount integer DEFAULT 0
 );
 
 
@@ -523,6 +525,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171024201403'),
 ('20171025231531'),
 ('20171026002957'),
-('20171026010311');
+('20171026010311'),
+('20171026202520'),
+('20171026212029');
 
 

@@ -82,11 +82,11 @@ class Shipping < ActiveRecord::Base
   def self.ConfirmPrice
     costWeight = Cost.where(["id = 1"]).first
     costZones = Costzone.where(["id = 1"]).first
-    if costZone.updated_at>10.minutes.ago && costWeight.updated_at>10.minutes.ago
+    if costZones.updated_at>10.minutes.ago && costWeight.updated_at>10.minutes.ago
       shippings = Shipping.where(["\"estimatedPrice\" = ? and \"status\" = ?", true, 0])
       shippings.each do |shipping|
         cost = shipping.UpdateCost shipping
-        shipping.cost = cost
+        shipping.price = cost
         shipping.estimatedPrice=false
         shipping.save!
         user = shipping.user
@@ -96,6 +96,8 @@ class Shipping < ActiveRecord::Base
   end
 
   def UpdateCost shipping
+    sql = 'SELECT * FROM zones WHERE st_contains(ST_GeomFromText(zones.polygon), ST_GeomFromText(?))'
+
     point = 'POINT('+shipping.latitudeFrom+''+shipping.longitudeFrom+')'
     zoneFrom = Zone.find_by_sql([sql, point]).first.identify.to_i
 
@@ -114,15 +116,15 @@ class Shipping < ActiveRecord::Base
   def self.DeliveredShipping
     costWeight = Cost.where(["id = 1"]).first
     costZones = Costzone.where(["id = 1"]).first
-    if costZone.updated_at > 10.minutes.ago && costWeight.updated_at > 10.minutes.ago
+    if costZones.updated_at > 10.minutes.ago && costWeight.updated_at > 10.minutes.ago
       shippings = Shipping.where(["\"estimatedPrice\" = ? and \"status\" = ?", true, 1])
       shippings.each do |shipping|
         cost = shipping.UpdateCost shipping
-        shipping.cost = cost
+        shipping.price = cost
         shipping.estimatedPrice=false
         shipping.save!
         user = shipping.user
-        User.SendConfirmationMail shipping, user
+        User.DeliveredShipping shipping
       end
     end
   end
