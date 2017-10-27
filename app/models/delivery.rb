@@ -42,7 +42,7 @@ class Delivery < ActiveRecord::Base
       return nil
     end
     delivery = Delivery.find(aux.id)
-    ApplicationMailer.new_shipping_mail(delivery.email, userFrom, addressFrom, addressTo).deliver_later
+    ApplicationMailer.new_shipping_mail(delivery.email, userFrom, addressFrom, addressTo).deliver_later(wait: 1.minute)
     return delivery
   end
 end

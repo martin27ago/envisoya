@@ -36,8 +36,8 @@ class Shipping < ActiveRecord::Base
     auxCostWeight = Cost.where(["id = 1"]).first
     costWeight = 0
     costZone = 0
-    timeDiff = ((Time.now-auxCostWeight.updated_at)* 24 * 60).to_i
-    if(timeDiff > 10)
+    time=10.minutes.ago
+    if(auxCostWeight.updated_at < 10.minutes.ago)
       estimatedPrice = true
       costWeight = (auxCostWeight.cost1 + auxCostWeight.cost2 + auxCostWeight.cost3) / 3
       else
@@ -54,8 +54,7 @@ class Shipping < ActiveRecord::Base
       costZone = 0
     else
       auxCostZone = Costzone.where(["\"zoneFrom\" = ? and \"zoneTo\" = ?", zoneFrom, zoneTo]).first
-      timeDiff = ((Time.now-auxCostZone.updated_at)* 24 * 60).to_i
-      if(timeDiff > 10)
+      if(auxCostZone.updated_at < 10.minutes.ago)
         estimatedPrice=true
         costZone = (auxCostZone.cost1 + auxCostZone.cost2 + auxCostZone.cost3) / 3
       else
@@ -83,10 +82,7 @@ class Shipping < ActiveRecord::Base
   def self.ConfirmPrice
     costWeight = Cost.where(["id = 1"]).first
     costZones = Costzone.where(["id = 1"]).first
-    timeDiffZones = ((Time.now-costZone.updated_at)* 24 * 60).to_i
-    timeDiffWeight = ((Time.now-costWeight.updated_at)* 24 * 60).to_i
-
-    if timeDiffWeight<10 && timeDiffZones<10
+    if costZone.updated_at>10.minutes.ago && costWeight.updated_at>10.minutes.ago
       shippings = Shipping.where(["\"estimatedPrice\" = ? and \"status\" = ?", true, 0])
       shippings.each do |shipping|
         cost = shipping.UpdateCost shipping
@@ -118,10 +114,7 @@ class Shipping < ActiveRecord::Base
   def self.DeliveredShipping
     costWeight = Cost.where(["id = 1"]).first
     costZones = Costzone.where(["id = 1"]).first
-    timeDiffZones = ((Time.now-costZone.updated_at)* 24 * 60).to_i
-    timeDiffWeight = ((Time.now-costWeight.updated_at)* 24 * 60).to_i
-
-    if timeDiffWeight<10 && timeDiffZones<10
+    if costZone.updated_at > 10.minutes.ago && costWeight.updated_at > 10.minutes.ago
       shippings = Shipping.where(["\"estimatedPrice\" = ? and \"status\" = ?", true, 1])
       shippings.each do |shipping|
         cost = shipping.UpdateCost shipping

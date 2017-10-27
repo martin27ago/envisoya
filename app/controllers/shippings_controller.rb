@@ -51,7 +51,7 @@ class ShippingsController < ApplicationController
   def create
     userFrom = current_user
     # envia mail al usuario si no esta registrado
-    User.ExistUserReceiver shipping_params[:emailTo], userFrom
+    User.ExistsUserTo shipping_params[:emailTo], userFrom
     #seleciona delivery y notificacion
     delivery = Delivery.selectDelivery userFrom.name+' '+userFrom.surname, shipping_params[:addressFrom], shipping_params[:addressTo]
     shipping_params.merge(:user => userFrom, :delivery => delivery)

@@ -27,9 +27,9 @@ class Zone < ActiveRecord::Base
           costZonesNew.zoneFrom = zone.identify
           costZonesNew.zoneTo = cost[0].to_i
           costZonesNew.cost1 = cost[1]
-          costZonesNew.cost2 = 0
-          costZonesNew.cost3 = 0
-          costZonesNew.lastUpdate = 1
+          costZonesNew.cost2 = cost[1]
+          costZonesNew.cost3 = cost[1]
+          costZonesNew.lastUpdate = 3
           costZonesNew.save!
       end
     end

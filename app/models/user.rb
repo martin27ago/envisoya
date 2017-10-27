@@ -36,13 +36,13 @@ class User < ActiveRecord::Base
 
   def self.ExistsUserTo email, sender
     if !User.exists?(["email = ?", email])
-      ApplicationMailer.registry_mail(email,sender).deliver_later
+      ApplicationMailer.registry_mail(email,sender).deliver_later(wait: 1.minute)
     end
   end
 
   def self.SendConfirmationMail shipping, user
     if(!shipping.estimatedPrice)
-      ApplicationMailer.send_shipping_confirmation(shipping, user).deliver_later
+      ApplicationMailer.send_shipping_confirmation(shipping, user).deliver_later(wait: 1.minute)
     end
   end
 
@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
 
   def self.DeliveredShipping shipping
     if(!shipping.estimatedPrice)
-      ApplicationMailer.shipping_delivered(shipping).deliver_later
+      ApplicationMailer.shipping_delivered(shipping).deliver_later(wait: 1.minute)
     end
   end
 

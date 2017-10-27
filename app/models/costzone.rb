@@ -17,21 +17,19 @@ class Costzone < ActiveRecord::Base
     arr = JSON.parse(response.read_body)
     arr.each do |item|
       item['costToAreas'].each do |cost|
-        costZone = Costzone.where(["zoneFrom = ? and zoneTo = ?", item['id'].to_i, cost[0].to_i]).first
+        costZone = Costzone.where(["\"zoneFrom\" = ? and \"zoneTo\" = ?", item['id'].to_i, cost[0].to_i]).first
         if(costZone.lastUpdate == 1 )
           costZone.cost2 = cost[1]
           costZone.lastUpdate = 2
-          costZone.save!
         else if(costZone.lastUpdate == 2)
                costZone.cost3 = cost[1]
                costZone.lastUpdate = 3
-               costZone.save!
              else
                costZone.cost1 = cost[1]
                costZone.lastUpdate = 1
-               costZone.save!
              end
         end
+        costZone.save!
       end
     end
   end

@@ -26,6 +26,7 @@ class ApplicationMailer < ActionMailer::Base
   def shipping_delivered (shipping)
     @shipping = shipping
     @user = shipping.user
-    mail(to:user, subject: "Pedido entregado con éxito")
+    pdf = WickedPdf.new.pdf_from_string('<h1>Se entrego tu pedido!</h1>')
+    mail(to:user, subject: "Pedido entregado con éxito", attachments: pdf)
   end
 end

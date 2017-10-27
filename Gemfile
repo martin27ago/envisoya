@@ -77,3 +77,7 @@ gem 'sidekiq'
 gem 'sidekiq-cron'
 
 gem 'pg', '0.20.0'
+
+gem 'wicked_pdf'
+
+gem 'wkhtmltopdf-binary'
