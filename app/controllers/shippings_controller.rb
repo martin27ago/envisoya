@@ -3,7 +3,7 @@ class ShippingsController < ApplicationController
   before_action :require_login_user, only: [:new]
   before_action :require_login_delivery, only: [:edit]
   #before_action :require_login_delivery_user, only: [:show]
-
+  before_action :check_doc_and_password, only: [:new, :index]
   def require_login_user
     if current_user.nil?
       flash[:notice] = "Tienes que estar logeado"
@@ -22,6 +22,23 @@ class ShippingsController < ApplicationController
     if current_user.nil? and @current_delivery.nil?
       flash[:notice] = "Tienes que estar logeado"
       redirect_to home_login_url
+    end
+  end
+
+  def check_doc_and_password
+    user = current_user
+    delivery = current_delivery
+    if user.nil?
+      if delivery.document.nil? or delivery.password.nil?
+        flash[:notice] ="Debes completar el formulario."
+        redirect_to delivery_path(delivery.id)+'/edit'
+
+      end
+    else
+        if user.document.nil? or user.password.nil?
+          flash[:notice] ="Debes completar el formulario."
+          redirect_to user_path(user.id)+'/edit'
+        end
     end
   end
 
@@ -62,7 +79,7 @@ class ShippingsController < ApplicationController
     if @shipping.save!
       User.SendConfirmationMail @shipping, userFrom
       flash[:notice] = "Envio creado."
-      Loghelper.Log 'info', 'Envio con id '+ @shipping.id + 'fue creado con éxito.'
+      Loghelper.Log 'info', 'Envio con id '+ @shipping.id.to_s + 'fue creado con éxito.'
       redirect_to shippings_path
     else
       Loghelper.Log 'error', 'No se pudo crear envío.'
@@ -86,7 +103,7 @@ class ShippingsController < ApplicationController
     if @shipping.update_attributes!(shipping_params)
       User.DeliveredShipping @shipping
       flash[:notice] = "El envío fue finalizado. "
-      Loghelper.Log 'info', 'Envio con id '+ @shipping.id + 'fue entregado.'
+      Loghelper.Log 'info', 'Envio con id '+ @shipping.id.to_s + ' fue entregado.'
       delivery = @shipping.delivery
       delivery.latitude = @shipping.latitudeTo
       delivery.longitude = @shipping.longitudeTo

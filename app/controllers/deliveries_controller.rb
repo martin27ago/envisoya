@@ -3,7 +3,7 @@ class DeliveriesController < ApplicationController
   before_action :require_login, only: [:show, :edit]
   before_action :admin_login, only: [:index, :destroy, :active]
   before_action :is_log, only: [:new]
-
+  before_action :check_doc_and_password, only: [:show]
   #Security methods
   def require_login
     if current_delivery.nil?
@@ -30,6 +30,17 @@ class DeliveriesController < ApplicationController
     if current_delivery.id != id
       flash[:notice] = "Tienes que estar logeado"
       redirect_to home_login_url
+    end
+  end
+
+  def check_doc_and_password
+    delivery= current_delivery
+    if !delivery.nil?
+      if delivery.document.nil? or delivery.password.nil?
+        flash[:notice] ="Debes completar el formulario."
+        redirect_to delivery_path(delivery.id)+'/edit'
+
+      end
     end
   end
 
@@ -111,12 +122,14 @@ class DeliveriesController < ApplicationController
     end
   end
 
+=begin
   def destroy
     @delivery = Delivery.find(params[:id])
     @delivery.destroy
     flash[:notice] = "#{@delivery.name} borrado."
     redirect_to deliveries_path
   end
+=end
 
   def active
       @delivery = Delivery.find params[:id]

@@ -3,8 +3,6 @@ class User < ActiveRecord::Base
   has_many :discounts, foreign_key: "user_id", class_name: "Discount"
   has_many :discountsTransmitted, foreign_key: "userFrom_id", class_name: "Discount"
   validates :name, :presence => true
-  validates :document, :presence => true
-  validates :password, :presence => true
   validates :surname, :presence => true
   validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}, :presence => true, :uniqueness => true
   has_attached_file :image, styles:{ medium: '200x200>', thumb: '48x48>'}
@@ -18,12 +16,10 @@ class User < ActiveRecord::Base
       user.surname = auth.info.last_name
       user.email = auth.info.email
       user.imageFacebook = auth.info.image
-      user.document ='123456789'
-      user.password = '123'
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       if user.save!
-        Loghelper.Log 'info', 'Se registró el usuario'+ user.name+' '+ user.surname+ ' con Facebook.'
+        Loghelper.Log 'info', 'Se registró el usuario '+ user.name+' '+ user.surname+ ' con Facebook.'
       else
         Loghelper.Log 'error', 'No se pudo registrar usuario por Facebook.'
       end
@@ -53,9 +49,11 @@ class User < ActiveRecord::Base
   def applyDiscount
     discount = Discount.where(["active = ? and used = ? and user_id = ?", true, false, self.id]).first
     if(!discount.nil?)
-      discountFrom = Discount.where(["userFrom = ? and user_id = ? and active = ?", self.id, discount.userFrom, false]).first
-      discountFrom.active = true
-      discountFrom.save!
+      discountFrom = Discount.where(["\"userFrom_id\" = ? and user_id = ? and active = ?", self.id, discount.userFrom, false]).first
+      if !discountFrom.nil?
+        discountFrom.active = true
+        discountFrom.save!
+      end
       discount.used = true
       discount.save!
       return discount.porcent

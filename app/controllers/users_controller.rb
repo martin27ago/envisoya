@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :require_login, only: [:show, :edit]
   before_action :is_log, only: [:new]
   before_action :admin_login, only: [:index, :destroy]
+  before_action :check_doc_and_password, only: [:show]
 
   def require_login
     if current_user.nil?
@@ -25,16 +26,18 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-    flash[:notice] = "#{@user.name} borrado."
-    redirect_to users_path
+  def check_doc_and_password
+    user= current_user
+    if !user.nil?
+      if user.document.nil? or user.password.nil?
+        flash[:notice] ="Debes completar el formulario."
+        redirect_to user_path(user.id)+'/edit'
+      end
+    end
   end
 
   def edit
    @user = User.find params[:id]
-    flash[:notice] = "#{@user.name} modificado correctamente."
   end
 
   def new
@@ -80,7 +83,7 @@ class UsersController < ApplicationController
     else
       if(@user = User.create!(user_params))
         flash[:notice] = "#{@user.name} te registraste con exito."
-        Loghelper.Log 'info', 'Usuario '+ @user.name + ' '+ @user.surname + ' creado con éxito.'
+        Loghelper.Log 'info', 'Usuario '+ @user.name.to_s + ' '+ @user.surname.to_s + ' creado con éxito.'
         if(userFrom!='')
           Discount.ManageDiscount @user, userFrom
         end
@@ -94,10 +97,21 @@ class UsersController < ApplicationController
     end
   end
 
+=begin
   def index
     @users = User.all
     resolve_format @users
   end
+=end
+
+=begin
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:notice] = "#{@user.name} borrado."
+    redirect_to users_path
+  end
+=end
 
   def user_params
     params.require(:user).permit(:name, :surname, :email, :document, :password, :image)

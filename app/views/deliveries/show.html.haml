@@ -5,7 +5,7 @@
   - if @delivery.image_file_name.nil?
     %img(src= "#{@delivery.imageFacebook}")
   - else
-    %img(src= "#{@delivery.image.url}" height="300px"  width="250px" )
+    %img(src= "#{@delivery.image.url}" height="200px"  width="150px" )
     %br
 
 %table.table.table-bordered
@@ -21,7 +21,16 @@
   %tr
     %td <strong>Email:</strong>
     %td #{@delivery.email}
+  %tr
+    %td <strong>Papeles:</strong>
+    %td
+      =link_to "Descargar", @delivery.papers.url, download: @delivery.papers_file_name
+  %tr
+    %td <strong>Licencia:</strong>
+    %td
+      %img(src= "#{@delivery.license.url}" height="50px"  width="100px" )
 
+%br
+=link_to "Editar Información", edit_delivery_path(@delivery) , class: "btn-primary "
 
-= link_to 'Editar Informacion', edit_delivery_path(@delivery), class: "btn-primary"
 %div

@@ -935,7 +935,7 @@
           <li class="nav-item">
             <%=link_to("Hola, " + current_user.name,
            :controller => 'users',
-           :action => 'edit',
+           :action => 'show',
            :id => current_user.id)%>
           </li>
           <li class="nav-item">
@@ -970,7 +970,7 @@
           <li class="nav-item">
             <%=link_to("Hola, " + current_delivery.name,
                        :controller => 'deliveries',
-                       :action => 'edit',
+                       :action => 'show',
                        :id => current_delivery.id)%>
           </li>
           <li class="nav-item">
@@ -992,7 +992,7 @@
 
 
 </body>
-<div class="container col-md-5 col-md-offset-3">
+<div class="container col-md-8 col-md-offset-3">
   <p><strong><%=flash[:notice]%></strong></p>
 <%= yield %>
 </div>

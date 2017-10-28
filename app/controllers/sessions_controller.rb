@@ -4,13 +4,19 @@ class SessionsController < ApplicationController
     if(type=='user')
       user = User.from_omniauth(request.env["omniauth.auth"])
       session[:user_id] = user.id
-
-      redirect_to user_path(user.id)+'/edit'
+      if !user.document.nil?
+        redirect_to shippings_path
+      else
+        redirect_to user_path(user.id)+'/edit'
+      end
     else
       delivery = Delivery.from_omniauth(request.env["omniauth.auth"])
       session[:delivery_id] = delivery.id
-
-      redirect_to delivery_path(delivery.id)+'/edit'
+      if !delivery.document.nil?
+        redirect_to shippings_path
+      else
+        redirect_to delivery_path(delivery.id)+'/edit'
+      end
     end
 
   end
@@ -20,13 +26,13 @@ class SessionsController < ApplicationController
     if(type=="true")
       user = User.signin(params[:email][:email], params[:password][:password])
       if(user.nil?)
-        flash[:error]= "Invalido usuario y/o contrasena"
+        flash[:error]= "Invalido usuario y/o contraseña"
         redirect_to home_login_url
       else
-        Loghelper.Log 'info', 'Usuario '+ user.name+' '+user.surname+ ' inicia session'
+        Loghelper.Log 'info', 'Usuario '+ user.name+' '+user.surname+ ' inicia sesión'
         session[:user_id] = user.id
         if(user.admin == true)
-          Loghelper.Log 'info', 'Administrador '+ user.name+' '+user.surname+ ' inicia session'
+          Loghelper.Log 'info', 'Administrador '+ user.name+' '+user.surname+ ' inicia sesión'
           redirect_to deliveries_url
         else
           redirect_to shippings_path

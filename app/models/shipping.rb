@@ -74,7 +74,7 @@ class Shipping < ActiveRecord::Base
     if(!discount.nil?)
       percentageDiscount = discount.porcent
     end
-    price =(weight.to_i * costWeight) + costZone
+    price = ((weight.to_i * costWeight) + costZone).round(2)
     result = { 'discount' => percentageDiscount, 'price' => price, 'estimatedPrice' => estimatedPrice }
 
   end
