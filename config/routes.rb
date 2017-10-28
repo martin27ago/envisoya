@@ -40,4 +40,7 @@ Rails.application.routes.draw do
 
   get 'application/deliveriesJson', to: 'application#deliveriesJson'
 
+  get 'application/healthCheck', to: 'application#healthCheck'
+
+
 end
