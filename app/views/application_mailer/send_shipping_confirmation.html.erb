@@ -6,7 +6,8 @@
 <div class="container">
   <h1 class="alert-info">EnviosYa</h1>
   <p>
-    <%= @user.name %>, tu envío está confirmado, con un costo de $ <%= @shipping.price%>.
+    <%= @user.name %>, tu envío está confirmado, con un costo de $ <%= @shipping.price%> y
+    un descuento de $ <%=@shipping.discount%> .
   </p>
   <br>
   <talbe class="table-striped">

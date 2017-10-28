@@ -4,10 +4,12 @@ class SessionsController < ApplicationController
     if(type=='user')
       user = User.from_omniauth(request.env["omniauth.auth"])
       session[:user_id] = user.id
+
       redirect_to user_path(user.id)+'/edit'
     else
       delivery = Delivery.from_omniauth(request.env["omniauth.auth"])
       session[:delivery_id] = delivery.id
+
       redirect_to delivery_path(delivery.id)+'/edit'
     end
 
@@ -21,8 +23,10 @@ class SessionsController < ApplicationController
         flash[:error]= "Invalido usuario y/o contrasena"
         redirect_to home_login_url
       else
+        Loghelper.Log 'info', 'Usuario '+ user.name+' '+user.surname+ ' inicia session'
         session[:user_id] = user.id
         if(user.admin == true)
+          Loghelper.Log 'info', 'Administrador '+ user.name+' '+user.surname+ ' inicia session'
           redirect_to deliveries_url
         else
           redirect_to shippings_path
@@ -35,6 +39,7 @@ class SessionsController < ApplicationController
         redirect_to home_login_url
       else
         session[:delivery_id] = delivery.id
+        Loghelper.Log 'info', 'Cadete '+ delivery.name+' '+delivery.surname+ ' inicia session'
         redirect_to shippings_path
       end
     end

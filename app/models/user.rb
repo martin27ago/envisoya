@@ -22,7 +22,11 @@ class User < ActiveRecord::Base
       user.password = '123'
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      user.save!
+      if user.save!
+        Loghelper.Log 'info', 'Se registró el usuario'+ user.name+' '+ user.surname+ ' con Facebook.'
+      else
+        Loghelper.Log 'error', 'No se pudo registrar usuario por Facebook.'
+      end
     end
   end
 
