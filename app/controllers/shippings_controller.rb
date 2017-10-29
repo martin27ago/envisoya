@@ -79,10 +79,10 @@ class ShippingsController < ApplicationController
     if @shipping.save!
       User.SendConfirmationMail @shipping, userFrom
       flash[:notice] = "Envio creado."
-      Loghelper.Log 'info', 'Envio con id '+ @shipping.id.to_s + 'fue creado con éxito.'
+      Loggermaster.Log 'info', 'Envio con id '+ @shipping.id.to_s + 'fue creado con éxito.'
       redirect_to shippings_path
     else
-      Loghelper.Log 'error', 'No se pudo crear envío.'
+      Loggermaster.Log 'error', 'No se pudo crear envío.'
       redirect_to new_shippings_path
     end
   end
@@ -103,7 +103,7 @@ class ShippingsController < ApplicationController
     if @shipping.update_attributes!(shipping_params)
       User.DeliveredShipping @shipping
       flash[:notice] = "El envío fue finalizado. "
-      Loghelper.Log 'info', 'Envio con id '+ @shipping.id.to_s + ' fue entregado.'
+      Loggermaster.Log 'info', 'Envio con id '+ @shipping.id.to_s + ' fue entregado.'
       delivery = @shipping.delivery
       delivery.latitude = @shipping.latitudeTo
       delivery.longitude = @shipping.longitudeTo
@@ -111,7 +111,7 @@ class ShippingsController < ApplicationController
       redirect_to shippings_path
     else
       flash[:notice] = "No se pudo realizar el envío, algun parámetro inválido."
-      Loghelper.Log 'error', 'No se pudo entregar el envío con id '+ @shipping.id + '.'
+      Loggermaster.Log 'error', 'No se pudo entregar el envío con id '+ @shipping.id + '.'
       redirect_to edit_delivery_path(current_delivery)
     end
   end

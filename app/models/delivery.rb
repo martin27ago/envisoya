@@ -21,9 +21,9 @@ class Delivery < ActiveRecord::Base
       delivery.oauth_expires_at = Time.at(auth.credentials.expires_at)
       delivery.active = false
       if delivery.save!
-        Loghelper.Log 'info', 'Se registró el cadete '+ delivery.name+' '+ delivery.surname+ ' con Facebook.'
+        Loggermaster.Log 'info', 'Se registró el cadete '+ delivery.name+' '+ delivery.surname+ ' con Facebook.'
       else
-        Loghelper.Log 'info', 'No se pudo registrar un cadete con Facebook.'
+        Loggermaster.Log 'info', 'No se pudo registrar un cadete con Facebook.'
       end
     end
   end

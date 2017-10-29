@@ -1,6 +1,6 @@
-class Loghelper < ActiveRecord::Base
+class Loggermaster < ActiveRecord::Base
   def self.Log level, message
-    file = File.new 'logFile', 'a'
+    file = File.new 'app.log', 'a'
     @logger = Logger.new file
     if level=='error'
       @logger.error(message)

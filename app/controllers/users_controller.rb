@@ -83,7 +83,7 @@ class UsersController < ApplicationController
     else
       if(@user = User.create!(user_params))
         flash[:notice] = "#{@user.name} te registraste con exito."
-        Loghelper.Log 'info', 'Usuario '+ @user.name.to_s + ' '+ @user.surname.to_s + ' creado con éxito.'
+        Loggermaster.Log 'info', 'Usuario '+ @user.name.to_s + ' '+ @user.surname.to_s + ' creado con éxito.'
         if(userFrom!='')
           Discount.ManageDiscount @user, userFrom
         end
@@ -91,7 +91,7 @@ class UsersController < ApplicationController
         redirect_to shippings_path
       else
         flash[:notice] = "Informacion invalida"
-        Loghelper.Log 'error', 'No se pudo crear un usuario.'
+        Loggermaster.Log 'error', 'No se pudo crear un usuario.'
         render '/users/new'
       end
     end

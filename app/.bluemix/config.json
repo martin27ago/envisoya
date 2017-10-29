@@ -1,0 +1,34 @@
+{
+  "ConsoleEndpoint": "",
+  "Region": "",
+  "RegionID": "",
+  "RegionType": "",
+  "IAMID": "",
+  "IAMToken": "",
+  "IAMRefreshToken": "",
+  "Account": {
+    "GUID": "",
+    "Name": "",
+    "Owner": ""
+  },
+  "ResourceGroup": {
+    "GUID": "",
+    "Name": "",
+    "State": "",
+    "Default": false,
+    "QuotaID": ""
+  },
+  "PluginRepos": [
+    {
+      "Name": "Bluemix",
+      "URL": "https://plugins.ng.bluemix.net"
+    }
+  ],
+  "Locale": "",
+  "Trace": "",
+  "ColorEnabled": "",
+  "HTTPTimeout": 0,
+  "CLIInfoEndpoint": "",
+  "CheckCLIVersionDisabled": false,
+  "UsageStatsDisabled": false
+}

@@ -63,11 +63,11 @@ class DeliveriesController < ApplicationController
       @delivery = Delivery.find params[:id]
       if @delivery.update_attributes!(delivery_params)
         flash[:notice] = "#{@delivery.name} se actualizo correctamente."
-        Loghelper.Log 'info', 'Cadete '+ @delivery.name + ' '+ @delivery.surname + ' actualizado con éxito.'
+        Loggermaster.Log 'info', 'Cadete '+ @delivery.name + ' '+ @delivery.surname + ' actualizado con éxito.'
         redirect_to delivery_path(@delivery)
       else
         flash[:notice] = "Informacion inválida"
-        Loghelper.Log 'error', 'Error al intentar editar cadete, parametros no válidos'
+        Loggermaster.Log 'error', 'Error al intentar editar cadete, parametros no válidos'
         redirect_to edit_delivery_path(current_delivery)
       end
       end
@@ -94,12 +94,12 @@ class DeliveriesController < ApplicationController
       if(@delivery = Delivery.create!(delivery_params))
         flash[:notice] = "#{@delivery.name} te registraste con exito."
         session[:delivery_id] = @delivery.id
-        Loghelper.Log 'info', 'Cadete '+ @delivery.name + ' '+ @delivery.surname + ' creado con éxito.'
+        Loggermaster.Log 'info', 'Cadete '+ @delivery.name + ' '+ @delivery.surname + ' creado con éxito.'
 
         redirect_to shippings_path
       else
         flash[:notice] = "Informacion invalida"
-        Loghelper.Log 'error', 'No se pudo crear Cadete, error en los para.'
+        Loggermaster.Log 'error', 'No se pudo crear Cadete, error en los para.'
         render '/deliveries/new'
       end
     end
