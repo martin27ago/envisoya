@@ -1,9 +1,9 @@
 # README
 
 Obligatorio 1
-Arquitectura de software en la práctica
-Maria Ines Fernandez - 186503
-Martin Gonzalez -  
+* Arquitectura de software en la práctica
+* Maria Ines Fernandez - 186503
+* Martin Gonzalez -  146507
 
 
 * Descripcion
