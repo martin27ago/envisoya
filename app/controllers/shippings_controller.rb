@@ -98,21 +98,27 @@ class ShippingsController < ApplicationController
   end
 
   def update
-    @shipping = Shipping.find params[:id]
-    @shipping.status = 1
-    if @shipping.update_attributes!(shipping_params)
-      User.DeliveredShipping @shipping
-      flash[:notice] = "El envío fue finalizado. "
-      Loggermaster.Log 'info', 'Envio con id '+ @shipping.id.to_s + ' fue entregado.'
-      delivery = @shipping.delivery
-      delivery.latitude = @shipping.latitudeTo
-      delivery.longitude = @shipping.longitudeTo
-      delivery.save!
-      redirect_to shippings_path
-    else
+    begin
+      @shipping = Shipping.find params[:id]
+      @shipping.status = 1
+      if @shipping.update_attributes!(shipping_params)
+        User.DeliveredShipping @shipping
+        flash[:notice] = "El envío fue finalizado. "
+        Loggermaster.Log 'info', 'Envio con id '+ @shipping.id.to_s + ' fue entregado.'
+        delivery = @shipping.delivery
+        delivery.latitude = @shipping.latitudeTo
+        delivery.longitude = @shipping.longitudeTo
+        delivery.save!
+        redirect_to shippings_path
+      else
+        flash[:notice] = "No se pudo realizar el envío, algun parámetro inválido."
+        Loggermaster.Log 'error', 'No se pudo entregar el envío con id '+ @shipping.id + '.'
+        redirect_to edit_shipping_path(@shipping)
+      end
+    rescue
       flash[:notice] = "No se pudo realizar el envío, algun parámetro inválido."
       Loggermaster.Log 'error', 'No se pudo entregar el envío con id '+ @shipping.id + '.'
-      redirect_to edit_delivery_path(current_delivery)
+      redirect_to edit_shipping_path(@shipping)
     end
   end
 

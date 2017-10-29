@@ -14,8 +14,9 @@ applications:
   services:
   - availability-monitoring-auto
 - name: enviosya-arq-GF-sidekiq
+  memory: 256M
   instances: 1
-  memory: 512M
-  disk_quota: 512M
-  command: sidekiq
+  path: .
+  command: bundle exec sidekiq
+  no-route: true
   health-check-type: process

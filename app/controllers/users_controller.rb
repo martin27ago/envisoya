@@ -51,14 +51,20 @@ class UsersController < ApplicationController
       redirect_to edit_user_path(current_user)
     else
       begin
-      @user = User.find params[:id]
+        @user = User.find params[:id]
         if @user.update_attributes!(user_params)
           flash[:notice] = "#{@user.name} se actualizo correctamente."
+          Loggermaster.Log 'info', 'Usuario '+ @user.name + ' '+ @user.surname + ' actualizado con éxito.'
           redirect_to user_path(@user)
         else
-          flash[:notice] = invalid.message
+          flash[:notice] = "Informacion inválida"
+          Loggermaster.Log 'error', 'Error al intentar editar usuario, parametros no válidos'
           redirect_to edit_user_path(current_user)
         end
+      rescue
+        flash[:notice] = "Informacion inválida"
+        Loggermaster.Log 'error', 'Error al intentar editar usuario, parametros no válidos'
+        redirect_to edit_user_path(current_user)
       end
     end
   end
@@ -81,15 +87,21 @@ class UsersController < ApplicationController
       end
       render '/users/new'
     else
-      if(@user = User.create!(user_params))
-        flash[:notice] = "#{@user.name} te registraste con exito."
-        Loggermaster.Log 'info', 'Usuario '+ @user.name.to_s + ' '+ @user.surname.to_s + ' creado con éxito.'
-        if(userFrom!='')
-          Discount.ManageDiscount @user, userFrom
+      begin
+        if(@user = User.create!(user_params))
+          flash[:notice] = "#{@user.name} te registraste con exito."
+          Loggermaster.Log 'info', 'Usuario '+ @user.name.to_s + ' '+ @user.surname.to_s + ' creado con éxito.'
+          if(userFrom!='')
+            Discount.ManageDiscount @user, userFrom
+          end
+          session[:user_id] = @user.id
+          redirect_to shippings_path
+        else
+          flash[:notice] = "Informacion invalida"
+          Loggermaster.Log 'error', 'No se pudo crear un usuario.'
+          render '/users/new'
         end
-        session[:user_id] = @user.id
-        redirect_to shippings_path
-      else
+      rescue
         flash[:notice] = "Informacion invalida"
         Loggermaster.Log 'error', 'No se pudo crear un usuario.'
         render '/users/new'

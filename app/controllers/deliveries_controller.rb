@@ -60,16 +60,20 @@ class DeliveriesController < ApplicationController
       redirect_to edit_delivery_path(current_delivery)
     else
       begin
-      @delivery = Delivery.find params[:id]
-      if @delivery.update_attributes!(delivery_params)
-        flash[:notice] = "#{@delivery.name} se actualizo correctamente."
-        Loggermaster.Log 'info', 'Cadete '+ @delivery.name + ' '+ @delivery.surname + ' actualizado con éxito.'
-        redirect_to delivery_path(@delivery)
-      else
+        @delivery = Delivery.find params[:id]
+        if @delivery.update_attributes!(delivery_params)
+          flash[:notice] = "#{@delivery.name} se actualizo correctamente."
+          Loggermaster.Log 'info', 'Cadete '+ @delivery.name + ' '+ @delivery.surname + ' actualizado con éxito.'
+          redirect_to delivery_path(@delivery)
+        else
+          flash[:notice] = "Informacion inválida"
+          Loggermaster.Log 'error', 'Error al intentar editar cadete, parametros no válidos'
+          redirect_to edit_delivery_path(current_delivery)
+        end
+      rescue
         flash[:notice] = "Informacion inválida"
         Loggermaster.Log 'error', 'Error al intentar editar cadete, parametros no válidos'
         redirect_to edit_delivery_path(current_delivery)
-      end
       end
     end
   end
@@ -91,13 +95,19 @@ class DeliveriesController < ApplicationController
       end
       render '/deliveries/new'
     else
-      if(@delivery = Delivery.create!(delivery_params))
-        flash[:notice] = "#{@delivery.name} te registraste con exito."
-        session[:delivery_id] = @delivery.id
-        Loggermaster.Log 'info', 'Cadete '+ @delivery.name + ' '+ @delivery.surname + ' creado con éxito.'
+      begin
+        if(@delivery = Delivery.create!(delivery_params))
+          flash[:notice] = "#{@delivery.name} te registraste con exito."
+          session[:delivery_id] = @delivery.id
+          Loggermaster.Log 'info', 'Cadete '+ @delivery.name + ' '+ @delivery.surname + ' creado con éxito.'
 
-        redirect_to shippings_path
-      else
+          redirect_to shippings_path
+        else
+          flash[:notice] = "Informacion invalida"
+          Loggermaster.Log 'error', 'No se pudo crear Cadete, error en los para.'
+          render '/deliveries/new'
+        end
+      rescue
         flash[:notice] = "Informacion invalida"
         Loggermaster.Log 'error', 'No se pudo crear Cadete, error en los para.'
         render '/deliveries/new'
