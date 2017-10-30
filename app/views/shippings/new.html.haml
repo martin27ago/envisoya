@@ -1,0 +1,131 @@
+%h2 Solicitar Envio
+%div{ :id => "map", :class => "container", :style => "position: absolute; height: 400px; width: 600px;" }
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+
+= form_tag shippings_path, :method => :post, :enctype => "multipart/form-data" do
+
+  = render :partial => 'shipping_form'
+  %br
+  %br
+  %br
+  %br
+  %br
+  %br
+  %br
+  %br
+  %br
+  %br
+  %br
+  %br
+  %br
+  = submit_tag 'Realizar', class: "btn-primary center-block"
+%br
+= button_tag 'Calcular Precio',onclick: "calculateCost()", class: "btn-primary center-block"
+
+
+%script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBz3WyEB0DzEcad5JKkEdJUUz1ijChvank&callback=initMap"
+async defer)
+:javascript
+    function calculateCost(){
+    weight1 = document.getElementById('shipping_weight').value;
+    latitudeTo = document.getElementById('shipping_latitudeTo').value;
+    longitudeTo = document.getElementById('shipping_longitudeTo').value;
+    latitudeFrom = document.getElementById('shipping_latitudeFrom').value;
+    longitudeFrom = document.getElementById('shipping_longitudeFrom').value;
+    if(weight1 == "" || latitudeFrom == "" || latitudeTo == ""){
+      alert("Es necesario ingresar las direcciones y el precio para calcular el costo.");
+    }
+    else{
+    $.ajax({
+      type: "GET",
+      url: "/shippings/1/calculate_cost",
+      dataType: "json",
+      data: {
+        weight: weight1 ,
+        latTo : latitudeTo ,
+        longTo: longitudeTo,
+        latFrom: latitudeFrom,
+        longFrom: longitudeFrom
+      },
+      success:function(result){
+        price = result['price'];
+        discount = result['discount'];
+        estimatedPrice = result['estimatedPrice'];
+
+        $('#shipping_price').val(price);
+        $('#shipping_discount').val(discount);
+        $('#shipping_estimatedPrice').prop("checked", estimatedPrice );
+      }
+      });
+    }
+    }
+    var map;
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: -34.894942447397305, lng: -56.14013671875},
+        zoom: 13
+      });
+      google.maps.event.addListener(map, 'click', displayLocation);
+    }
+    var markers = []
+    function displayLocation(current){
+          if(markers.length == 2)
+          {
+            deleteOverlays();
+          }
+          else{
+              var marker = new google.maps.Marker({
+              position: current.latLng,
+              map: map
+              });
+              var geocoder=new google.maps.Geocoder;
+          geocoder.geocode({'location':current.latLng}, function (results,status){
+                if(status==='OK'){
+                    if(results[1]){
+                        if(markers.length==0) {
+                        $('#shipping_addressFrom').val(results[1].formatted_address)
+                        }
+                        else{
+                            $('#shipping_addressTo').val(results[1].formatted_address)
+                        }
+                        markers.push(marker);
+                        $('#shipping_latitudeFrom').val(markers[0].position.lat)
+                        $('#shipping_longitudeFrom').val(markers[0].position.lng)
+                        if(markers.length == 2)
+                        {
+                          $('#shipping_latitudeTo').val(markers[1].position.lat)
+                          $('#shipping_longitudeTo').val(markers[1].position.lng)
+                        }
+                    }
+                }
+              });
+          }
+    }
+    function deleteOverlays() {
+        while(markers.length) { markers.pop().setMap(null); }
+        $('#shipping_latitudeTo').val(null)
+        $('#shipping_longitudeTo').val(null)
+        $('#shipping_latitudeFrom').val(null)
+        $('#shipping_longitudeFrom').val(null)
+    }
+

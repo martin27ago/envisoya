@@ -21,3 +21,19 @@
 /yarn-error.log
 
 .byebug_history
+
+public/system/deliveries/papers/000/000/001/original/trump\.jpg
+
+public/system/deliveries/papers/000/000/001/thumbnail/trump\.jpg
+
+public/system/users/images/000/000/007/medium/trump\.jpg
+
+public/system/users/images/000/000/007/original/trump\.jpg
+
+public/system/users/images/000/000/007/thumb/trump\.jpg
+
+db/schema\.rb
+
+\.idea/obligatorio\.iml
+
+\.idea/

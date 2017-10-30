@@ -62,8 +62,8 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "obligatorio_#{Rails.env}"
   config.action_mailer.perform_caching = false
 
-  # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
+  # Ignore bad email addresses and do not raise email delivery.rb errors.
+  # Set this to true and configure the email server for immediate delivery.rb to raise delivery.rb errors.
   # config.action_mailer.raise_delivery_errors = false
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
@@ -78,7 +78,7 @@ Rails.application.configure do
 
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
-  # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
+  # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Loghelper.new 'app-name')
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
@@ -88,4 +88,18 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+      address:              'smtp.gmail.com',
+      port:                 587,
+      domain:               'gmail.com',
+      user_name:            'enviosyaarq',
+      password:             'martinheby',
+      authentication:       'plain',
+      enable_starttls_auto: true
+  }
+  config.action_mailer.default_url_options = { :host => "https://enviosya-arq-gf-app.mybluemix.net"}
+
 end

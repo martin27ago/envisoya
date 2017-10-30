@@ -1,0 +1,22 @@
+stack: cflinuxfs2
+buildpack: "https://github.com/cloudfoundry/ruby-buildpack.git#v1.7.3"
+services:
+- enviosya-arq-GF-redis
+- enviosya-arq-GF-db
+applications:
+- name: enviosya-arq-GF-app
+  instances: 1
+  memory: 512M
+  disk_quota: 512M
+  routes:
+  - route: enviosya-arq-GF-app.mybluemix.net
+  command: rails server -p $PORT
+  services:
+  - availability-monitoring-auto
+- name: enviosya-arq-GF-sidekiq
+  memory: 256M
+  instances: 1
+  path: .
+  command: bundle exec sidekiq
+  no-route: true
+  health-check-type: process

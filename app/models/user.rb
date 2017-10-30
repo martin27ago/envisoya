@@ -1,15 +1,70 @@
 class User < ActiveRecord::Base
+  has_many :shippings
+  has_many :discounts, foreign_key: "user_id", class_name: "Discount"
+  has_many :discountsTransmitted, foreign_key: "userFrom_id", class_name: "Discount"
+  validates :name, :presence => true
+  validates :surname, :presence => true
+  validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}, :presence => true, :uniqueness => true
+  has_attached_file :image, styles:{ medium: '200x200>', thumb: '48x48>'}
+  validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"], styles:{ medium: '200x200>', thumb: '48x48>'}
+
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
+    where(email: auth.info.email).first_or_initialize do |user|
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth.info.first_name
       user.surname = auth.info.last_name
-      user.mail = auth.info.email
-      user.image = auth.info.image
+      user.email = auth.info.email
+      user.imageFacebook = auth.info.image
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      user.save!
+      if user.save!
+        Loggermaster.Log 'info', 'Se registró el usuario '+ user.name+' '+ user.surname+ ' con Facebook.'
+      else
+        Loggermaster.Log 'error', 'No se pudo registrar usuario por Facebook.'
+      end
     end
   end
+
+  def self.signin (email, password)
+    aux = User.where(["email = ? AND password = ?", email, password]).first
+    if(aux.nil?)
+      return nil
+    end
+    User.find(aux.id)
+  end
+
+  def self.ExistsUserTo email, sender
+    if !User.exists?(["email = ?", email])
+      ApplicationMailer.registry_mail(email,sender).deliver_later(wait: 1.minute)
+    end
+  end
+
+  def self.SendConfirmationMail shipping, user
+    if(!shipping.estimatedPrice)
+      ApplicationMailer.send_shipping_confirmation(shipping, user).deliver_later(wait: 1.minute)
+    end
+  end
+
+  def applyDiscount
+    discount = Discount.where(["active = ? and used = ? and user_id = ?", true, false, self.id]).first
+    if(!discount.nil?)
+      discountFrom = Discount.where(["\"userFrom_id\" = ? and user_id = ? and active = ?", self.id, discount.userFrom, false]).first
+      if !discountFrom.nil?
+        discountFrom.active = true
+        discountFrom.save!
+      end
+      discount.used = true
+      discount.save!
+      return discount.porcent
+    end
+    return 0
+  end
+
+  def self.DeliveredShipping shipping
+    if(!shipping.estimatedPrice)
+      ApplicationMailer.shipping_delivered(shipping).deliver_later(wait: 1.minute)
+    end
+  end
+
 end

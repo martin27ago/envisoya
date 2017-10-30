@@ -1,0 +1,41 @@
+%h2 Detalles de envio
+%div
+%ul#Shippings
+%br
+%table.table.table-bordered
+  %tr
+    %td <strong>Dirrecion desde</strong>:
+    %td #{@shipping.addressFrom}
+  %tr
+    %td <strong>Dirrecion hasta</strong>:
+    %td #{@shipping.addressTo}
+  %tr
+    %td <strong>Emisor<strong/>:
+    %td #{@shipping.user.name} #{@shipping.user.surname}
+  %tr
+    %td <strong>Receptor(email)<strong/>:
+    %td #{@shipping.emailTo}
+  %tr
+    %td <strong>Codigo postal desde<strong/>:
+    %td #{@shipping.postalCodeFrom}
+  %tr
+    %td <strong>Codigo postal hasta<strong/>:
+    %td #{@shipping.postalCodeTo}
+  %tr
+    %td <strong>Cadete<strong/>:
+    %td #{@shipping.delivery.name} #{@shipping.delivery.surname}
+  %tr
+    %td <strong>Peso</strong>:
+    %td #{@shipping.weight}
+  %tr
+    %td <strong>Descuento</strong>:
+    %td #{@shipping.discount} %
+  %tr
+    %td <strong>Precio</strong>:
+    %td #{@shipping.price}
+
+-if(!current_delivery.nil?)
+  =link_to "Entregar Pedido", edit_shipping_path(@shipping) , class: "btn-primary "
+
+%div
+

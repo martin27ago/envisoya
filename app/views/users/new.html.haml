@@ -1,0 +1,7 @@
+%h2 Registrarse
+
+= form_tag users_path, :method => :post, :enctype => "multipart/form-data" do
+
+  = render :partial => 'user_form'
+  %br
+  = submit_tag 'Registrse', class: "btn-primary"

@@ -1,0 +1,60 @@
+<html>
+<head>
+  <meta content="text/html: charset = UTF-8" http-equiv="content-type">
+</head>
+<body>
+<div class="container">
+  <h1 class="alert-info">EnviosYa</h1>
+  <p>
+    <%= @user.name %>, tu pedido se realizó con éxito.
+  </p>
+  <br>
+  <h1>Detalles del pedido</h1>
+  <talbe class="table-striped">
+
+      <td>
+        Desde:
+      </td>
+      <td>
+        <strong><%= @shipping.addressFrom %></strong>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Hasta:
+      </td>
+      <td>
+        <strong><%= @shipping.addressTo %></strong>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Precio:
+      </td>
+      <td>
+        <strong><%= @shipping.price %></strong>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Cadete:
+      </td>
+      <td>
+        <strong><%= @shipping.delivery.name %></strong>
+      </td>
+    </tr>
+    <br>
+  </talbe>
+
+  <p>
+    Puede ver mas información del envío desde la app.
+  </p>
+  <br>
+  <p>
+    Saludos,
+    <br>
+    Equipo de EnviosYa!
+  </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+%h1 Cadetes
+%br
+
+%table.table-striped#deliveries
+  %thead
+    %tr
+      %th.col-md-5 Nombre
+      %th.col-md-5 Apellido
+      %th.col-md-5 Email
+      %th.col-md-5 Documento
+      %th.col-md-5 Activo
+      %th.col-md-5 Detalles
+  %tbody
+    - @deliveries.each do |delivery|
+      %tr
+        %td.col-md-5= delivery.name
+        %td.col-md-5= delivery.surname
+        %td.col-md-5= delivery.email
+        %td.col-md-5= delivery.document
+        %td.col-md-5= delivery.active
+        %td.col-md-5= link_to "Detalles", delivery_path(delivery), class: "btn-primary"
+        - if !delivery.active
+          %td.col-md-3= link_to "Activar", {:controller => "deliveries", :action => "active", :id => delivery.id}, class: "btn-primary"

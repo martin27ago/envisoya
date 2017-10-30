@@ -1,0 +1,24 @@
+%h2 Detalles de #{@user.name}
+%div
+%ul#Details
+  %br
+  - if @user.image_file_name.nil?
+    %img(src= "#{@user.imageFacebook}")
+  - else
+    %img(src= "#{@user.image.url}" height="300px"  width="250px" )
+    %br
+%table.table.table-bordered
+  %tr
+    %td <strong>Nombre</strong>:
+    %td #{@user.name}
+  %tr
+    %td <strong>Apellido</strong>:
+    %td #{@user.surname}
+  %tr
+    %td <strong>Documento</strong>:
+    %td #{@user.document}
+  %tr
+    %td <strong>Email<strong/>:
+    %td #{@user.email}
+= link_to 'Editar Informacion', edit_user_path(@user)
+%div

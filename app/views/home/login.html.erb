@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/scss" href="application.css.sass">
+  <style>
+
+  </style>
+</head>
+<body>
+
+<br>
+<br>
+<h1 align="center">Envios YA</h1>
+<div class="container col-md-6 col-md-offset-3">
+  <%= form_tag('signin', :method => "get") do %>
+      Email: <%= email_field :email, "email", class:'form-control'%>
+      <br>
+      Contraseña:<%= password_field :password, "password", class:'form-control' %>
+      <br>
+      <br>
+      Usuario
+      <%= radio_button :autolyse,:autolyse, true, :checked => true, class:'form-control' %>
+      Cadete
+      <%= radio_button :autolyse, :autolyse, false, class:'form-control' %>
+      <br>
+      <%= submit_tag("Entrar", class: 'btn-primary')%>
+  <% end %>
+  <p class="text-danger"><%=flash[:error]%></p>
+</div>
+<div class="form-group col-md-8 col-md-offset-2">
+<br>
+<%= link_to "Ingresar con Facebook como Usuario", "/auth/facebook?type=user", id: "sign_in", class: ".btn-social" %>
+<br>
+<%= link_to "Registrarse como Usuario", "/users/new", id: "sign_up" %>
+  <br>
+  <%= link_to "Ingresar con Facebook como Cadete", "/auth/facebook?type=delivery", id: "sign_in", class: ".btn-social" %>
+  <br>
+  <%= link_to "Registrarse como Cadete", "/deliveries/new", id: "sign_up" %>
+</div>
+
+
+</body>
