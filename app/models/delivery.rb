@@ -9,6 +9,8 @@ class Delivery < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"], styles:{ medium: '200x200>', thumb: '48x48>'}
   validates_attachment_content_type :license, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"], styles:{ medium: '200x200>', thumb: '48x48>'}
   validates_attachment_content_type :papers, :content_type => ["application/pdf"]
+  before_save :encrypt_password
+
   def self.from_omniauth(auth)
     where(email: auth.info.email).first_or_initialize do |delivery|
       delivery.provider = auth.provider
@@ -21,19 +23,20 @@ class Delivery < ActiveRecord::Base
       delivery.oauth_expires_at = Time.at(auth.credentials.expires_at)
       delivery.active = false
       if delivery.save!
-        Loggermaster.Log 'info', 'Se registró el cadete '+ delivery.name+' '+ delivery.surname+ ' con Facebook.'
+        LoggerHelper.Log 'info', 'Se registró el cadete '+ delivery.name+' '+ delivery.surname+ ' con Facebook.'
       else
-        Loggermaster.Log 'info', 'No se pudo registrar un cadete con Facebook.'
+        LoggerHelper.Log 'info', 'No se pudo registrar un cadete con Facebook.'
       end
     end
   end
 
   def self.signin (email, password)
-    aux = Delivery.where(["email = ? AND password = ?", email, password]).first
-    if(aux.nil?)
-      return nil
-    end
-    Delivery.find(aux.id)
+    aux = Delivery.where(["email = ? ", email]).first
+     if aux.is_password? password
+       Delivery.find(aux.id)
+     else
+       return nil
+     end
   end
 
   def self.selectDelivery (userFrom, addressFrom, addressTo)
@@ -45,4 +48,16 @@ class Delivery < ActiveRecord::Base
     ApplicationMailer.new_shipping_mail(delivery.email, userFrom, addressFrom, addressTo).deliver_later(wait: 1.minute)
     return delivery
   end
+
+  def encrypt_password
+    if password.present?
+      encryptedPassword = BCrypt::Password.create(self.password )
+      self.password = encryptedPassword
+    end
+  end
+
+  def is_password? password
+    BCrypt::Password.new(self.password)==password
+  end
+
 end

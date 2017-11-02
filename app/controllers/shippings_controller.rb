@@ -4,6 +4,8 @@ class ShippingsController < ApplicationController
   before_action :require_login_delivery, only: [:edit]
   #before_action :require_login_delivery_user, only: [:show]
   before_action :check_doc_and_password, only: [:new, :index]
+
+  #Validation methods
   def require_login_user
     if current_user.nil?
       flash[:notice] = "Tienes que estar logeado"
@@ -42,6 +44,7 @@ class ShippingsController < ApplicationController
     end
   end
 
+  #Actions
   def show
     id = params[:id]
     @shipping = Shipping.find(id)
@@ -56,15 +59,15 @@ class ShippingsController < ApplicationController
     end
   end
 
-  def edit
-    @shipping = Shipping.find params[:id]
-  end
-
   def new
     @shipping = Shipping.new
     @user_cache = User.pluck(:email)
   end
 
+  def edit
+    @shipping = Shipping.find params[:id]
+  end
+  
   def create
     userFrom = current_user
     # envia mail al usuario si no esta registrado
@@ -79,10 +82,10 @@ class ShippingsController < ApplicationController
     if @shipping.save!
       User.SendConfirmationMail @shipping, userFrom
       flash[:notice] = "Envio creado."
-      Loggermaster.Log 'info', 'Envio con id '+ @shipping.id.to_s + 'fue creado con éxito.'
+      LoggerHelper.Log 'info', 'Envio con id '+ @shipping.id.to_s + 'fue creado con éxito.'
       redirect_to shippings_path
     else
-      Loggermaster.Log 'error', 'No se pudo crear envío.'
+      LoggerHelper.Log 'error', 'No se pudo crear envío.'
       redirect_to new_shippings_path
     end
   end
@@ -104,7 +107,7 @@ class ShippingsController < ApplicationController
       if @shipping.update_attributes!(shipping_params)
         User.DeliveredShipping @shipping
         flash[:notice] = "El envío fue finalizado. "
-        Loggermaster.Log 'info', 'Envio con id '+ @shipping.id.to_s + ' fue entregado.'
+        LoggerHelper.Log 'info', 'Envio con id '+ @shipping.id.to_s + ' fue entregado.'
         delivery = @shipping.delivery
         delivery.latitude = @shipping.latitudeTo
         delivery.longitude = @shipping.longitudeTo
@@ -112,12 +115,12 @@ class ShippingsController < ApplicationController
         redirect_to shippings_path
       else
         flash[:notice] = "No se pudo realizar el envío, algun parámetro inválido."
-        Loggermaster.Log 'error', 'No se pudo entregar el envío con id '+ @shipping.id + '.'
+        LoggerHelper.Log 'error', 'No se pudo entregar el envío con id '+ @shipping.id + '.'
         redirect_to edit_shipping_path(@shipping)
       end
     rescue
       flash[:notice] = "No se pudo realizar el envío, algun parámetro inválido."
-      Loggermaster.Log 'error', 'No se pudo entregar el envío con id '+ @shipping.id + '.'
+      LoggerHelper.Log 'error', 'No se pudo entregar el envío con id '+ @shipping.id + '.'
       redirect_to edit_shipping_path(@shipping)
     end
   end

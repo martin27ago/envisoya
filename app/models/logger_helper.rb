@@ -1,4 +1,4 @@
-class Loggermaster < ActiveRecord::Base
+class LoggerHelper < ActiveRecord::Base
   def self.Log level, message
     file = File.new 'app.log', 'a'
     @logger = Logger.new file

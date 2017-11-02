@@ -24,15 +24,16 @@ class SessionsController < ApplicationController
   def signin
     type = params[:autolyse][:autolyse]
     if(type=="true")
+
       user = User.signin(params[:email][:email], params[:password][:password])
       if(user.nil?)
         flash[:error]= "Invalido usuario y/o contraseña"
         redirect_to home_login_url
       else
-        Loggermaster.Log 'info', 'Usuario '+ user.name+' '+user.surname+ ' inicia sesión'
+        LoggerHelper.Log 'info', 'Usuario '+ user.name+' '+user.surname+ ' inicia sesión'
         session[:user_id] = user.id
         if(user.admin == true)
-          Loggermaster.Log 'info', 'Administrador '+ user.name+' '+user.surname+ ' inicia sesión'
+          LoggerHelper.Log 'info', 'Administrador '+ user.name+' '+user.surname+ ' inicia sesión'
           redirect_to deliveries_url
         else
           redirect_to shippings_path
@@ -45,7 +46,7 @@ class SessionsController < ApplicationController
         redirect_to home_login_url
       else
         session[:delivery_id] = delivery.id
-        Loggermaster.Log 'info', 'Cadete '+ delivery.name+' '+delivery.surname+ ' inicia session'
+        LoggerHelper.Log 'info', 'Cadete '+ delivery.name+' '+delivery.surname+ ' inicia session'
         redirect_to shippings_path
       end
     end

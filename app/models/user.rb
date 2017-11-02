@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}, :presence => true, :uniqueness => true
   has_attached_file :image, styles:{ medium: '200x200>', thumb: '48x48>'}
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"], styles:{ medium: '200x200>', thumb: '48x48>'}
+  before_save :encrypt_password
 
   def self.from_omniauth(auth)
     where(email: auth.info.email).first_or_initialize do |user|
@@ -19,19 +20,20 @@ class User < ActiveRecord::Base
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       if user.save!
-        Loggermaster.Log 'info', 'Se registró el usuario '+ user.name+' '+ user.surname+ ' con Facebook.'
+        LoggerHelper.Log 'info', 'Se registró el usuario '+ user.name+' '+ user.surname+ ' con Facebook.'
       else
-        Loggermaster.Log 'error', 'No se pudo registrar usuario por Facebook.'
+        LoggerHelper.Log 'error', 'No se pudo registrar usuario por Facebook.'
       end
     end
   end
 
   def self.signin (email, password)
-    aux = User.where(["email = ? AND password = ?", email, password]).first
-    if(aux.nil?)
+    aux = User.where(["email = ? ", email]).first
+    if aux.is_password?password
+      User.find(aux.id)
+    else
       return nil
     end
-    User.find(aux.id)
   end
 
   def self.ExistsUserTo email, sender
@@ -65,6 +67,17 @@ class User < ActiveRecord::Base
     if(!shipping.estimatedPrice)
       ApplicationMailer.shipping_delivered(shipping).deliver_later(wait: 1.minute)
     end
+  end
+
+  def encrypt_password
+    if password.present?
+      encryptedPassword = BCrypt::Password.create(self.password )
+      self.password = encryptedPassword
+    end
+  end
+
+  def is_password? password
+    BCrypt::Password.new(self.password)==password
   end
 
 end

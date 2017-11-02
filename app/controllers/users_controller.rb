@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   before_action :admin_login, only: [:index, :destroy]
   before_action :check_doc_and_password, only: [:show]
 
+#Validation methods
   def require_login
     if current_user.nil?
       flash[:notice] = "Tienes que estar logeado"
@@ -36,43 +37,15 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-   @user = User.find params[:id]
-  end
-
-  def new
-    @user = User.new
-  end
-
-  def update
-    document = user_params[:document]
-    if(!CiUY.validate(document))
-      flash[:notice] = "Documento no verificable"
-      redirect_to edit_user_path(current_user)
-    else
-      begin
-        @user = User.find params[:id]
-        if @user.update_attributes!(user_params)
-          flash[:notice] = "#{@user.name} se actualizo correctamente."
-          Loggermaster.Log 'info', 'Usuario '+ @user.name + ' '+ @user.surname + ' actualizado con éxito.'
-          redirect_to user_path(@user)
-        else
-          flash[:notice] = "Informacion inválida"
-          Loggermaster.Log 'error', 'Error al intentar editar usuario, parametros no válidos'
-          redirect_to edit_user_path(current_user)
-        end
-      rescue
-        flash[:notice] = "Informacion inválida"
-        Loggermaster.Log 'error', 'Error al intentar editar usuario, parametros no válidos'
-        redirect_to edit_user_path(current_user)
-      end
-    end
-  end
-
+#Actions
   def show
     id = params[:id]
     @user = User.find(id)
     resolve_format @user
+  end
+
+  def new
+    @user = User.new
   end
 
   def create
@@ -90,7 +63,7 @@ class UsersController < ApplicationController
       begin
         if(@user = User.create!(user_params))
           flash[:notice] = "#{@user.name} te registraste con exito."
-          Loggermaster.Log 'info', 'Usuario '+ @user.name.to_s + ' '+ @user.surname.to_s + ' creado con éxito.'
+          LoggerHelper.Log 'info', 'Usuario '+ @user.name.to_s + ' '+ @user.surname.to_s + ' creado con éxito.'
           if(userFrom!='')
             Discount.ManageDiscount @user, userFrom
           end
@@ -98,32 +71,45 @@ class UsersController < ApplicationController
           redirect_to shippings_path
         else
           flash[:notice] = "Informacion invalida"
-          Loggermaster.Log 'error', 'No se pudo crear un usuario.'
+          LoggerHelper.Log 'error', 'No se pudo crear un usuario.'
           render '/users/new'
         end
       rescue
         flash[:notice] = "Informacion invalida"
-        Loggermaster.Log 'error', 'No se pudo crear un usuario.'
+        LoggerHelper.Log 'error', 'No se pudo crear un usuario.'
         render '/users/new'
       end
     end
   end
 
-=begin
-  def index
-    @users = User.all
-    resolve_format @users
+  def edit
+    @user = User.find params[:id]
   end
-=end
 
-=begin
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-    flash[:notice] = "#{@user.name} borrado."
-    redirect_to users_path
+  def update
+    document = user_params[:document]
+    if(!CiUY.validate(document))
+      flash[:notice] = "Documento no verificable"
+      redirect_to edit_user_path(current_user)
+    else
+      begin
+        @user = User.find params[:id]
+        if @user.update_attributes!(user_params)
+          flash[:notice] = "#{@user.name} se actualizo correctamente."
+          LoggerHelper.Log 'info', 'Usuario '+ @user.name + ' '+ @user.surname + ' actualizado con éxito.'
+          redirect_to user_path(@user)
+        else
+          flash[:notice] = "Informacion inválida"
+          LoggerHelper.Log 'error', 'Error al intentar editar usuario, parametros no válidos'
+          redirect_to edit_user_path(current_user)
+        end
+      rescue
+        flash[:notice] = "Informacion inválida"
+        LoggerHelper.Log 'error', 'Error al intentar editar usuario, parametros no válidos'
+        redirect_to edit_user_path(current_user)
+      end
+    end
   end
-=end
 
   def user_params
     params.require(:user).permit(:name, :surname, :email, :document, :password, :image)

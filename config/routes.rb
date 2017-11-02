@@ -42,7 +42,7 @@ Rails.application.routes.draw do
 
   get 'application/loadDataBase', to: 'application#loadDataBase'
 
-  get 'application/deliveriesJson', to: 'application#deliveriesJson'
+  get 'deliveries/json', to: 'deliveries#json'
 
   get 'application/healthCheck', to: 'application#healthCheck'
 

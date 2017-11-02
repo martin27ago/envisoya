@@ -11,11 +11,6 @@ class ApplicationController < ActionController::Base
     @current_delivery ||= Delivery.find(session[:delivery_id]) if session[:delivery_id]
   end
 
-  def deliveriesJson
-    @deliveries = Delivery.all
-    render :json => @deliveries
-  end
-
   def healthCheck
     Cost.all
     render :json => {:ok => true}

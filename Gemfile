@@ -84,3 +84,5 @@ gem 'wkhtmltopdf-binary'
 
 gem 'logging'
 
+gem 'bcrypt'
+
