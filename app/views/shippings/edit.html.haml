@@ -10,6 +10,12 @@
       = label :shipping, :signature, 'Firma (.jpg)'
     .col-sm-10
       = file_field :shipping, :signature
+  .form-group
+  .control-label
+    .col-sm-2
+      = label :shipping, :paymentMedia, 'Forma de pago'
+    .col-sm-10
+      = select :shipping, :paymentMedia, ['Contado', 'Debito']
   %br
   %br
   %br

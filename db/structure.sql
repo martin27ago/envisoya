@@ -244,7 +244,7 @@ CREATE TABLE shippings (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     weight numeric,
-    "paymentMedia" integer,
+    "paymentMedia" character varying,
     signature_file_name character varying,
     signature_content_type character varying,
     signature_file_size integer,
@@ -527,6 +527,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171026002957'),
 ('20171026010311'),
 ('20171026202520'),
-('20171026212029');
+('20171026212029'),
+('20171109001925');
 
 
