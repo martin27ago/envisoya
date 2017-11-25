@@ -2,10 +2,10 @@ class ShippingsController < ApplicationController
 
   before_action :require_login_user, only: [:new]
   before_action :require_login_delivery, only: [:edit]
-  #before_action :require_login_delivery_user, only: [:show]
+  # before_action :require_login_delivery_user, only: [:show]
   before_action :check_doc_and_password, only: [:new, :index]
 
-  #Validation methods
+  # Validation methods
   def require_login_user
     if current_user.nil?
       flash[:notice] = "Tienes que estar logeado"
@@ -44,7 +44,7 @@ class ShippingsController < ApplicationController
     end
   end
 
-  #Actions
+  # Actions
   def show
     id = params[:id]
     @shipping = Shipping.find(id)
