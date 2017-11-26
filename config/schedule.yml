@@ -2,8 +2,3 @@ send_mail:
     cron: "*/5 * * * *"
     class: "SendMailJob"
     queue: default
-
-clear_log:
-    cron: "0 0 3 1/1 * ? *"
-    class: "ClearFile"
-    queue: default
