@@ -72,7 +72,7 @@ class ShippingsController < ApplicationController
     userFrom = current_user
     # envia mail al usuario si no esta registrado
     User.ExistsUserTo shipping_params[:emailTo], userFrom
-    #seleciona delivery y notificacion
+    # selecciona delivery y notificacion
     delivery = Delivery.selectDelivery userFrom.name+' '+userFrom.surname, shipping_params[:addressFrom], shipping_params[:addressTo]
     shipping_params.merge(:user => userFrom, :delivery => delivery)
     @shipping = Shipping.new(shipping_params)
@@ -82,7 +82,7 @@ class ShippingsController < ApplicationController
     if @shipping.save!
       User.SendConfirmationMail @shipping, userFrom
       flash[:notice] = "Envio creado."
-      LoggerHelper.Log 'info', 'Envio con id '+ @shipping.id.to_s + 'fue creado con éxito.'
+      LoggerHelper.Log 'info', 'Envio con id '+ @shipping.id.to_s + ' fue creado con éxito.'
       redirect_to shippings_path
     else
       LoggerHelper.Log 'error', 'No se pudo crear envío.'
@@ -92,11 +92,11 @@ class ShippingsController < ApplicationController
 
   def calculate_cost
     weight = params[:weight]
-    latFrom = params[:latFrom]
-    longFrom = params[:longFrom]
-    latTo = params[:latTo]
-    longTo = params[:longTo]
-    @result = Shipping.CalculateCost longFrom, latFrom, longTo, latTo, weight, current_user.id
+    lat_from = params[:latFrom]
+    long_from = params[:longFrom]
+    lat_to = params[:latTo]
+    long_to = params[:longTo]
+    @result = Shipping.CalculateCost long_from, lat_from, long_to, lat_to, weight, current_user.id
     render json: @result
   end
 
@@ -107,7 +107,7 @@ class ShippingsController < ApplicationController
       if @shipping.update_attributes!(shipping_params)
         User.DeliveredShipping @shipping
         flash[:notice] = "El envío fue finalizado. "
-        LoggerHelper.Log 'info', 'Envio con id '+ @shipping.id.to_s + ' fue entregado.'
+        LoggerHelper.Log 'info', 'Envio con id ' + @shipping.id.to_s + ' fue entregado.'
         delivery = @shipping.delivery
         delivery.latitude = @shipping.latitudeTo
         delivery.longitude = @shipping.longitudeTo
