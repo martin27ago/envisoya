@@ -3,8 +3,8 @@ class SendMailJob < ApplicationJob
 
   def perform(*args)
     puts "Start Shipping"
-    Shipping.DeliveredShipping
-    Shipping.ConfirmPrice
+    Shipping.delivered_shipping
+    Shipping.confirm_price
     puts "Finally Shipping"
   end
 end

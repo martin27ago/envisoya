@@ -36,25 +36,25 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.ExistsUserTo email, sender
+  def self.exists_user_to email, sender
     if !User.exists?(["email = ?", email])
       ApplicationMailer.registry_mail(email,sender).deliver_later(wait: 1.minute)
     end
   end
 
-  def self.SendConfirmationMail shipping, user
+  def self.send_confirmation_mail shipping, user
     if(!shipping.estimatedPrice)
       ApplicationMailer.send_shipping_confirmation(shipping, user).deliver_later(wait: 1.minute)
     end
   end
 
-  def applyDiscount
+  def apply_discount
     discount = Discount.where(["active = ? and used = ? and user_id = ?", true, false, self.id]).first
     if(!discount.nil?)
-      discountFrom = Discount.where(["\"userFrom_id\" = ? and user_id = ? and active = ?", self.id, discount.userFrom, false]).first
+      discount_from = Discount.where(["\"userFrom_id\" = ? and user_id = ? and active = ?", self.id, discount.userFrom, false]).first
       if !discountFrom.nil?
-        discountFrom.active = true
-        discountFrom.save!
+        discount_from.active = true
+        discount_from.save!
       end
       discount.used = true
       discount.save!
@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
     return 0
   end
 
-  def self.DeliveredShipping shipping
+  def self.delivered_shipping shipping
     if(!shipping.estimatedPrice)
       ApplicationMailer.shipping_delivered(shipping).deliver_later(wait: 1.minute)
     end

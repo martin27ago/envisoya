@@ -39,20 +39,20 @@ class Delivery < ActiveRecord::Base
      end
   end
 
-  def self.selectDelivery (userFrom, addressFrom, addressTo)
+  def self.select_delivery (user_from, address_from, address_to)
     aux = Delivery.where(['active = ?', true]).first
     if(aux.nil?)
       return nil
     end
     delivery = Delivery.find(aux.id)
-    ApplicationMailer.new_shipping_mail(delivery.email, userFrom, addressFrom, addressTo).deliver_later(wait: 1.minute)
+    ApplicationMailer.new_shipping_mail(delivery.email, user_from, address_from, address_to).deliver_later(wait: 1.minute)
     return delivery
   end
 
   def encrypt_password
     if password.present?
-      encryptedPassword = BCrypt::Password.create(self.password )
-      self.password = encryptedPassword
+      encrypted_password = BCrypt::Password.create(self.password )
+      self.password = encrypted_password
     end
   end
 
