@@ -12,7 +12,12 @@ class ApplicationController < ActionController::Base
   end
 
   def healthCheck
-    Cost.all
-    render :json => {:ok => true}
+    User.all
+    health_costs = false
+    begin
+      health_costs = CostsService.health_check_costs
+    rescue
+    end
+    render :json => {:apiShipping => true, :apiCosts => health_costs}
   end
 end

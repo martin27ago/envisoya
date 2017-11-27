@@ -1,3 +1,5 @@
+require 'uri'
+require 'net/http'
 class CostsService < ActiveRecord::Base
 
   def self.calculate_cost latitude_from, latitude_to, longitude_from, longitude_to, weight
@@ -5,8 +7,6 @@ class CostsService < ActiveRecord::Base
     url = URI(ENV['URLCosts'] + '/costs/calculate_cost?' + params)
 
     http = Net::HTTP.new(url.host, url.port)
-    #http.use_ssl = true
-    #http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
     request = Net::HTTP::Get.new(url)
     request.basic_auth ENV['user'], ENV['password']
@@ -21,8 +21,6 @@ class CostsService < ActiveRecord::Base
     url = URI(ENV['URLCosts'] + '/costs/is_updated')
 
     http = Net::HTTP.new(url.host, url.port)
-    #http.use_ssl = true
-    #http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
     request = Net::HTTP::Get.new(url)
     request.basic_auth ENV['user'], ENV['password']
@@ -30,6 +28,20 @@ class CostsService < ActiveRecord::Base
     response = http.request(request)
 
     JSON.parse(response.read_body)['updated']
+  end
+
+  def self.health_check_costs
+
+    url = URI(ENV['URLCosts'] + '/application/healthCheck')
+
+    http = Net::HTTP.new(url.host, url.port)
+
+    request = Net::HTTP::Get.new(url)
+    request.basic_auth ENV['user'], ENV['password']
+
+    response = http.request(request)
+
+    JSON.parse(response.read_body)['ok']
   end
 
 end

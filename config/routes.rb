@@ -24,10 +24,11 @@ Rails.application.routes.draw do
 
   root :to => redirect('/users')
 
+  get 'deliveries/json', to: 'deliveries#json'
+
   resources :deliveries
 
   get 'deliveries/active/:id', to: 'deliveries#active'
-
 
 
   root :to => redirect('/deliveries')
@@ -42,9 +43,6 @@ Rails.application.routes.draw do
 
   get 'application/loadDataBase', to: 'application#loadDataBase'
 
-  get 'deliveries/json', to: 'deliveries#json'
-
   get 'application/healthCheck', to: 'application#healthCheck'
-
 
 end
