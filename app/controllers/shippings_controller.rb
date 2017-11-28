@@ -60,6 +60,10 @@ class ShippingsController < ApplicationController
   end
 
   def new
+    if(!CostsService.health_check_costs())
+      flash[:notice] = "En este momento no se pueden realizar envios."
+      redirect_to home_login_url
+    end
     @shipping = Shipping.new
     @user_cache = User.pluck(:email)
   end

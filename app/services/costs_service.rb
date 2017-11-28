@@ -31,17 +31,21 @@ class CostsService < ActiveRecord::Base
   end
 
   def self.health_check_costs
+    begin
+      url = URI(ENV['URLCosts'] + '/application/healthCheck')
 
-    url = URI(ENV['URLCosts'] + '/application/healthCheck')
+      http = Net::HTTP.new(url.host, url.port)
 
-    http = Net::HTTP.new(url.host, url.port)
+      request = Net::HTTP::Get.new(url)
+      request.basic_auth ENV['user'], ENV['password']
 
-    request = Net::HTTP::Get.new(url)
-    request.basic_auth ENV['user'], ENV['password']
+      response = http.request(request)
 
-    response = http.request(request)
-
-    JSON.parse(response.read_body)['ok']
+      JSON.parse(response.read_body)['ok']
+    rescue
+      LoggerHelper.Log('error', 'El servicio de costos esta apago.')
+      return false
+    end
   end
 
 end
