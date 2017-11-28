@@ -75,16 +75,16 @@ class ShippingsController < ApplicationController
   def create
     userFrom = current_user
     # envia mail al usuario si no esta registrado
-    User.ExistsUserTo shipping_params[:emailTo], userFrom
+    User.exists_user_to shipping_params[:emailTo], userFrom
     # selecciona delivery y notificacion
-    delivery = Delivery.selectDelivery userFrom.name+' '+userFrom.surname, shipping_params[:addressFrom], shipping_params[:addressTo]
+    delivery = Delivery.select_delivery userFrom.name+' '+userFrom.surname, shipping_params[:addressFrom], shipping_params[:addressTo]
     shipping_params.merge(:user => userFrom, :delivery => delivery)
     @shipping = Shipping.new(shipping_params)
     @shipping.user = userFrom
     @shipping.delivery = delivery
-    userFrom.applyDiscount
+    userFrom.apply_discount
     if @shipping.save!
-      User.SendConfirmationMail @shipping, userFrom
+      User.send_confirmation_mail @shipping, userFrom
       flash[:notice] = "Envio creado."
       LoggerHelper.Log 'info', 'Envio con id '+ @shipping.id.to_s + ' fue creado con éxito.'
       redirect_to shippings_path
@@ -100,7 +100,7 @@ class ShippingsController < ApplicationController
     long_from = params[:longFrom]
     lat_to = params[:latTo]
     long_to = params[:longTo]
-    @result = Shipping.CalculateCost long_from, lat_from, long_to, lat_to, weight, current_user.id
+    @result = Shipping.calculate_cost long_from, lat_from, long_to, lat_to, weight, current_user.id
     render json: @result
   end
 
@@ -109,7 +109,7 @@ class ShippingsController < ApplicationController
       @shipping = Shipping.find params[:id]
       @shipping.status = 1
       if @shipping.update_attributes!(shipping_params)
-        User.DeliveredShipping @shipping
+        User.delivered_shipping @shipping
         flash[:notice] = "El envío fue finalizado. "
         LoggerHelper.Log 'info', 'Envio con id ' + @shipping.id.to_s + ' fue entregado.'
         delivery = @shipping.delivery
