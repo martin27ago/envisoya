@@ -6,7 +6,10 @@ class LoggerHelper < ActiveRecord::Base
       url = URI(ENV['URLLogger'])
 
       http = Net::HTTP.new(url.host, url.port)
-
+      if Rails.env.production?
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      end
       request = Net::HTTP::Post.new(url, {'Content-Type' => 'application/json'})
       request.body = {:level => level, :description => message}.to_json
 

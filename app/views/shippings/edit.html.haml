@@ -3,20 +3,19 @@
 = form_tag shipping_path(@shipping), :method => :put, :enctype => "multipart/form-data" do
 
   = render :partial => 'shipping_form'
-
-  .form-group
-  .control-label
-    .col-sm-2
-      = label :shipping, :signature, 'Firma (.jpg)'
-    .col-sm-10
-      = file_field :shipping, :signature
-  .form-group
-  .control-label
-    .col-sm-2
-      = label :shipping, :paymentMedia, 'Forma de pago'
-    .col-sm-10
-      = select :shipping, :paymentMedia, ['Contado', 'Debito']
+  .form-horizontal
+    .form-group
+      .control-label
+      .col-sm-6
+        = label :shipping, :paymentMedia, 'Forma de pago:'
+      .col-sm-6
+        = select :shipping, :paymentMedia, ['Contado', 'Debito']
+    .form-group
+      .control-label
+      .col-sm-6
+        = label :shipping, :signature, 'Firma (.jpg):'
+      .col-sm-6
+        = file_field :shipping, :signature
   %br
   %br
-  %br
-  = submit_tag 'Finalizar', class: "btn-primary"
+  = submit_tag 'Entregar', class: "btn-primary center-block"

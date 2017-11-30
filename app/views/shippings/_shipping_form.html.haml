@@ -1,67 +1,67 @@
 -cache @user_cache do
   .form-horizontal
-  .form-group
-    .control-label
-    .col-sm-6
-      = label :shipping, :emailTo, 'Mail receptor:'
-    .col-sm-6
-      = email_field :shipping, :emailTo, :required => true
-      = label :shipping, :latitudeFrom, 'latitudeFrom', :style => 'display:none'
-      = text_field :shipping, :latitudeFrom, :required => true, :style => 'display:none'
-      = label :shipping, :longitudeFrom, 'longitudeFrom', :style => 'display:none'
-      = text_field :shipping, :longitudeFrom, :required => true, :style => 'display:none'
-      = label :shipping, :latitudeTo, 'latitudeTo', :style => 'display:none'
-      = text_field :shipping, :latitudeTo, :required => true, :style => 'display:none'
-      = label :shipping, :longitudeTo, 'longitudeTo', :style => 'display:none'
-      = text_field :shipping, :longitudeTo, :required => true, :style => 'display:none'
-  .form-group
-    .control-label
-    .col-sm-6
-      = label :shipping, :addressFrom, 'Desde:'
-    .col-sm-6
-      = text_field :shipping, :addressFrom, :required => true, :readonly => true
-  .form-group
-    .control-label
-    .col-sm-6
-      = label :shipping, :addressTo, 'Hasta:'
-    .col-sm-6
-      = text_field :shipping, :addressTo, :required => true, :readonly => true
-  .form-group
-    .control-label
-    .col-sm-6
-      = label :shipping, :weight, 'Peso:', input_html: { readonly: true }
-    .col-sm-6
-      = number_field :shipping, :weight, :required => true, input_html: { readonly: true }
-  .form-group
-    .control-label
-    .col-sm-6
-      = label :shipping, :postalCodeFrom, 'Codigo postal desde:'
-    .col-sm-6
-      = number_field :shipping, :postalCodeFrom, :required => true
-  .form-group
-    .control-label
-    .col-sm-6
-      = label :shipping, :postalCodeTo, 'Codigo postal hasta:'
-    .col-sm-6
-      = number_field :shipping, :postalCodeTo, :required => true
-  .form-group
-    .control-label
-    .col-sm-6
-      = label :shipping, :price, 'Precio:'
-    .col-sm-6
-      = number_field :shipping, :price, :readonly=> true, :required => true
-  .form-group
-    .control-label
-    .col-sm-6
-      = label :shipping, :discount, 'Descuento(%):'
-    .col-sm-6
-      = number_field :shipping, :discount, :readonly=> true, :required => true
-  .form-group
-    .control-label
-    .col-sm-6
-      = label :shipping, :estimatedPrice, 'Precio Estimado:'
-    .col-sm-6
-      = check_box :shipping, :estimatedPrice, :readonly=> true, :required => true
+    .form-group
+      .control-label
+      .col-sm-6
+        = label :shipping, :emailTo, 'Mail receptor:'
+      .col-sm-6
+        = email_field :shipping, :emailTo, :required => true
+        = label :shipping, :latitudeFrom, 'latitudeFrom', :style => 'display:none'
+        = text_field :shipping, :latitudeFrom, :required => true, :style => 'display:none'
+        = label :shipping, :longitudeFrom, 'longitudeFrom', :style => 'display:none'
+        = text_field :shipping, :longitudeFrom, :required => true, :style => 'display:none'
+        = label :shipping, :latitudeTo, 'latitudeTo', :style => 'display:none'
+        = text_field :shipping, :latitudeTo, :required => true, :style => 'display:none'
+        = label :shipping, :longitudeTo, 'longitudeTo', :style => 'display:none'
+        = text_field :shipping, :longitudeTo, :required => true, :style => 'display:none'
+    .form-group
+      .control-label
+      .col-sm-6
+        = label :shipping, :addressFrom, 'Desde:'
+      .col-sm-6
+        = text_field :shipping, :addressFrom, :required => true, :readonly => true
+    .form-group
+      .control-label
+      .col-sm-6
+        = label :shipping, :addressTo, 'Hasta:'
+      .col-sm-6
+        = text_field :shipping, :addressTo, :required => true, :readonly => true
+    .form-group
+      .control-label
+      .col-sm-6
+        = label :shipping, :weight, 'Peso:', input_html: { readonly: true }
+      .col-sm-6
+        = number_field :shipping, :weight, :required => true, input_html: { readonly: true }
+    .form-group
+      .control-label
+      .col-sm-6
+        = label :shipping, :postalCodeFrom, 'Codigo postal desde:'
+      .col-sm-6
+        = number_field :shipping, :postalCodeFrom, :required => true
+    .form-group
+      .control-label
+      .col-sm-6
+        = label :shipping, :postalCodeTo, 'Codigo postal hasta:'
+      .col-sm-6
+        = number_field :shipping, :postalCodeTo, :required => true
+    .form-group
+      .control-label
+      .col-sm-6
+        = label :shipping, :price, 'Precio:'
+      .col-sm-6
+        = number_field :shipping, :price, :readonly=> true, :required => true
+    .form-group
+      .control-label
+      .col-sm-6
+        = label :shipping, :discount, 'Descuento(%):'
+      .col-sm-6
+        = number_field :shipping, :discount, :readonly=> true, :required => true
+    .form-group
+      .control-label
+      .col-sm-6
+        = label :shipping, :estimatedPrice, 'Precio Estimado:'
+      .col-sm-6
+        = check_box :shipping, :estimatedPrice, :readonly=> true, :required => true
 
 %script{type: "text/javascript"}
   :plain

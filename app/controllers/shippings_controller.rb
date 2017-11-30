@@ -53,9 +53,9 @@ class ShippingsController < ApplicationController
 
   def index
     if(current_user.nil?)
-      @shippings = Shipping.where("delivery_id = ?", current_delivery.id)
+      @shippings = Shipping.where("delivery_id = ?", current_delivery.id).limit(10)
     else
-      @shippings = Shipping.where("user_id = ?", current_user.id)
+      @shippings = Shipping.where("user_id = ?", current_user.id).limit(10)
     end
   end
 
@@ -112,25 +112,23 @@ class ShippingsController < ApplicationController
         User.delivered_shipping @shipping
         flash[:notice] = "El envío fue finalizado. "
         LoggerHelper.Log 'info', 'Envio con id ' + @shipping.id.to_s + ' fue entregado.'
-        delivery = @shipping.delivery
-        delivery.latitude = @shipping.latitudeTo
-        delivery.longitude = @shipping.longitudeTo
-        delivery.save!
+        Delivery.update(@shipping.delivery_id, {latitude: @shipping.latitudeTo, longitude: @shipping.longitudeTo})
+
         redirect_to shippings_path
       else
         flash[:notice] = "No se pudo realizar el envío, algun parámetro inválido."
-        LoggerHelper.Log 'error', 'No se pudo entregar el envío con id '+ @shipping.id + '.'
+        LoggerHelper.Log 'error', 'No se pudo entregar el envío con id '+ @shipping.id.to_s + '.'
         redirect_to edit_shipping_path(@shipping)
       end
     rescue
       flash[:notice] = "No se pudo realizar el envío, algun parámetro inválido."
-      LoggerHelper.Log 'error', 'No se pudo entregar el envío con id '+ @shipping.id + '.'
+      LoggerHelper.Log 'error', 'No se pudo entregar el envío con id '+ @shipping.id.to_s + '.'
       redirect_to edit_shipping_path(@shipping)
     end
   end
 
   def shipping_params
-    params.require(:shipping).permit(:emailTo, :latitudeFrom, :latitudeTo, :longitudeFrom, :longitudeTo, :addressFrom, :addressTo, :price, :postalCodeFrom, :postalCodeTo, :weight, :estimatedPrice, :discount)
+    params.require(:shipping).permit(:emailTo, :latitudeFrom, :latitudeTo, :longitudeFrom, :longitudeTo, :addressFrom, :addressTo, :price, :postalCodeFrom, :postalCodeTo, :weight, :estimatedPrice, :discount, :signature, :paymentMedia)
   end
 
   def resolve_format(obj)

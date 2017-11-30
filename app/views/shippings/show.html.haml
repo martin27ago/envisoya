@@ -33,8 +33,11 @@
   %tr
     %td <strong>Precio</strong>:
     %td #{@shipping.price}
+  %tr
+    %td <strong>Estado</strong>:
+    %td #{@shipping.status}
 
--if(!current_delivery.nil?)
+-if(!current_delivery.nil? and Shipping.statuses[@shipping.status]==Shipping.statuses['Pendiente'])
   =link_to "Entregar Pedido", edit_shipping_path(@shipping) , class: "btn-primary "
 
 %div

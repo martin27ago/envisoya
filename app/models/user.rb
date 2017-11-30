@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
   validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}, :presence => true, :uniqueness => true
   has_attached_file :image, styles:{ medium: '200x200>', thumb: '48x48>'}
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"], styles:{ medium: '200x200>', thumb: '48x48>'}
-  before_save :encrypt_password
-
+  before_create :encrypt_password
+  before_update :encrypt_password_update
   def self.from_omniauth(auth)
     where(email: auth.info.email).first_or_initialize do |user|
       user.provider = auth.provider
@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
 
   def self.signin (email, password)
     aux = User.where(["email = ? ", email]).first
-    if aux.is_password?password
+    if aux.is_password? password
       User.find(aux.id)
     else
       return nil
@@ -71,6 +71,13 @@ class User < ActiveRecord::Base
 
   def encrypt_password
     if password.present?
+      encryptedPassword = BCrypt::Password.create(self.password )
+      self.password = encryptedPassword
+    end
+  end
+
+  def encrypt_password_update
+    if password.present? and is_password? self.password
       encryptedPassword = BCrypt::Password.create(self.password )
       self.password = encryptedPassword
     end

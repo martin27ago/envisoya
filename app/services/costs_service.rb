@@ -7,6 +7,10 @@ class CostsService < ActiveRecord::Base
     url = URI(ENV['URLCosts'] + '/costs/calculate_cost?' + params)
 
     http = Net::HTTP.new(url.host, url.port)
+    if Rails.env.production?
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    end
 
     request = Net::HTTP::Get.new(url)
     request.basic_auth ENV['user'], ENV['password']
@@ -21,6 +25,10 @@ class CostsService < ActiveRecord::Base
     url = URI(ENV['URLCosts'] + '/costs/is_updated')
 
     http = Net::HTTP.new(url.host, url.port)
+    if Rails.env.production?
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    end
 
     request = Net::HTTP::Get.new(url)
     request.basic_auth ENV['user'], ENV['password']
@@ -35,7 +43,10 @@ class CostsService < ActiveRecord::Base
       url = URI(ENV['URLCosts'] + '/application/healthCheck')
 
       http = Net::HTTP.new(url.host, url.port)
-
+      if Rails.env.production?
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      end
       request = Net::HTTP::Get.new(url)
       request.basic_auth ENV['user'], ENV['password']
 

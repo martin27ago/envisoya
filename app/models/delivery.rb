@@ -9,8 +9,8 @@ class Delivery < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"], styles:{ medium: '200x200>', thumb: '48x48>'}
   validates_attachment_content_type :license, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"], styles:{ medium: '200x200>', thumb: '48x48>'}
   validates_attachment_content_type :papers, :content_type => ["application/pdf"]
-  before_save :encrypt_password
-
+  before_create :encrypt_password
+  before_update :encrypt_password_update
   def self.from_omniauth(auth)
     where(email: auth.info.email).first_or_initialize do |delivery|
       delivery.provider = auth.provider
@@ -53,6 +53,13 @@ class Delivery < ActiveRecord::Base
     if password.present?
       encrypted_password = BCrypt::Password.create(self.password )
       self.password = encrypted_password
+    end
+  end
+
+  def encrypt_password_update
+    if password.present? and is_password? self.password
+      encryptedPassword = BCrypt::Password.create(self.password )
+      self.password = encryptedPassword
     end
   end
 
